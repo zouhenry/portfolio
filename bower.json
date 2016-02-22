@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "description": "To show off my personal projects",
+  "main": "index.js",
+  "authors": [
+    "Henry Zou"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Henry",
+    "Zou",
+    "Angular",
+    "Material",
+    "Design"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
