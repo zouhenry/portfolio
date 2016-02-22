@@ -5,6 +5,8 @@ var filelog    = require('gulp-filelog');
 var uglify     = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
+var sass       = require('gulp-sass');
+var size       = require('gulp-size');
 
 //require('require-dir')('./gulps/');
 
@@ -20,10 +22,11 @@ var jsVendors = [
   'app/bower_components/angular-material/angular-material.js',
   'app/bower_components/lodash/dist/lodash.js'
 ];
+var appSass   = ['app/src/assets/app.scss'];
 
 gulp.task('default', ['clean', 'build']);
 
-gulp.task('build', ['js', 'index.html']);
+gulp.task('build', ['js', 'scss', 'index.html']);
 
 gulp.task('js', function () {
   gulp
@@ -34,7 +37,20 @@ gulp.task('js', function () {
     .pipe(concat('app.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(filelog())
-    .pipe(gulp.dest(destDir));
+    .pipe(gulp.dest(destDir))
+    .pipe(size());
+});
+
+gulp.task('scss', function () {
+  gulp
+    .src(appSass)
+    .pipe(filelog())
+    .pipe(sass({ errLogToConsole: true }))
+    .on('error', handleError)
+    //.pipe(gulp.dest('./tmp/'))
+    .pipe(concat('app.css'))
+    .pipe(gulp.dest(destDir))
+    .pipe(size());
 });
 
 gulp.task('index.html', function () {
@@ -44,7 +60,7 @@ gulp.task('index.html', function () {
 });
 
 gulp.task('clean', function () {
-  //del([destDir + "**"]);
+  del([destDir + "**"]);
 });
 
 
