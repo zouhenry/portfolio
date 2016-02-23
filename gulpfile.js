@@ -12,7 +12,7 @@ var size       = require('gulp-size');
 
 
 var jsSrc     = ['app/src/**/*.module.js', 'app/src/**/*.js'];
-var indexSrc  = ['app/src/index.html'];
+var htmlSrc   = ['app/src/**/*.html'];
 var destDir   = 'app/dist/';
 var jsVendors = [
   'app/bower_components/angular/angular.js',
@@ -20,13 +20,14 @@ var jsVendors = [
   'app/bower_components/angular-aria/angular-aria.js',
   'app/bower_components/angular-messages/angular-messages.js',
   'app/bower_components/angular-material/angular-material.js',
+  'app/bower_components/angular-ui-router/release/angular-ui-router.js',
   'app/bower_components/lodash/dist/lodash.js'
 ];
 var appSass   = ['app/src/assets/app.scss'];
 
-gulp.task('default', ['clean', 'build']);
+gulp.task('default', ['clean', 'build', 'watch']);
 
-gulp.task('build', ['js', 'scss', 'index.html']);
+gulp.task('build', ['js', 'scss', 'html']);
 
 gulp.task('js', function () {
   gulp
@@ -53,9 +54,9 @@ gulp.task('scss', function () {
     .pipe(size());
 });
 
-gulp.task('index.html', function () {
+gulp.task('html', function () {
   gulp
-    .src(indexSrc)
+    .src(htmlSrc)
     .pipe(gulp.dest(destDir));
 });
 
@@ -63,6 +64,11 @@ gulp.task('clean', function () {
   del([destDir + "**"]);
 });
 
+gulp.task('watch', function () {
+  gulp.watch(jsSrc, ['js']);
+  gulp.watch(htmlSrc, ['html']);
+  gulp.watch(appSass, ['sass']);
+});
 
 gulp.on('err', handleError);
 
