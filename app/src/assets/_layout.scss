@@ -1,0 +1,40 @@
+$default-font-size: 16px;
+$bold-font-weight: 500;
+$page-width: 60rem;
+
+body {
+  background-color: honeydew;
+  font-size: $default-font-size;
+  color: #666;
+}
+
+%spacer {
+  max-width: 60rem;
+}
+
+#header {
+  padding: 1.25rem;
+  background: white;
+  border-bottom: 2px dotted khaki;
+
+  .brand {
+    .avatar {
+      margin: 0 .5rem;
+    }
+    .name {
+      font-weight: $bold-font-weight;
+    }
+  }
+
+  .menu {
+    //display: flex;
+    //flex-direction: row;
+    .item {
+      margin: 0 10px;
+    }
+  }
+}
+
+#content {
+  padding: 1.5rem;
+}
