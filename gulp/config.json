@@ -1,0 +1,29 @@
+{
+  "gulpFiles": [
+    "gulp/**.js"
+  ],
+  "jsSrc"       : [
+    "app/src/**/*.module.js",
+    "app/src/**/*.js"
+  ],
+  "indexSrc"    : [
+    "app/src/index.html"
+  ],
+  "jadeSrc"     : [
+    "app/src/*.jade",
+    "app/src/**/*.jade"
+  ],
+  "sassSrc"     : [
+    "app/src/assets/**/*.scss"
+  ],
+  "jsVendorSrc" : [
+    "app/bower_components/angular/angular.js",
+    "app/bower_components/angular-animate/angular-animate.js",
+    "app/bower_components/angular-aria/angular-aria.js",
+    "app/bower_components/angular-messages/angular-messages.js",
+    "app/bower_components/angular-material/angular-material.js",
+    "app/bower_components/angular-ui-router/release/angular-ui-router.js",
+    "app/bower_components/lodash/dist/lodash.js"
+  ],
+  "destDir"     : "app/dist/"
+}
