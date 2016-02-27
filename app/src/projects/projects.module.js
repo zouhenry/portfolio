@@ -4,18 +4,19 @@
 /*========================================
  =              APP START                =
  ========================================*/
+
 (function () {
 
   angular
-    .module('portfolio', ['ui.router', 'ngMaterial', 'ipsum', 'portfolio.projects'])
+    .module('portfolio.projects', [])
     .config(config);
 
   function config($stateProvider) {
     $stateProvider
-      .state('portfolio', {
-        url        : "/",
-        templateUrl: "layout/layout.html"
+      .state('portfolio.projects', {
+        url        : "projects",
+        templateUrl: "projects/projects.html",
+        controller : "projectsController as projectsCtrl"
       });
   }
-
 })();

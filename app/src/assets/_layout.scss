@@ -8,6 +8,11 @@ body {
   color: #666;
 }
 
+.collapse {
+  padding: 0;
+  margin: 0;
+}
+
 %spacer {
   max-width: 60rem;
 }
@@ -37,4 +42,21 @@ body {
 
 #content {
   padding: 1.5rem;
+}
+
+// project card
+.project-card {
+  text-align: center;
+
+  md-card-header {
+    align-self: center;
+    font-weight: $bold-font-weight;
+    font-size: 1.25rem;
+  }
+
+  md-card-footer {
+    font-weight: $bold-font-weight;
+    font-size: 0.875rem;
+  }
+
 }

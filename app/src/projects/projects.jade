@@ -1,0 +1,10 @@
+div.layout-row(layout-wrap)
+  div.project-card(ng-repeat="project in projectsCtrl.projects track by $index"
+  flex-gt-xs="50" flex-xs="100")
+    md-card
+      md-card-header
+        | {{project.title}}
+      md-card-content
+        p(ipsum="3s")
+      md-card-footer
+        | {{project.description}}
