@@ -7,12 +7,16 @@ var ngAnnotate = require('gulp-ng-annotate');
 var sourcemaps = require('gulp-sourcemaps');
 var sass       = require('gulp-sass');
 var size       = require('gulp-size');
+var jade       = require('gulp-jade');
 
 //require('require-dir')('./gulps/');
 
 
-var jsSrc     = ['app/src/**/*.module.js', 'app/src/**/*.js'];
-var indexSrc  = ['app/src/index.html'];
+var jsSrc    = ['app/src/**/*.module.js', 'app/src/**/*.js'];
+var indexSrc = ['app/src/index.html'];
+var jadeSrc  = ['app/src/**.jade'];
+var sassSrc  = ['app/src/assets/app.scss'];
+
 var destDir   = 'app/dist/';
 var jsVendors = [
   'app/bower_components/angular/angular.js',
@@ -22,11 +26,10 @@ var jsVendors = [
   'app/bower_components/angular-material/angular-material.js',
   'app/bower_components/lodash/dist/lodash.js'
 ];
-var appSass   = ['app/src/assets/app.scss'];
 
 gulp.task('default', ['clean', 'build']);
 
-gulp.task('build', ['js', 'scss', 'index.html']);
+gulp.task('build', ['js', 'scss', 'jade', 'watch']);
 
 gulp.task('js', function () {
   gulp
@@ -43,7 +46,7 @@ gulp.task('js', function () {
 
 gulp.task('scss', function () {
   gulp
-    .src(appSass)
+    .src(sassSrc)
     .pipe(filelog())
     .pipe(sass({ errLogToConsole: true }))
     .on('error', handleError)
@@ -51,6 +54,13 @@ gulp.task('scss', function () {
     .pipe(concat('app.css'))
     .pipe(gulp.dest(destDir))
     .pipe(size());
+});
+
+gulp.task('jade', function () {
+  gulp
+    .src(jadeSrc)
+    .pipe(jade())
+    .pipe(gulp.dest(destDir));
 });
 
 gulp.task('index.html', function () {
@@ -63,6 +73,11 @@ gulp.task('clean', function () {
   del([destDir + "**"]);
 });
 
+gulp.task('watch', function () {
+  gulp.watch(jsSrc, ['js']);
+  gulp.watch(jadeSrc, ['jade']);
+  gulp.watch(sassSrc, ['sass']);
+});
 
 gulp.on('err', handleError);
 
