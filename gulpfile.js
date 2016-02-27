@@ -9,12 +9,9 @@ var sass       = require('gulp-sass');
 var size       = require('gulp-size');
 var jade       = require('gulp-jade');
 
-//require('require-dir')('./gulps/');
-
-
 var jsSrc    = ['app/src/**/*.module.js', 'app/src/**/*.js'];
 var indexSrc = ['app/src/index.html'];
-var jadeSrc  = ['app/src/**.jade'];
+var jadeSrc  = ['app/src/*.jade','app/src/**/*.jade'];
 var sassSrc  = ['app/src/assets/app.scss'];
 
 var destDir   = 'app/dist/';
@@ -24,6 +21,7 @@ var jsVendors = [
   'app/bower_components/angular-aria/angular-aria.js',
   'app/bower_components/angular-messages/angular-messages.js',
   'app/bower_components/angular-material/angular-material.js',
+  'app/bower_components/angular-ui-router/release/angular-ui-router.js',
   'app/bower_components/lodash/dist/lodash.js'
 ];
 
@@ -60,6 +58,7 @@ gulp.task('jade', function () {
   gulp
     .src(jadeSrc)
     .pipe(jade())
+    .pipe(filelog())
     .pipe(gulp.dest(destDir));
 });
 
