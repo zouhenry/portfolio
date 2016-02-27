@@ -6,9 +6,13 @@
  ========================================*/
 
 angular
-  .module('portfolio', [])
-  .run(run);
+  .module('portfolio', ['ui.router', 'ngMaterial'])
+  .config(config);
 
-function run($filter) {
-
+function config($stateProvider) {
+  $stateProvider
+    .state('portfolio', {
+      url        : "",
+      templateUrl: "layout/layout.html"
+    });
 }
