@@ -12,11 +12,10 @@ body {
   max-width: 60rem;
 }
 
-#nav {
-  padding: 1.5rem;
-  background: khaki;
-  //display: flex;
-  //justify-content: space-between;
+#header {
+  padding: 1.25rem;
+  background: white;
+  border-bottom: 2px dotted khaki;
 
   .brand {
     .avatar {
