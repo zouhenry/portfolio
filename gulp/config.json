@@ -28,5 +28,9 @@
     "app/bower_components/angular-ui-router/release/angular-ui-router.js",
     "app/bower_components/angular-ipsum/dist/ipsum.min.js"
   ],
-  "destDir"     : "app/dist/"
+  "fontsSrc": [
+    "app/bower_components/font-awesome/fonts/*"
+  ],
+  "destDir"     : "app/dist/",
+  "destFontsDir": "app/dist/fonts/"
 }
