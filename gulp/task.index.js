@@ -8,14 +8,10 @@ module.exports = {
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("jade", function () {
+  gulp.task("index", function () {
     gulp
-      .src(config.jadeSrc)
+      .src(config.indexSrc)
       .pipe(plugins.jade())
-      .pipe(plugins.templateCache('templates.js', {
-        module    : 'portfolio.tpls',
-        standalone: true
-      }))
       .pipe(plugins.filelog())
       .pipe(gulp.dest(config.destDir));
   });

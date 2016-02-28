@@ -10,7 +10,10 @@ angular
   .module('portfolio.projects', [])
   .config(config);
 
-function config($stateProvider, navProvider) {
+function config($stateProvider, $urlRouterProvider, navProvider) {
+  $urlRouterProvider.when('', '/projects');
+  $urlRouterProvider.when('/', '/projects');
+
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
     navProvider.register(state);

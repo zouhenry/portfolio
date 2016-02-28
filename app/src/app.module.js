@@ -10,27 +10,11 @@ angular
     'ui.router',
     'ngMaterial',
     'ipsum',
+    //templates
+    'portfolio.tpls',
+    //services
     'portfolio.services',
+    //pages
+    'portfolio.layout',
     'portfolio.projects',
-    'portfolio.todo'])
-  .config(config);
-
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-
-}
-
-function getStates() {
-  return [{
-    url        : "/",
-    state      : "portfolio",
-    tabIndex   : "portfolio",
-    templateUrl: "layout/layout.html",
-    controller : "layoutController as layoutCtrl"
-  }];
-}
-
+    'portfolio.todo']);

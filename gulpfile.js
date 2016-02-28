@@ -1,15 +1,16 @@
 var gulp    = require("gulp");
 var plugins = { //gulp plugins
-  concat    : require("gulp-concat"),
-  del       : require("del"),
-  filelog   : require("gulp-filelog"),
-  uglify    : require("gulp-uglify"),
-  ngAnnotate: require("gulp-ng-annotate"),
-  sourcemaps: require("gulp-sourcemaps"),
-  sass      : require("gulp-sass"),
-  size      : require("gulp-size"),
-  jade      : require("gulp-jade"),
-  iife      : require("gulp-iife")
+  concat       : require("gulp-concat"),
+  del          : require("del"),
+  filelog      : require("gulp-filelog"),
+  uglify       : require("gulp-uglify"),
+  ngAnnotate   : require("gulp-ng-annotate"),
+  sourcemaps   : require("gulp-sourcemaps"),
+  sass         : require("gulp-sass"),
+  size         : require("gulp-size"),
+  jade         : require("gulp-jade"),
+  iife         : require("gulp-iife"),
+  templateCache: require('gulp-angular-templatecache')
 };
 
 /*========================================
