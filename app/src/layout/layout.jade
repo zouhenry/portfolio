@@ -5,5 +5,9 @@
   .menu.layout-row
     .menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':true")
       a(ui-sref="{{item.state}}") {{item.tabName}}
+  .social-media
+    a.social-link.social-link-facebook(href="https://www.facebook.com" title="Henry Zou on Facebook") Facebook
+    a.social-link.social-link-facebook(href="https://twitter.com" title="Henry Zou on Twitter") Twitter
+    a.social-link.social-link-facebook(href="https://www.linkedin.com" title="Henry Zou on Linkedin") LinkedIn
 #content
   ui-view
