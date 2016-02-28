@@ -29,16 +29,21 @@ a {
 }
 
 #header {
-  padding: 1.25rem;
+  padding: 0 1.25rem;
   background: white;
-  border-bottom: 2px dotted khaki;
+  border-bottom: 1px solid lightgray;
+  text-transform: uppercase;
+  font-weight: 200;
 
   .brand {
     .avatar {
       margin: 0 .5rem;
+      display: none;
     }
     .name {
-      font-weight: $bold-font-weight;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: -2px;
     }
   }
 
@@ -46,11 +51,29 @@ a {
     //display: flex;
     //flex-direction: row;
     .menu-item {
-      margin: 0 10px;
+      margin: 0 0.625rem;
       a {
-        color: #999999;
-        font-weight: 600;
+        color: #979797;
+        background-color: transparent;
+        line-height: 3.75rem;
+        font-size: 1.25rem;
+        text-transform: uppercase;
+
+        &:hover {
+          color: #333;
+        }
       }
+    }
+  }
+
+  .social-media {
+    border-left: 1px solid lightgray;
+    line-height: 3.75rem;
+    padding: 0 2rem;
+    margin-left: 2rem;
+
+    a {
+      padding: 0 0.5rem;
     }
   }
 }
