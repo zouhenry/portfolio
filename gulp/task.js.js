@@ -14,6 +14,7 @@ function init(gulp, plugins, config, _, errorFn) {
       .src(config.jsVendorSrc.concat(config.jsSrc))
       .pipe(plugins.filelog())
       .pipe(plugins.ngAnnotate())
+      .pipe(plugins.iife())
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.concat("app.js"))
       .pipe(plugins.sourcemaps.write("./"))
