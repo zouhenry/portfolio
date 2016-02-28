@@ -9,8 +9,10 @@
   "indexSrc"    : [
     "app/src/index.html"
   ],
+  "indexSrc"     : [
+    "app/src/index.jade"
+  ],
   "jadeSrc"     : [
-    "app/src/*.jade",
     "app/src/**/*.jade"
   ],
   "sassSrc"     : [
