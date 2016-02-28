@@ -1,1 +1,16 @@
-| placeholder for todo
+#todo.layout-column.center-panel
+  .todo-item.layout-row(layout-align="space-between center")
+    input.check(type="checkbox")
+    div(ipsum="1s" flex)
+    div.due {{ "2015-05-23" | date:'MM-dd-yyyy'}}
+  .todo-item.layout-row(layout-align="space-between center")
+    input.check(type="checkbox")
+    div(ipsum="1s" flex)
+    div.due {{ "2015-01-09" | date:'MM-dd-yyyy'}}
+  .todo-item.layout-row(layout-align="space-between center")
+    input.check(type="checkbox")
+    div(ipsum="1s" flex)
+    div.due {{ "2015-02-13" | date:'MM-dd-yyyy'}}
+  .todo-item.layout-row(layout-align="space-between center")
+    input(type="text" placeholder="new" flex)
+    md-datepicker(ng-model="todoCtrl.new.date")
