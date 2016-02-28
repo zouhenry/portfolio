@@ -1,16 +1,21 @@
 #todo.layout-column.center-panel
-  .todo-item.layout-row(layout-align="space-between center")
-    input.check(type="checkbox")
-    div(ipsum="1s" flex)
-    div.due {{ "2015-05-23" | date:'MM-dd-yyyy'}}
-  .todo-item.layout-row(layout-align="space-between center")
-    input.check(type="checkbox")
-    div(ipsum="1s" flex)
-    div.due {{ "2015-01-09" | date:'MM-dd-yyyy'}}
-  .todo-item.layout-row(layout-align="space-between center")
-    input.check(type="checkbox")
-    div(ipsum="1s" flex)
-    div.due {{ "2015-02-13" | date:'MM-dd-yyyy'}}
-  .todo-item.layout-row(layout-align="space-between center")
-    input(type="text" placeholder="new" flex)
-    md-datepicker(ng-model="todoCtrl.new.date")
+  .active
+    .todo-item.layout-row(layout-align="space-between center"
+    ng-repeat="todo in todoCtrl.activeTodos"
+    ng-click="todoCtrl.archive(todo)")
+      input.check(type="checkbox")
+      p(flex) {{todo.description}}
+    .todo-item.todo-add
+      form(ng-submit="todoCtrl.create()" flex)
+        md-input-container.layout-fill
+          label type in a new item and press enter...
+          input(type="text" ng-model="todoCtrl.newTodo")
+
+  .completed(ng-if="todoCtrl.completedTodos.length > 0")
+    h3 Completed
+    .todo-item.todo-completed(layout="row"
+    layout-align="space-between center"
+    ng-repeat="todo in todoCtrl.completedTodos")
+      md-button.md-primary(ng-click="todoCtrl.reactivate(todo)") restore
+      p(flex) {{todo.description}}
+      md-button.md-warn(ng-click="todoCtrl.remove(todo)") remove
