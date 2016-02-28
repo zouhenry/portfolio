@@ -1,21 +1,20 @@
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 2/28/16.
  */
 
-'use strict';
 
 angular
-  .module('portfolio.projects')
-  .controller('projectsController', ProjectsController);
+  .module('portfolio.todo')
+  .controller('todoController', TodoController);
 
-function ProjectsController() {
-  var self      = this;
-  self.projects = getProjects();
+function TodoController() {
+  var self  = this;
+  self.todo = getTodo();
 
   /*========================================
    =                 helpers                =
    ========================================*/
-  function getProjects() {
+  function getTodo() {
     return [
       {
         title      : "Timesheet",
@@ -35,5 +34,3 @@ function ProjectsController() {
     ];
   }
 }
-
-

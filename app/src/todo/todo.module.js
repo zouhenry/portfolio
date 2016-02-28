@@ -1,13 +1,12 @@
 /**
- * Created by hzou on 2/21/16.
+ * Created by hzou on 2/27/16.
  */
 /*========================================
  =              APP START                =
  ========================================*/
 
-
 angular
-  .module('portfolio.projects', [])
+  .module('portfolio.todo', [])
   .config(config);
 
 function config($stateProvider, navProvider) {
@@ -19,12 +18,11 @@ function config($stateProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : 0,
-    state      : "portfolio.projects",
-    tabIndex   : "portfolio.projects",
-    templateUrl: "projects/projects.html",
-    controller : "projectsController as projectsCtrl"
+    url        : "todo",
+    tabName    : "To Do",
+    tabIndex   : 1,
+    state      : "portfolio.todo",
+    templateUrl: "todo/todo.html",
+    controller : "todoController as todoCtrl"
   }];
 }

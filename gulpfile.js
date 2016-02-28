@@ -8,7 +8,8 @@ var plugins = { //gulp plugins
   sourcemaps: require("gulp-sourcemaps"),
   sass      : require("gulp-sass"),
   size      : require("gulp-size"),
-  jade      : require("gulp-jade")
+  jade      : require("gulp-jade"),
+  iife      : require("gulp-iife")
 };
 
 /*========================================

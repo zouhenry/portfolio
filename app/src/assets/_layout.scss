@@ -34,7 +34,7 @@ body {
   .menu {
     //display: flex;
     //flex-direction: row;
-    .item {
+    .menu-item {
       margin: 0 10px;
     }
   }
@@ -58,5 +58,4 @@ body {
     font-weight: $bold-font-weight;
     font-size: 0.875rem;
   }
-
 }
