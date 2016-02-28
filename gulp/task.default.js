@@ -8,5 +8,5 @@ module.exports = {
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("default", ["clean", "js", "sass", "index", "jade", "watch"]);
+  gulp.task("default", ["clean", "js", "sass", "index", "jade", "fonts", "watch"]);
 }
