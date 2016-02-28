@@ -5,5 +5,13 @@
   .menu.layout-row
     .menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':true")
       a(ui-sref="{{item.state}}") {{item.tabName}}
+  .social-media
+    a.social-link.social-link-facebook(target="_blank" href="https://www.linkedin.com/in/henry-zou-8a7a8611" title="Henry Zou on Linkedin")
+      i.fa.fa-linkedin.fa-lg
+    a.social-link.social-link-facebook(target="_blank" href="https://github.com/zouhenry" title="Henry Zou on GitHub")
+      i.fa.fa-github.fa-lg
+    a.hide.social-link.social-link-facebook(target="_blank" href="https://www.linkedin.com" title="Henry Zou on Linkedin")
+      i.fa.fa-youtube.fa-lg
+
 #content
   ui-view
