@@ -1,5 +1,5 @@
 {
     "public": "www/",
     "index": "www/index.html",
-    "port": 80
+    "port": 4000
 }
