@@ -7,6 +7,7 @@ var send = require('koa-send'),
     app = koa();
 
 var defaults = require('./defaults.json');
+var port = process.env.PORT || defaults.port;
 
 /** static files */
 app.use(function* () {
@@ -18,5 +19,5 @@ app.use(function* () {
     }
 });
 
-app.listen(defaults.port);
-console.log('Koa server listening at port', defaults.port);
+app.listen(port);
+console.log('Koa server listening at port', port);
