@@ -1,15 +1,14 @@
 #todo.layout-column.center-panel
   .active
     .todo-item.layout-row(layout-align="space-between center"
-    ng-repeat="todo in todoCtrl.activeTodos"
-    ng-click="todoCtrl.archive(todo)")
-      input.check(type="checkbox")
+    ng-repeat="todo in todoCtrl.activeTodos")
+      input.check(type="checkbox" ng-click="todoCtrl.archive(todo)")
       p(flex) {{todo.description}}
     .todo-item.todo-add
       form(ng-submit="todoCtrl.create()" flex)
         md-input-container.layout-fill
           label type in a new item and press enter...
-          input(type="text" ng-model="todoCtrl.newTodo")
+          input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
 
   .completed(ng-if="todoCtrl.completedTodos.length > 0")
     h3 Completed
