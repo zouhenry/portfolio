@@ -1,31 +1,34 @@
 {
-  "name"         : "portfolio",
-  "description"  : "To show off my personal projects",
-  "main"         : "index.js",
-  "authors"      : [
+  "name"            : "portfolio",
+  "description"     : "To show off my personal projects",
+  "main"            : "index.js",
+  "authors"         : [
     "Henry Zou"
   ],
-  "license"      : "ISC",
-  "keywords"     : [
+  "license"         : "ISC",
+  "keywords"        : [
     "Henry",
     "Zou",
     "Angular",
     "Material",
     "Design"
   ],
-  "homepage"     : "",
-  "ignore"       : [
+  "homepage"        : "",
+  "ignore"          : [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
   ],
-  "dependencies" : {
+  "dependencies"    : {
     "angular"           : "^1.5.0",
     "angular-material"  : "^1.0.5",
     "lodash"            : "^4.5.0",
     "angular-ui-router" : "ui-router#^0.2.18",
-    "font-awesome"      : "^4.5.0"
+    "font-awesome"      : "^4.5.0",
+    "angular-ipsum"     : "^0.0.4"
+  },
+  "devDependencies" : {
   }
 }
