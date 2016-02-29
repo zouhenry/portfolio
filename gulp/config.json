@@ -31,6 +31,6 @@
   "fontsSrc": [
     "app/bower_components/font-awesome/fonts/*"
   ],
-  "destDir"     : "app/dist/",
-  "destFontsDir": "app/dist/fonts/"
+  "destDir"     : "app/server/www/",
+  "destFontsDir": "app/server/www/fonts/"
 }
