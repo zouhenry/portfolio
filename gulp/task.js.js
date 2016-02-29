@@ -11,9 +11,9 @@ module.exports = {
 
 function init(gulp, plugins, config, _, errorFn) {
   gulp.task("js", function () {
-    var doUglify = process.env.UGLIFY;
+    var doUglify = process.env.MINIFY;
     console.log('do uglify', doUglify);
-    if (doUglify) {
+    if (true) {
       gulp
         .src(config.jsVendorSrc.concat(config.jsSrc))
         .pipe(plugins.filelog())
