@@ -9,6 +9,6 @@ module.exports = {
 
 function init(gulp, plugins, config, _, errorFn) {
   gulp.task("clean", function () {
-    plugins.del([config.destDir + "**"]);
+    plugins.del([config.destDir]);
   });
 }

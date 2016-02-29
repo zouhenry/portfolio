@@ -27,13 +27,15 @@
     "gulp-sass": "^2.2.0",
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.2",
+    "gulp-uglify": "^1.5.3",
     "lodash": "^4.5.1",
     "require-dir": "^0.3.0",
     "underscore.string": "^3.3.4"
   },
   "dependencies": {
     "koa": "^1.1.2",
+    "koa-conditional-get": "^1.0.3",
+    "koa-etag": "^2.1.1",
     "koa-send": "^3.1.0"
   }
 }
