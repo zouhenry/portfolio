@@ -27,8 +27,8 @@
     "lodash"            : "^4.5.0",
     "angular-ui-router" : "ui-router#^0.2.18",
     "font-awesome"      : "^4.5.0",
-    "angular-ipsum"     : "^0.0.4"
+    "angular-ipsum"     : "^0.0.4",
+    "socket.io-client"  : "^1.4.5"
   },
-  "devDependencies" : {
-  }
+  "devDependencies" : {}
 }

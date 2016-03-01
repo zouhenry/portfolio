@@ -2,24 +2,42 @@
  * Created by hzou on 2/29/16.
  */
 
+var koa = require('koa.io');
+var app = koa();
+//middleware
+var router = require('koa-route');
 var conditional = require('koa-conditional-get');
 var etag = require('koa-etag');
-var send = require('koa-send'),
-    koa = require('koa'),
-    app = koa();
-
+var duration = require('./middleware/duration');
+var logger = require('./middleware/logger');
+var koaStatic = require('koa-static');
+//configs
 var defaults = require('./defaults.json');
 var port = process.env.PORT || defaults.port;
 
+// middleware for koa
 // etag works together with conditional-get
-app.use(conditional());
-app.use(etag());
+app.use(conditional()); //needed by etag
+app.use(etag());        //etag for cache management
+app.use(duration());    //puts "Duration" in the header
+app.use(logger());    //puts "Duration" in the header
+app.use(koaStatic(defaults.public)); //specify public folder
 
-/** static files */
-app.use(function* () {
-    console.log('requesting', this.path);
-    yield send(this, defaults.index);
-    yield send(this, this.path, { root: defaults.public });
+
+// middleware for socket.io's connect and disconnect
+app.io.use(function* (next) {
+    // on connect
+    console.log('socket connected');
+    yield* next;
+    console.log('socket disconnected');
+    // on disconnect
+});
+
+// router for socket event
+app.io.route('new message', function* (next, message) {
+    // we tell the client to execute 'new message'
+    console.log('message from client', message);
+    this.emit('new message', 'server:' + message);
 });
 
 app.listen(port);

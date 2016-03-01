@@ -1,24 +1,24 @@
 {
-  "gulpFiles"   : [
+  "gulpFiles"    : [
     "gulp/**.js"
   ],
-  "jsSrc"       : [
+  "jsSrc"        : [
     "app/src/**/*.module.js",
     "app/src/**/*.js"
   ],
-  "indexSrc"    : [
+  "indexSrc"     : [
     "app/src/index.html"
   ],
   "indexSrc"     : [
     "app/src/index.jade"
   ],
-  "jadeSrc"     : [
+  "jadeSrc"      : [
     "app/src/**/*.jade"
   ],
-  "sassSrc"     : [
+  "sassSrc"      : [
     "app/src/assets/**/*.scss"
   ],
-  "jsVendorSrc" : [
+  "jsVendorSrc"  : [
     "app/bower_components/lodash/dist/lodash.js",
     "app/bower_components/angular/angular.js",
     "app/bower_components/angular-animate/angular-animate.js",
@@ -26,11 +26,12 @@
     "app/bower_components/angular-messages/angular-messages.js",
     "app/bower_components/angular-material/angular-material.js",
     "app/bower_components/angular-ui-router/release/angular-ui-router.js",
-    "app/bower_components/angular-ipsum/dist/ipsum.min.js"
+    "app/bower_components/angular-ipsum/dist/ipsum.min.js",
+    "app/bower_components/socket.io-client/socket.io.js"
   ],
-  "fontsSrc": [
+  "fontsSrc"     : [
     "app/bower_components/font-awesome/fonts/*"
   ],
-  "destDir"     : "app/server/www/",
-  "destFontsDir": "app/server/www/fonts/"
+  "destDir"      : "app/server/www/",
+  "destFontsDir" : "app/server/www/fonts/"
 }
