@@ -3,6 +3,6 @@ module.exports = function () {
         var start = Date.now();
         yield next;
         var duration = Date.now() - start;
-        this.set('Duration', duration + 'ms');
+        console.log(this.request.method, this.request.url, 'took', duration+'ms');
   };
 };
