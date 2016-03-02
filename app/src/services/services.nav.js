@@ -19,7 +19,9 @@ angular
     function navService() {
       return {
         getTabs: function () {
-          return tabs;
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
         }
       };
     }

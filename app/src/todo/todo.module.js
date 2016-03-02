@@ -20,7 +20,7 @@ function getStates() {
   return [{
     url        : "todo",
     tabName    : "To Do",
-    tabIndex   : 1,
+    tabIndex   : 2,
     state      : "portfolio.todo",
     templateUrl: "todo/todo.html",
     controller : "todoController as todoCtrl"

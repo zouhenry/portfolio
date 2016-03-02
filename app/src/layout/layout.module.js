@@ -22,7 +22,6 @@ function getStates() {
   return [{
     url        : "/",
     state      : "portfolio",
-    tabIndex   : "portfolio",
     templateUrl: "layout/layout.html",
     controller : "layoutController as layoutCtrl"
   }];
