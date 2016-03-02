@@ -6,15 +6,19 @@ var uglify = require('gulp-uglify');
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName: 'js',
+  group     : {
+    "default": 1,
+    "deploy" : 1
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("js", function () {
+  gulp.task(module.exports.taskName, function () {
     var doUglify = process.env.MINIFY;
-    console.log('do uglify', doUglify);
-    if (true) {
-      gulp
+    if (doUglify) {
+      return gulp
         .src(config.jsVendorSrc.concat(config.jsSrc))
         .pipe(plugins.filelog())
         .pipe(plugins.ngAnnotate())
@@ -27,7 +31,7 @@ function init(gulp, plugins, config, _, errorFn) {
         .pipe(gulp.dest(config.destDir))
         .pipe(plugins.size());
     } else {
-      gulp
+      return gulp
         .src(config.jsVendorSrc.concat(config.jsSrc))
         .pipe(plugins.filelog())
         .pipe(plugins.ngAnnotate())

@@ -4,12 +4,17 @@
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName: 'jade',
+  group     : {
+    "default": 1,
+    "deploy" : 1
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("jade", function () {
-    gulp
+  gulp.task(module.exports.taskName, function () {
+    return gulp
       .src(config.jadeSrc)
       .pipe(plugins.jade())
       .pipe(plugins.templateCache('templates.js', {

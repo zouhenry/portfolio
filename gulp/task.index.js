@@ -4,12 +4,17 @@
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName: 'index',
+  group     : {
+    "default": 1,
+    "deploy" : 1
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("index", function () {
-    gulp
+  gulp.task(module.exports.taskName, function () {
+    return gulp
       .src(config.indexSrc)
       .pipe(plugins.jade())
       .pipe(plugins.filelog())

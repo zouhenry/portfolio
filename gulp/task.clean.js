@@ -4,11 +4,16 @@
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName  : 'clean',
+  group     : {
+    "default": 0,
+    "deploy" : 0
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("clean", function () {
-    plugins.del([config.destDir]);
+  gulp.task(module.exports.taskName, function () {
+    return plugins.del([config.destDir]);
   });
 }

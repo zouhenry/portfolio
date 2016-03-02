@@ -4,12 +4,17 @@
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName  : 'fonts',
+  group     : {
+    'default': 1,
+    'deploy' : 1
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("fonts", function () {
-    gulp
+  gulp.task(module.exports.taskName, function () {
+    return gulp
       .src(config.fontsSrc)
       .pipe(plugins.filelog())
       .pipe(gulp.dest(config.destFontsDir))
