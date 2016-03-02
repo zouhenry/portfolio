@@ -24,9 +24,8 @@ function getStates() {
   return [{
     url        : "projects",
     tabName    : "Projects",
-    tabIndex   : 0,
+    tabIndex   : 1,
     state      : "portfolio.projects",
-    tabIndex   : "portfolio.projects",
     templateUrl: "projects/projects.html",
     controller : "projectsController as projectsCtrl"
   }];
