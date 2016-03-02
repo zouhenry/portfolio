@@ -4,17 +4,21 @@
 
 module.exports = {
   isGulpTask: true,
-  init      : init
+  init      : init,
+  taskName: 'sass',
+  group     : {
+    "default": 1,
+    "deploy" : 1
+  }
 };
 
 function init(gulp, plugins, config, _, errorFn) {
-  gulp.task("sass", function () {
-    gulp
+  gulp.task(module.exports.taskName, function () {
+    return gulp
       .src(config.sassSrc)
       .pipe(plugins.filelog())
       .pipe(plugins.sass({ errLogToConsole: true }))
       .on("error", errorFn)
-      //.pipe(gulp.dest("./tmp/"))
       .pipe(plugins.concat("app.css"))
       .pipe(plugins.filelog())
       .pipe(gulp.dest(config.destDir))
