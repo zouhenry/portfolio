@@ -32,7 +32,7 @@ function TodoController(dataApi) {
     dataApi
       .post(url, todo)
       .then(function (data) {
-        self.activeTodos.unshift(data);
+        self.activeTodos.push(data);
         self.newTodo = "";
       });
   }
@@ -61,7 +61,7 @@ function TodoController(dataApi) {
       .put(url + todo.id, completed)
       .then(function () {
         _.remove(self.activeTodos, todo);
-        self.completedTodos.unshift(completed);
+        self.completedTodos.push(completed);
       });
   }
 
@@ -72,7 +72,7 @@ function TodoController(dataApi) {
       .put(url + todo.id, activated)
       .then(function () {
         _.remove(self.completedTodos, todo);
-        self.activeTodos.unshift(activated);
+        self.activeTodos.push(activated);
       });
   }
 }

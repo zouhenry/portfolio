@@ -87173,17 +87173,6 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services', []);
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -87216,6 +87205,17 @@ function getStates() {
     controller : "projectsController as projectsCtrl"
   }];
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services', []);
 }());
 
 ;(function() {
@@ -87468,39 +87468,6 @@ function localApi($window, $q) {
  * Created by hzou on 2/27/16.
  */
 
-angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
-
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
-  });
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
 'use strict';
 
 angular
@@ -87534,6 +87501,39 @@ function ProjectsController() {
     ];
   }
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
 }());
 
 ;(function() {
@@ -87574,7 +87574,7 @@ function TodoController(dataApi) {
     dataApi
       .post(url, todo)
       .then(function (data) {
-        self.activeTodos.unshift(data);
+        self.activeTodos.push(data);
         self.newTodo = "";
       });
   }
@@ -87603,7 +87603,7 @@ function TodoController(dataApi) {
       .put(url + todo.id, completed)
       .then(function () {
         _.remove(self.activeTodos, todo);
-        self.completedTodos.unshift(completed);
+        self.completedTodos.push(completed);
       });
   }
 
@@ -87614,7 +87614,7 @@ function TodoController(dataApi) {
       .put(url + todo.id, activated)
       .then(function () {
         _.remove(self.completedTodos, todo);
-        self.activeTodos.unshift(activated);
+        self.activeTodos.push(activated);
       });
   }
 }

@@ -19237,6 +19237,9 @@ a {
   background: white;
   padding: 2rem;
   border-radius: 4px; }
+  @media screen and (max-width: 600px) {
+    .center-panel {
+      padding: 2rem 0; } }
 
 .collapse {
   padding: 0;
@@ -19255,6 +19258,8 @@ a {
     font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: -2px; }
+  #header md-menu-item > .md-button {
+    font-size: 1.25rem; }
   #header .menu .menu-item {
     margin: 0 0.625rem; }
     #header .menu .menu-item a {
@@ -19280,6 +19285,9 @@ a {
 
 #content {
   padding: 1.5rem; }
+  @media screen and (max-width: 600px) {
+    #content {
+      padding: 1rem .25rem; } }
 
 .project-card {
   text-align: center; }
@@ -19298,8 +19306,10 @@ input[type="text"] {
   max-width: 60rem;
   margin-left: auto;
   margin-right: auto; }
+  #todo .header {
+    padding: .5rem; }
   #todo .todo-item {
-    padding: 1rem;
+    padding: 0.5rem;
     border-bottom: 1px solid #E5E5E5; }
     #todo .todo-item:focus {
       outline: none; }
