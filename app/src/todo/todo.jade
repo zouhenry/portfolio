@@ -17,4 +17,4 @@
     ng-repeat="todo in todoCtrl.completedTodos")
       md-button.md-primary(ng-click="todoCtrl.reactivate(todo)") restore
       p(flex) {{todo.description}}
-      md-button.md-warn(ng-click="todoCtrl.remove(todo)") remove
+      md-button.md-warn(ng-click="todoCtrl.remove(todo)") &times;

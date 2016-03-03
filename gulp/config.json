@@ -36,8 +36,7 @@
   "destFontsDir" : "app/server/www/fonts/",
   "gulpTasks"    : {
     "build": ["clean", ["js", "index", "jade", "sass", "fonts"]],
-    "deployBuild": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
-    "default":["build", "watch"],
-    "deploy":["update", "deployBuild", "restart"]
+    "deploy": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
+    "default":["build", "watch"]
   }
 }
