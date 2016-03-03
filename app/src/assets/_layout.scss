@@ -17,6 +17,10 @@ a {
   background: white;
   padding: 2rem;
   border-radius: 4px;
+
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    padding: 2rem 0;
+  }
 }
 
 .collapse {
@@ -47,7 +51,12 @@ a {
     }
   }
 
+  md-menu-item > .md-button {
+    font-size: 1.25rem;
+  }
+
   .menu {
+
     //display: flex;
     //flex-direction: row;
     .menu-item {
@@ -87,6 +96,10 @@ a {
 
 #content {
   padding: 1.5rem;
+
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    padding: 1rem .25rem;
+  }
 }
 
 // project card
@@ -114,8 +127,12 @@ input[type="text"] {
   margin-left: auto;
   margin-right: auto;
 
+  .header {
+    padding: .5rem;
+  }
+
   .todo-item {
-    padding: 1rem;
+    padding: 0.5rem;
     border-bottom: 1px solid #E5E5E5;
 
     &:focus {
