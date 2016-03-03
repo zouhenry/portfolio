@@ -5,11 +5,7 @@
 module.exports = {
   isGulpTask: true,
   init      : init,
-  taskName: 'index',
-  group     : {
-    "default": 1,
-    "deploy" : 1
-  }
+  taskName: 'index'
 };
 
 function init(gulp, plugins, config, _, errorFn) {

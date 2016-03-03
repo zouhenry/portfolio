@@ -5,11 +5,7 @@
 module.exports = {
   isGulpTask: true,
   init      : init,
-  taskName: 'jade',
-  group     : {
-    "default": 1,
-    "deploy" : 1
-  }
+  taskName: 'jade'
 };
 
 function init(gulp, plugins, config, _, errorFn) {

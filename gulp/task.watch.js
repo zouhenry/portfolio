@@ -5,10 +5,7 @@
 module.exports = {
   isGulpTask: true,
   init      : init,
-  taskName  : 'watch',
-  group     : {
-    "default": 2
-  }
+  taskName  : 'watch'
 };
 
 function init(gulp, plugins, config, _, errorFn) {

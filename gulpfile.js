@@ -30,28 +30,15 @@ var config = require('./gulp/config.json');
  ========================================*/
 var tasksFiles = require('require-dir')('./gulp/');
 
-//constructors this array to be consued by runSequence:
-//{
-//  default: [['clean'],
-//    ['fonts', 'index', 'jade', 'js', 'sass'],
-//    ['watch']]
-//}
-var taskGroups = {};
-
 _.forEach(tasksFiles, function (task) {
   if (task.isGulpTask) {
     //initialize each task
     task.init(gulp, plugins, config, _, errorFn);
-    _.forEach(task.group, function (order, name) {
-      taskGroups[name]        = taskGroups[name] || [];
-      taskGroups[name][order] = taskGroups[name][order] || [];
-      taskGroups[name][order].push(task.taskName);
-    });
   }
 });
 
-// foreach taskGroups dynamically create a new task and run the tasks through runSequence
-_.forEach(taskGroups, function (taskGroupItems, taskGroupName) {
+// foreach gulpTasks dynamically create a new task and run the tasks through runSequence
+_.forEach(config.gulpTasks, function (taskGroupItems, taskGroupName) {
   gulp.task(taskGroupName, function () {
     return plugins.runSequence.apply(plugins.runSequence, taskGroupItems);
   });
