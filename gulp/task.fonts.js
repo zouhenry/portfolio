@@ -5,11 +5,7 @@
 module.exports = {
   isGulpTask: true,
   init      : init,
-  taskName  : 'fonts',
-  group     : {
-    'default': 1,
-    'deploy' : 1
-  }
+  taskName  : 'fonts'
 };
 
 function init(gulp, plugins, config, _, errorFn) {

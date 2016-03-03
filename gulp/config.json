@@ -33,5 +33,11 @@
     "app/bower_components/font-awesome/fonts/*"
   ],
   "destDir"      : "app/server/www/",
-  "destFontsDir" : "app/server/www/fonts/"
+  "destFontsDir" : "app/server/www/fonts/",
+  "gulpTasks"    : {
+    "build": ["clean", ["js", "index", "jade", "sass", "fonts"]],
+    "deployBuild": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
+    "default":["build", "watch"],
+    "deploy":["update", "deployBuild", "restart"]
+  }
 }
