@@ -16,6 +16,8 @@ angular
     'portfolio.apis',
     //services
     'portfolio.services',
+    //directives
+    'portfolio.directives',
     //pages
     'portfolio.layout',
     'portfolio.projects',
@@ -26,7 +28,6 @@ angular
 
 function config(dataApiProvider, $mdThemingProvider) {
   dataApiProvider.set('localApi');
-  //$mdThemingProvider.theme('default')
-  //  .primaryPalette('light-blue')
-  //  .accentPalette('teal');
+  $mdThemingProvider.theme('default')
+    .primaryPalette('light-blue');
 }

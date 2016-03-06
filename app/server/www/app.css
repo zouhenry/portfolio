@@ -19226,6 +19226,9 @@ md-tooltip {
 
 html {
   font-size: 16px; }
+  @media screen and (max-width: 600px) {
+    html {
+      font-size: 15px; } }
 
 body {
   background-color: #EFF0F1;
@@ -19267,12 +19270,8 @@ a {
 
 .center-panel {
   max-width: 60rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 4px; }
-  @media screen and (max-width: 600px) {
-    .center-panel {
-      padding: 2rem 0; } }
+  margin-left: auto;
+  margin-right: auto; }
 
 .collapse {
   padding: 0;
@@ -19353,5 +19352,26 @@ md-card md-card-footer {
 
 input[type="text"] {
   padding: 0.5rem; }
+
+#todo {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto; }
+  #todo form {
+    margin-top: 1rem; }
+  #todo .header {
+    padding: .5rem; }
+  #todo .todo-item {
+    border-bottom: 1px solid #E5E5E5; }
+    #todo .todo-item:focus {
+      outline: none; }
+    #todo .todo-item.todo-add {
+      border-bottom: none; }
+    #todo .todo-item.todo-completed p {
+      font-weight: 200;
+      font-style: italic;
+      text-decoration: line-through; }
+    #todo .todo-item .check {
+      margin-right: 1rem; }
 
 /*# sourceMappingURL=app.css.map */

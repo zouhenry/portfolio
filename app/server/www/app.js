@@ -87113,6 +87113,8 @@ angular
     'portfolio.apis',
     //services
     'portfolio.services',
+    //directives
+    'portfolio.directives',
     //pages
     'portfolio.layout',
     'portfolio.projects',
@@ -87123,9 +87125,8 @@ angular
 
 function config(dataApiProvider, $mdThemingProvider) {
   dataApiProvider.set('localApi');
-  //$mdThemingProvider.theme('default')
-  //  .primaryPalette('light-blue')
-  //  .accentPalette('teal');
+  $mdThemingProvider.theme('default')
+    .primaryPalette('light-blue');
 }
 }());
 
@@ -87172,6 +87173,17 @@ function getStates() {
 
 angular
   .module('portfolio.apis', []);
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/6/16.
+ */
+
+angular
+  .module('portfolio.directives', []);
 }());
 
 ;(function() {
@@ -87544,6 +87556,33 @@ function localApi($window, $q) {
     deferred.resolve(data);
     return deferred.promise;
   }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/6/16.
+ */
+
+autofocus.$inject = ["$timeout"];
+angular
+  .module('portfolio.directives')
+  .directive('autofocus', autofocus);
+
+function autofocus($timeout) {
+  return {
+    restrict: 'A',
+    link    : focusOnLoad
+  };
+
+  function focusOnLoad($scope, $element) {
+    $timeout(function () {  //ensuring dom is rendered by waiting 250ms
+      $element[0].focus();
+    }, 250);
+  }
+
 }
 }());
 
