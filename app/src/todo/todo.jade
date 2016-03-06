@@ -1,5 +1,5 @@
 #todo.layout-column.center-panel
-  md-subheader.active.md-primary On-going
+  md-subheader.md-no-sticky.active On-going
     .todo-item.layout-row(layout-align="space-between center"
     ng-repeat="todo in todoCtrl.activeTodos")
       input.check(type="checkbox" ng-click="todoCtrl.archive(todo)")
@@ -11,7 +11,7 @@
           input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
 
   .completed(ng-if="todoCtrl.completedTodos.length > 0")
-    md-subheader.md-primary Completed
+    md-subheader.md-no-sticky Completed
     .todo-item.todo-completed(layout="row"
     layout-align="space-between center"
     ng-repeat="todo in todoCtrl.completedTodos")
