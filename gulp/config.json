@@ -32,10 +32,14 @@
   "fontsSrc"     : [
     "app/bower_components/font-awesome/fonts/*"
   ],
+  "imagesSrc": [
+    "app/src/assets/images/*"
+  ],
   "destDir"      : "app/server/www/",
   "destFontsDir" : "app/server/www/fonts/",
+  "destImagesDir" : "app/server/www/images/",
   "gulpTasks"    : {
-    "build": ["clean", ["js", "index", "jade", "sass", "fonts"]],
+    "build": ["clean", ["js", "index", "jade", "sass", "fonts", "images"]],
     "deploy": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
     "default":["build", "watch"]
   }

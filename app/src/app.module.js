@@ -19,7 +19,9 @@ angular
     //pages
     'portfolio.layout',
     'portfolio.projects',
-    'portfolio.todo'])
+    'portfolio.todo',
+    'portfolio.about'
+  ])
   .config(config);
 
 function config(dataApiProvider, $mdThemingProvider) {

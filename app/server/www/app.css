@@ -19338,15 +19338,18 @@ a {
     #content {
       padding: 1rem .25rem; } }
 
-.project-card {
+md-card.center {
   text-align: center; }
-  .project-card md-card-header {
-    align-self: center;
-    font-weight: 500;
-    font-size: 1.25rem; }
-  .project-card md-card-footer {
-    font-weight: 500;
-    font-size: 0.875rem; }
+
+md-card md-card-header {
+  font-weight: 500;
+  font-size: 1.25rem; }
+  md-card md-card-header.center {
+    align-self: center; }
+
+md-card md-card-footer {
+  font-weight: 500;
+  font-size: 0.875rem; }
 
 input[type="text"] {
   padding: 0.5rem; }
