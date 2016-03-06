@@ -22,6 +22,9 @@ angular
     'portfolio.todo'])
   .config(config);
 
-function config(dataApiProvider) {
+function config(dataApiProvider, $mdThemingProvider) {
   dataApiProvider.set('localApi');
+  //$mdThemingProvider.theme('default')
+  //  .primaryPalette('light-blue')
+  //  .accentPalette('teal');
 }

@@ -12,16 +12,12 @@ a {
 }
 
 .name {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: -2px;
   line-height: 6rem;
   height: 6rem;
   background-color: white;
-
-  .title {
-    padding-left: 0.5rem;
-  }
 
   @media screen and (max-width: $layout-breakpoint-xs) {
     line-height: 4rem;
@@ -45,8 +41,8 @@ a {
     border: 5px solid gray;
 
     @media screen and (max-width: $layout-breakpoint-xs) {
-      width: 6rem;
-      border-radius: 4rem;
+      width: 8rem;
+      border-radius: 5rem;
     }
 
   }
@@ -83,10 +79,7 @@ a {
 #header {
   text-transform: uppercase;
   font-weight: 200;
-  md-menu {
-    padding-top: 1.5rem;
-    float: right;
-  }
+
   @media screen and (max-width: $layout-breakpoint-xs) {
     height: 4rem;
   }
@@ -94,7 +87,7 @@ a {
     margin-left: 225px;
 
     @media screen and (max-width: $layout-breakpoint-xs) {
-      margin-left: 125px;
+      margin-left: 165px;
     }
   }
   .brand {
