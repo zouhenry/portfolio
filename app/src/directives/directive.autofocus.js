@@ -13,9 +13,9 @@ function autofocus($timeout) {
   };
 
   function focusOnLoad($scope, $element) {
-    $timeout(function () {
+    $timeout(function () {  //ensuring dom is rendered by waiting 250ms
       $element[0].focus();
-    });
+    }, 250);
   }
 
 }

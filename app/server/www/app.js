@@ -87113,6 +87113,8 @@ angular
     'portfolio.apis',
     //services
     'portfolio.services',
+    //directives
+    'portfolio.directives',
     //pages
     'portfolio.layout',
     'portfolio.projects',
@@ -87123,9 +87125,8 @@ angular
 
 function config(dataApiProvider, $mdThemingProvider) {
   dataApiProvider.set('localApi');
-  //$mdThemingProvider.theme('default')
-  //  .primaryPalette('light-blue')
-  //  .accentPalette('teal');
+  $mdThemingProvider.theme('default')
+    .primaryPalette('light-blue');
 }
 }());
 
@@ -87577,9 +87578,9 @@ function autofocus($timeout) {
   };
 
   function focusOnLoad($scope, $element) {
-    $timeout(function () {
+    $timeout(function () {  //ensuring dom is rendered by waiting 250ms
       $element[0].focus();
-    });
+    }, 250);
   }
 
 }
