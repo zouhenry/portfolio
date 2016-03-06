@@ -19224,13 +19224,46 @@ md-tooltip {
 .fa-percent:before {
   content: ""; }
 
+html {
+  font-size: 16px; }
+
 body {
   background-color: #EFF0F1;
-  font-size: 16px;
   color: #666; }
 
 a {
   text-decoration: none; }
+
+.name {
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 6rem;
+  height: 6rem;
+  background-color: white; }
+  .name .title {
+    padding-left: 0.5rem; }
+  @media screen and (max-width: 600px) {
+    .name {
+      line-height: 4rem;
+      height: 4rem; } }
+  .name .nametext {
+    display: inline-block;
+    vertical-align: text-top; }
+
+.avatar {
+  position: absolute;
+  top: 0rem;
+  border-radius: 7rem;
+  margin: 0.5rem; }
+  .avatar img {
+    border-radius: 7rem;
+    width: 12rem;
+    border: 5px solid gray; }
+    @media screen and (max-width: 600px) {
+      .avatar img {
+        width: 6rem;
+        border-radius: 4rem; } }
 
 .center-panel {
   max-width: 60rem;
@@ -19245,23 +19278,37 @@ a {
   padding: 0;
   margin: 0; }
 
-#header {
-  padding: 0rem 1.25rem;
+#header-bg {
+  z-index: -1;
   background: white;
-  border-bottom: 1px solid lightgray;
+  height: 12rem;
+  margin-top: -18rem;
+  position: relative; }
+
+#header {
   text-transform: uppercase;
   font-weight: 200; }
-  #header .brand .avatar {
-    margin: 0 .5rem;
-    display: none; }
-  #header .brand .name {
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: -2px; }
+  #header md-menu {
+    padding-top: 1.5rem;
+    float: right; }
+  @media screen and (max-width: 600px) {
+    #header {
+      height: 4rem; } }
+  #header .right {
+    margin-left: 225px; }
+    @media screen and (max-width: 600px) {
+      #header .right {
+        margin-left: 125px; } }
+  #header .brand {
+    margin: 1rem;
+    position: relative;
+    line-height: normal; }
   #header md-menu-item > .md-button {
     font-size: 1.25rem; }
   #header .menu .menu-item {
     margin: 0 0.625rem; }
+    #header .menu .menu-item:first-child {
+      margin-left: 0rem; }
     #header .menu .menu-item a {
       color: #979797;
       background-color: transparent;
@@ -19284,6 +19331,8 @@ a {
         color: #333; }
 
 #content {
+  position: relative;
+  top: 4rem;
   padding: 1.5rem; }
   @media screen and (max-width: 600px) {
     #content {
@@ -19301,25 +19350,5 @@ a {
 
 input[type="text"] {
   padding: 0.5rem; }
-
-#todo {
-  max-width: 60rem;
-  margin-left: auto;
-  margin-right: auto; }
-  #todo .header {
-    padding: .5rem; }
-  #todo .todo-item {
-    padding: 0.5rem;
-    border-bottom: 1px solid #E5E5E5; }
-    #todo .todo-item:focus {
-      outline: none; }
-    #todo .todo-item.todo-add {
-      border-bottom: none; }
-    #todo .todo-item.todo-completed p {
-      font-weight: 200;
-      font-style: italic;
-      text-decoration: line-through; }
-    #todo .todo-item .check {
-      margin-right: 1rem; }
 
 /*# sourceMappingURL=app.css.map */

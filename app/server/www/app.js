@@ -87101,7 +87101,7 @@ function toArray(list, index) {
  =              APP START                =
  ========================================*/
 
-config.$inject = ["dataApiProvider"];
+config.$inject = ["dataApiProvider", "$mdThemingProvider"];
 angular
   .module('portfolio', [
     'ui.router',
@@ -87119,8 +87119,11 @@ angular
     'portfolio.todo'])
   .config(config);
 
-function config(dataApiProvider) {
+function config(dataApiProvider, $mdThemingProvider) {
   dataApiProvider.set('localApi');
+  //$mdThemingProvider.theme('default')
+  //  .primaryPalette('light-blue')
+  //  .accentPalette('teal');
 }
 }());
 
@@ -87173,6 +87176,17 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services', []);
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -87205,17 +87219,6 @@ function getStates() {
     controller : "projectsController as projectsCtrl"
   }];
 }
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services', []);
 }());
 
 ;(function() {
@@ -87468,6 +87471,39 @@ function localApi($window, $q) {
  * Created by hzou on 2/27/16.
  */
 
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
 'use strict';
 
 angular
@@ -87501,39 +87537,6 @@ function ProjectsController() {
     ];
   }
 }
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
-
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
-  });
 }());
 
 ;(function() {

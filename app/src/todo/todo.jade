@@ -1,5 +1,5 @@
 #todo.layout-column.center-panel
-  .active
+  md-subheader.active.md-primary On-going
     .todo-item.layout-row(layout-align="space-between center"
     ng-repeat="todo in todoCtrl.activeTodos")
       input.check(type="checkbox" ng-click="todoCtrl.archive(todo)")
@@ -11,8 +11,7 @@
           input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
 
   .completed(ng-if="todoCtrl.completedTodos.length > 0")
-    .header
-      h3 Completed
+    md-subheader.md-primary Completed
     .todo-item.todo-completed(layout="row"
     layout-align="space-between center"
     ng-repeat="todo in todoCtrl.completedTodos")
