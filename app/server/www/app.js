@@ -87178,6 +87178,17 @@ angular
 "use strict";
 
 /**
+ * Created by hzou on 3/6/16.
+ */
+
+angular
+  .module('portfolio.directives', []);
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -87544,6 +87555,33 @@ function localApi($window, $q) {
     deferred.resolve(data);
     return deferred.promise;
   }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/6/16.
+ */
+
+autofocus.$inject = ["$timeout"];
+angular
+  .module('portfolio.directives')
+  .directive('autofocus', autofocus);
+
+function autofocus($timeout) {
+  return {
+    restrict: 'A',
+    link    : focusOnLoad
+  };
+
+  function focusOnLoad($scope, $element) {
+    $timeout(function () {
+      $element[0].focus();
+    });
+  }
+
 }
 }());
 

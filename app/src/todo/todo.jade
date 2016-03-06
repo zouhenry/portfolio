@@ -6,7 +6,7 @@
       md-list
         md-subheader
           ng-pluralize(count="todoCtrl.activeTodos.length"
-          when="{'one': '1 pending task', 'other': '{} pending tasks'}")
+          when="{'0':'Add a new one task below', 'one': '1 pending task', 'other': '{} pending tasks'}")
         md-list-item.todo-item(ng-repeat="todo in todoCtrl.activeTodos" ng-click="todoCtrl.archive(todo)")
           input.check(type="checkbox")
           | {{todo.description}}
@@ -14,7 +14,7 @@
           form(ng-submit="todoCtrl.create()" flex)
             md-input-container.layout-fill
               label type in a new item and press enter...
-              input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
+              input(autofocus type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
   md-card(ng-if="todoCtrl.completedTodos.length > 0")
     md-card-header.center
       | Completed
