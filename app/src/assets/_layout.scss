@@ -54,13 +54,6 @@ a {
 
 .center-panel {
   max-width: $page-width;
-  background: white;
-  padding: 2rem;
-  border-radius: 4px;
-
-  @media screen and (max-width: $layout-breakpoint-xs) {
-    padding: 2rem 0;
-  }
 }
 
 .collapse {

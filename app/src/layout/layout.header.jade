@@ -1,0 +1,32 @@
+#header
+  .name
+    .right.nametext
+      | Henry Zou
+      small.title(hide-xs) Front End Engineer
+    md-menu.layout-row(hide-gt-xs)
+      md-button.md-icon-button(ng-click='layoutCtrl.openMenu($mdOpenMenu, $event)')
+        md-icon.fa.fa-2x(md-font-icon='fa-bars')
+      md-menu-content(width='4')
+        md-menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':false" ui-sref="{{item.state}}")
+          md-button
+            | {{item.tabName}}
+        md-menu-divider
+        md-menu-item
+          a.md-button(target="_blank" href="https://www.linkedin.com/in/zouhenry" title="Henry Zou on Linkedin")
+            md-icon.fa.fa-lg(md-font-icon='fa-linkedin', md-menu-align-target='')
+              | LinkedIn
+        md-menu-item
+          a.md-button(target="_blank" href="https://github.com/zouhenry" title="Henry Zou on GitHub")
+            md-icon.fa.fa-lg(md-font-icon='fa-github', md-menu-align-target='')
+              | Github
+        md-menu-item.hide
+          a.md-button(target="_blank" href="https://github.com/zouhenry" title="Henry Zou on GitHub")
+            md-icon.fa.fa-lg(md-font-icon='fa-youtube', md-menu-align-target='')
+              | Youtube
+  .right
+    .menu.layout-row(hide-xs)
+      .menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':false")
+        a(ui-sref="{{item.state}}") {{item.tabName}}
+    small.title(hide-gt-xs) Front End Engineer
+.avatar
+  img(src="images/portfolio.jpg")

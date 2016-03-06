@@ -1,20 +1,50 @@
 #todo.layout-column.center-panel
-  md-subheader.md-no-sticky.active On-going
-    .todo-item.layout-row(layout-align="space-between center"
-    ng-repeat="todo in todoCtrl.activeTodos")
-      input.check(type="checkbox" ng-click="todoCtrl.archive(todo)")
-      p(flex) {{todo.description}}
-    .todo-item.todo-add
-      form(ng-submit="todoCtrl.create()" flex)
-        md-input-container.layout-fill
-          label type in a new item and press enter...
-          input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
-
-  .completed(ng-if="todoCtrl.completedTodos.length > 0")
-    md-subheader.md-no-sticky Completed
-    .todo-item.todo-completed(layout="row"
-    layout-align="space-between center"
-    ng-repeat="todo in todoCtrl.completedTodos")
-      md-button.md-primary(ng-click="todoCtrl.reactivate(todo)") restore
-      p(flex) {{todo.description}}
-      md-button.md-warn(ng-click="todoCtrl.remove(todo)") &times;
+  md-card
+    md-card-header.center
+      | On-going
+    md-card-content
+      md-list
+        md-subheader
+          ng-pluralize(count="todoCtrl.activeTodos.length"
+          when="{'one': '1 pending task', 'other': '{} pending tasks'}")
+        md-list-item.todo-item(ng-repeat="todo in todoCtrl.activeTodos" ng-click="todoCtrl.archive(todo)")
+          input.check(type="checkbox")
+          | {{todo.description}}
+        md-list-item.todo-item.todo-add
+          form(ng-submit="todoCtrl.create()" flex)
+            md-input-container.layout-fill
+              label type in a new item and press enter...
+              input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
+  md-card(ng-if="todoCtrl.completedTodos.length > 0")
+    md-card-header.center
+      | Completed
+    md-card-content
+      md-list
+        md-subheader
+          ng-pluralize(count="todoCtrl.completedTodos.length"
+          when="{'one': '1 completed task', 'other': '{} completed tasks'}")
+        md-list-item.todo-item.todo-completed(ng-repeat="todo in todoCtrl.completedTodos" ng-click="todoCtrl.reactivate(todo)")
+          input.check(type="checkbox")
+          p {{todo.description}}
+          md-button.md-icon-button(ng-click="todoCtrl.remove(todo)")
+            md-icon.fa.fa-lg.md-accent(md-font-icon='fa-times')
+            //
+  //md-subheader.md-no-sticky.active On-going
+  //  .todo-item.layout-row(layout-align="space-between center"
+  //  ng-repeat="todo in todoCtrl.activeTodos")
+  //    input.check(type="checkbox" ng-click="todoCtrl.archive(todo)")
+  //    p(flex) {{todo.description}}
+  //  .todo-item.todo-add
+  //    form(ng-submit="todoCtrl.create()" flex)
+  //      md-input-container.layout-fill
+  //        label type in a new item and press enter...
+  //        input(type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
+  //
+  //.completed(ng-if="todoCtrl.completedTodos.length > 0")
+  //  md-subheader.md-no-sticky Completed
+  //  .todo-item.todo-completed(layout="row"
+  //  layout-align="space-between center"
+  //  ng-repeat="todo in todoCtrl.completedTodos")
+  //    md-button.md-primary(ng-click="todoCtrl.reactivate(todo)") restore
+  //    p(flex) {{todo.description}}
+  //    md-button.md-warn(ng-click="todoCtrl.remove(todo)") &times;

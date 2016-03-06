@@ -1,38 +1,37 @@
-//#todo {
-//  max-width: $page-width;
-//  margin-left: auto;
-//  margin-right: auto;
-//
-//  form {
-//    margin-top: 1rem;
-//  }
-//
-//  .header {
-//    padding: .5rem;
-//  }
-//
-//  .todo-item {
-//    padding: 0.5rem;
-//    border-bottom: 1px solid #E5E5E5;
-//
-//    &:focus {
-//      outline: none;
-//    }
-//
-//    &.todo-add {
-//      border-bottom: none;
-//    }
-//
-//    &.todo-completed {
-//      p {
-//        font-weight: 200;
-//        font-style: italic;
-//        text-decoration: line-through;
-//      }
-//    }
-//
-//    .check {
-//      margin-right: 1rem;
-//    }
-//  }
-//}
+#todo {
+  max-width: $page-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  form {
+    margin-top: 1rem;
+  }
+
+  .header {
+    padding: .5rem;
+  }
+
+  .todo-item {
+    border-bottom: 1px solid #E5E5E5;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.todo-add {
+      border-bottom: none;
+    }
+
+    &.todo-completed {
+      p {
+        font-weight: 200;
+        font-style: italic;
+        text-decoration: line-through;
+      }
+    }
+
+    .check {
+      margin-right: 1rem;
+    }
+  }
+}
