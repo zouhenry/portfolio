@@ -10,7 +10,9 @@ angular
   .config(config);
 
 
-function config($stateProvider, navProvider) {
+function config($stateProvider, navProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('', '/about');
+  $urlRouterProvider.when('/', '/about');
 
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);

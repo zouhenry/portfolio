@@ -161,11 +161,16 @@ a {
 }
 
 // project card
-.project-card {
-  text-align: center;
+md-card {
+  &.center {
+    text-align: center;
+  }
 
   md-card-header {
-    align-self: center;
+    //background-color: #eee;
+    &.center {
+      align-self: center;
+    }
     font-weight: $bold-font-weight;
     font-size: 1.25rem;
   }

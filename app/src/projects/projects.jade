@@ -2,7 +2,7 @@ div.layout-row(layout-wrap)
   div.project-card(ng-repeat="project in projectsCtrl.projects track by $index"
   flex-sm="50" flex-gt-sm="33" flex-xs="100")
     md-card
-      md-card-header
+      md-card-header.center
         | {{project.title}}
       md-card-content
         p(ipsum="3s")

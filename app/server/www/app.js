@@ -87116,7 +87116,9 @@ angular
     //pages
     'portfolio.layout',
     'portfolio.projects',
-    'portfolio.todo'])
+    'portfolio.todo',
+    'portfolio.about'
+  ])
   .config(config);
 
 function config(dataApiProvider, $mdThemingProvider) {
@@ -87124,6 +87126,40 @@ function config(dataApiProvider, $mdThemingProvider) {
   //$mdThemingProvider.theme('default')
   //  .primaryPalette('light-blue')
   //  .accentPalette('teal');
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.about', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "about",
+    tabName    : "About",
+    tabIndex   : 1,
+    state      : "portfolio.about",
+    templateUrl: "about/about.html",
+    controller : "aboutController as aboutCtrl"
+  }];
 }
 }());
 
@@ -87148,13 +87184,15 @@ angular
  =              APP START                =
  ========================================*/
 
-config.$inject = ["$stateProvider", "navProvider"];
+config.$inject = ["$stateProvider", "navProvider", "$urlRouterProvider"];
 angular
   .module('portfolio.layout', [])
   .config(config);
 
 
-function config($stateProvider, navProvider) {
+function config($stateProvider, navProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('', '/about');
+  $urlRouterProvider.when('/', '/about');
 
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
@@ -87176,17 +87214,6 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services', []);
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -87200,8 +87227,6 @@ angular
   .config(config);
 
 function config($stateProvider, $urlRouterProvider, navProvider) {
-  $urlRouterProvider.when('', '/projects');
-  $urlRouterProvider.when('/', '/projects');
 
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
@@ -87213,12 +87238,23 @@ function getStates() {
   return [{
     url        : "projects",
     tabName    : "Projects",
-    tabIndex   : 1,
+    tabIndex   : 3,
     state      : "portfolio.projects",
     templateUrl: "projects/projects.html",
     controller : "projectsController as projectsCtrl"
   }];
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services', []);
 }());
 
 ;(function() {
@@ -87252,6 +87288,90 @@ function getStates() {
     templateUrl: "todo/todo.html",
     controller : "todoController as todoCtrl"
   }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+AboutController.$inject = ["dataApi"];
+angular
+  .module('portfolio.about')
+  .controller('aboutController', AboutController);
+
+function AboutController(dataApi) {
+  var self = this;
+  var url  = 'api/about/';
+
+  _.extend(self, {
+    activeAbouts   : [],
+    completedAbouts: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  get();
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var about    = { description: self.newAbout };
+    about.status = 'active';
+    dataApi
+      .post(url, about)
+      .then(function (data) {
+        self.activeAbouts.push(data);
+        self.newAbout = "";
+      });
+  }
+
+  function remove(about) {
+    dataApi
+      .delete(url + about.id)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+      });
+  }
+
+  function get() {
+    dataApi
+      .get(url)
+      .then(function (data) {
+        self.activeAbouts    = _.filter(data, { status: 'active' });
+        self.completedAbouts = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(about) {
+    var completed    = _.cloneDeep(about);
+    completed.status = "completed";
+    dataApi
+      .put(url + about.id, completed)
+      .then(function () {
+        _.remove(self.activeAbouts, about);
+        self.completedAbouts.push(completed);
+      });
+  }
+
+  function reactivate(about) {
+    var activated    = _.cloneDeep(about);
+    activated.status = "active";
+    dataApi
+      .put(url + about.id, activated)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+        self.activeAbouts.push(activated);
+      });
+  }
 }
 }());
 
@@ -87471,39 +87591,6 @@ function localApi($window, $q) {
  * Created by hzou on 2/27/16.
  */
 
-angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
-
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
-  });
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
 'use strict';
 
 angular
@@ -87537,6 +87624,39 @@ function ProjectsController() {
     ];
   }
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
 }());
 
 ;(function() {
