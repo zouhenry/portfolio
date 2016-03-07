@@ -19224,6 +19224,23 @@ md-tooltip {
 .fa-percent:before {
   content: ""; }
 
+a {
+  color: #979797;
+  text-decoration: none; }
+
+md-card.center {
+  text-align: center; }
+
+md-card md-card-header {
+  font-weight: 500;
+  font-size: 1.25rem; }
+  md-card md-card-header.center {
+    align-self: center; }
+
+md-card md-card-footer {
+  font-weight: 500;
+  font-size: 0.875rem; }
+
 html {
   font-size: 16px; }
   @media screen and (max-width: 600px) {
@@ -19234,22 +19251,35 @@ body {
   background-color: #EFF0F1;
   color: #666; }
 
-a {
-  text-decoration: none; }
+.center-panel {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto; }
+
+.collapse {
+  padding: 0;
+  margin: 0; }
+
+input[type="text"] {
+  padding: 0.5rem; }
 
 .name {
   font-size: 1.75rem;
   text-transform: uppercase;
   letter-spacing: -2px;
-  line-height: 6rem;
-  height: 6rem;
+  line-height: 7rem;
+  height: 7rem;
   background-color: white; }
   .name .title {
     padding-left: 0.5rem; }
   @media screen and (max-width: 600px) {
     .name {
       line-height: 4rem;
-      height: 4rem; } }
+      height: 4rem;
+      font-size: 1.75rem; } }
+  @media screen and (min-width: 600px) and (max-width: 960px) {
+    .name {
+      font-size: 1.6rem; } }
   .name .nametext {
     display: inline-block;
     vertical-align: text-top; }
@@ -19268,23 +19298,8 @@ a {
         width: 6rem;
         border-radius: 4rem; } }
 
-.center-panel {
-  max-width: 60rem;
-  margin-left: auto;
-  margin-right: auto; }
-
-.collapse {
-  padding: 0;
-  margin: 0; }
-
-#header-bg {
-  z-index: -1;
-  background: white;
-  height: 12rem;
-  margin-top: -18rem;
-  position: relative; }
-
 #header {
+  position: relative;
   text-transform: uppercase;
   font-weight: 200; }
   #header md-menu {
@@ -19307,15 +19322,19 @@ a {
   #header .menu .menu-item {
     margin: 0 0.625rem; }
     #header .menu .menu-item:first-child {
-      margin-left: 0rem; }
+      margin-left: 0; }
     #header .menu .menu-item a {
-      color: #979797;
       background-color: transparent;
       line-height: 3.75rem;
       font-size: 1.25rem;
       text-transform: uppercase; }
-      #header .menu .menu-item a:hover {
+      @media screen and (max-width: 1280px) {
+        #header .menu .menu-item a {
+          font-size: 1.15rem; } }
+      #header .menu .menu-item a:hover, #header .menu .menu-item a.active {
         color: #333; }
+      #header .menu .menu-item a.active {
+        font-weight: normal; }
   #header .social-media {
     border-left: 1px solid lightgray;
     margin-left: 2rem;
@@ -19329,6 +19348,9 @@ a {
       #header .social-media a:hover {
         color: #333; }
 
+#git-fork img {
+  height: 7.5rem; }
+
 #content {
   position: relative;
   top: 4rem;
@@ -19336,22 +19358,6 @@ a {
   @media screen and (max-width: 600px) {
     #content {
       padding: 1rem .25rem; } }
-
-md-card.center {
-  text-align: center; }
-
-md-card md-card-header {
-  font-weight: 500;
-  font-size: 1.25rem; }
-  md-card md-card-header.center {
-    align-self: center; }
-
-md-card md-card-footer {
-  font-weight: 500;
-  font-size: 0.875rem; }
-
-input[type="text"] {
-  padding: 0.5rem; }
 
 #todo {
   max-width: 60rem;

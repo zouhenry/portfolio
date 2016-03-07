@@ -1,0 +1,138 @@
+$header-name-height: 7rem;
+
+.name {
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: $header-name-height;
+  height: $header-name-height;
+  background-color: white;
+
+  .title {
+    padding-left: 0.5rem;
+  }
+
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    line-height: 4rem;
+    height: 4rem;
+    font-size: 1.75rem;
+  }
+
+  @media screen and (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+    font-size: 1.6rem;
+  }
+
+  .nametext {
+    display: inline-block;
+    vertical-align: text-top;
+  }
+}
+
+.avatar {
+  position: absolute;
+  top: 0rem;
+  border-radius: $header-name-height;
+  margin: 0.5rem;
+  img {
+    border-radius: $header-name-height;
+    width: 12rem;
+    border: 5px solid gray;
+
+    @media screen and (max-width: $layout-breakpoint-xs) {
+      width: 6rem;
+      border-radius: 4rem;
+    }
+  }
+}
+
+#header {
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 200;
+
+  md-menu {
+    padding-top: 1.5rem;
+    float: right;
+  }
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    height: 4rem;
+  }
+  .right {
+    margin-left: 225px;
+
+    @media screen and (max-width: $layout-breakpoint-xs) {
+      margin-left: 125px;
+    }
+  }
+  .brand {
+    margin: 1rem;
+    position: relative;
+    line-height: normal;
+
+  }
+
+  md-menu-item > .md-button {
+    font-size: 1.25rem;
+  }
+
+  .menu {
+    //display: flex;
+    //flex-direction: row;
+    .menu-item {
+      margin: 0 0.625rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+      a {
+        background-color: transparent;
+        line-height: 3.75rem;
+        font-size: 1.25rem;
+        text-transform: uppercase;
+
+        @media screen and (max-width: $layout-breakpoint-md) {
+          font-size: 1.15rem;
+        }
+
+        &:hover, &.active {
+          color: #333;
+        }
+        &.active {
+          font-weight: normal;
+        }
+      }
+    }
+  }
+
+  .social-media {
+    border-left: 1px solid lightgray;
+    margin-left: 2rem;
+    padding-left: 2rem;
+    a {
+      margin: 0 0.375rem;
+      line-height: 3.75rem;
+      color: #979797;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+
+      &:hover {
+        color: #333;
+      }
+
+    }
+  }
+}
+
+#git-fork img {
+  height: $header-name-height + 0.5;
+}
+
+#content {
+  position: relative;
+  top: 4rem;
+  padding: 1.5rem;
+
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    padding: 1rem .25rem;
+  }
+}

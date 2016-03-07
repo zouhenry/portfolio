@@ -1,0 +1,24 @@
+a {
+  color: #979797;
+  text-decoration: none;
+}
+
+md-card {
+  &.center {
+    text-align: center;
+  }
+
+  md-card-header {
+    //background-color: #eee;
+    &.center {
+      align-self: center;
+    }
+    font-weight: $bold-font-weight;
+    font-size: 1.25rem;
+  }
+
+  md-card-footer {
+    font-weight: $bold-font-weight;
+    font-size: 0.875rem;
+  }
+}
