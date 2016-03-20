@@ -1,5 +1,17 @@
-#HENRY ZOU
+#HENRY ZOU Portfolio
+## This is my portfolio writen in AngularJS utilizing Angular Material.
+### Additional Technologies used here: Gulp, WebSocket, NodeJs, Bower, NPM, Jade, SASS
+#### Feel free to use this as basis for your own personal portfolio
 
-##Open 2 terminals:
-1. live-server @ <appRoot>/app/dist folder
-2. gulp watch @ <appRoot>
+##Getting started
+    // clone this project
+    git clone https://github.com/zouhenry/portfolio.git
+    // install bower && npm packages
+    npm install && bower install
+    // cd into server folder and start node server
+    cd app/server   
+    node portfolio.js
+    // start gulp build and watch (different terminal)
+    gulp
+    
+    

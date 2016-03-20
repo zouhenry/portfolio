@@ -19533,4 +19533,12 @@ input[type="text"] {
     #todo .todo-item .check {
       margin-right: 1rem; }
 
+.my-chart {
+  height: 20rem;
+  margin-bottom: 5rem; }
+
+ul.feed-data {
+  list-style: none;
+  line-height: 1.25rem; }
+
 /*# sourceMappingURL=app.css.map */
