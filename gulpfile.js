@@ -39,7 +39,7 @@ _.forEach(tasksFiles, function (task) {
 
 // foreach gulpTasks dynamically create a new task and run the tasks through runSequence
 _.forEach(config.gulpTasks, function (taskGroupItems, taskGroupName) {
-  gulp.task(taskGroupName, function () {
+  return gulp.task(taskGroupName, function () {
     return plugins.runSequence.apply(plugins.runSequence, taskGroupItems);
   });
 });

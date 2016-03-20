@@ -20,16 +20,6 @@
     self.isCurrentState = function isCurrentState(stateName) {
       return stateName === $state.current.name;
     };
-
-    var socket = io();
-    socket.on('connect', function () {
-      _.defer(function () {
-        socket.emit('new message', 'hi from the client');
-      }, 2500);
-    });
-    socket.on('new message', function (message) {
-      console.log('new message from server', message);
-    });
   }
 
 })();

@@ -27,7 +27,9 @@
     "app/bower_components/angular-material/angular-material.js",
     "app/bower_components/angular-ui-router/release/angular-ui-router.js",
     "app/bower_components/angular-ipsum/dist/ipsum.min.js",
-    "app/bower_components/socket.io-client/socket.io.js"
+    "app/bower_components/socket.io-client/socket.io.js",
+    "app/bower_components/d3/d3.js",
+    "node_modules/n3-charts/build/LineChart.js"
   ],
   "fontsSrc"     : [
     "app/bower_components/font-awesome/fonts/*"
@@ -39,7 +41,8 @@
   "destFontsDir" : "app/server/www/fonts/",
   "destImagesDir" : "app/server/www/images/",
   "gulpTasks"    : {
-    "build": ["clean", ["js", "index", "jade", "sass", "fonts", "images"]],
+    "build": ["clean", ["vendorjs", "appjs",
+      "index", "jade", "sass", "fonts", "images"]],
     "deploy": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
     "default":["build", "watch"]
   }
