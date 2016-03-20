@@ -1,0 +1,7 @@
+.my-chart
+  linechart(data="chartCtrl.data" options="chartCtrl.options")
+
+h3 Last 10 WebSocket feeds
+ul.feed-data
+  li(ng-repeat="feed in chartCtrl.feeds  |orderBy:'x':true | limitTo:10 track by $index")
+    {{feed}}

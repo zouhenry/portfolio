@@ -22,7 +22,8 @@ angular
     'portfolio.layout',
     'portfolio.projects',
     'portfolio.todo',
-    'portfolio.about'
+    'portfolio.about',
+    'portfolio.chart'
   ])
   .config(config);
 

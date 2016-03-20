@@ -10,7 +10,7 @@ module.exports = {
 
 function init(gulp, plugins, config, _, errorFn) {
   gulp.task(module.exports.taskName, function () {
-    gulp.watch(config.jsSrc, ["js"]);
+    gulp.watch(config.jsSrc, ["appjs"]);
     gulp.watch(config.jadeSrc, ["jade"]);
     gulp.watch(config.sassSrc, ["sass"]);
   });

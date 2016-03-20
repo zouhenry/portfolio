@@ -23,7 +23,6 @@ app.use(duration());    //puts "Duration" in the header
 app.use(logger());    //puts "Duration" in the header
 app.use(koaStatic(defaults.public)); //specify public folder
 
-
 // middleware for socket.io's connect and disconnect
 app.io.use(function* (next) {
     // on connect
@@ -34,11 +33,7 @@ app.io.use(function* (next) {
 });
 
 // router for socket event
-app.io.route('new message', function* (next, message) {
-    // we tell the client to execute 'new message'
-    console.log('message from client', message);
-    this.emit('new message', 'server:' + message);
-});
+require('./feeds.socket').init(app.io);
 
 app.listen(port);
 console.log('Koa server listening at port', port);
