@@ -15,16 +15,12 @@ function init(gulp, plugins, config, _, errorFn) {
     return gulp
       .src(config.jsSrc)
       .pipe(plugins.filelog())
+      .pipe(plugins.sourcemaps.init({ loadMaps: true }))
+      .pipe(plugins.iife())
       .pipe(plugins.ngAnnotate())
-      .pipe(plugins.iife({
-        useStrict: true,
-        trimCode: true,
-        prependSemicolon: false,
-        bindThis: false
-      }))
-      .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.uglify())
       .pipe(plugins.concat("app.js"))
-      .pipe(plugins.sourcemaps.write("./"))
+      .pipe(plugins.sourcemaps.write("."))
       .pipe(plugins.filelog())
       .pipe(gulp.dest(config.destDir))
       .pipe(plugins.size());
