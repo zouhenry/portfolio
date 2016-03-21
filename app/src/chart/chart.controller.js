@@ -40,6 +40,7 @@ function ChartController($scope, socket) {
 
     $scope.$on('$destroy', function () {
       socket.emit('stopFeed');
+      socket.disconnect();
     });
   }
 
