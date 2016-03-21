@@ -108,7 +108,7 @@ function config($stateProvider, navProvider) {
 function getStates() {
   return [{
     url: "chart",
-    tabName: "Charts",
+    tabName: "Chart",
     tabIndex: 3,
     state: "portfolio.chart",
     templateUrl: "chart/chart.html",
@@ -558,6 +558,7 @@ function ChartController($scope, socket) {
 
     $scope.$on('$destroy', function () {
       socket.emit('stopFeed');
+      socket.disconnect();
     });
   }
 
@@ -744,46 +745,53 @@ angular
  */
 
 
-  socket.$inject = ["$log", "$rootScope"];
-  angular
-    .module('portfolio.socket')
-    .factory('socket', socket);
+socket.$inject = ["$log", "$rootScope"];
+angular
+  .module('portfolio.socket')
+  .factory('socket', socket);
 
-  function socket($log, $rootScope) {
-    $log.debug('socket LOADED');
-    var socket;
-    return {
-      connect: connect,
-      on     : on,
-      emit   : emit
-    };
+function socket($log, $rootScope) {
+  $log.debug('socket LOADED');
+  var socket;
+  return {
+    connect   : connect,
+    disconnect: disconnect,
+    on        : on,
+    emit      : emit
+  };
 
-    function connect(uri) {
-      socket = io.connect(uri, { 'forceNew': true });
-    }
-
-    function on(eventName, callback) {
-      $log.debug('on called');
-      socket.on(eventName, function () {
-        var args = arguments;
-        $rootScope.$evalAsync(function () {
-          callback.apply(socket, args);
-        });
-      });
-    }
-
-    function emit(eventName, data, callback) {
-      $log.debug('emit called');
-      socket.emit(eventName, data, function () {
-        var args = arguments;
-        $rootScope.$evalAsync(function () {
-          if (callback) {
-            callback.apply(socket, args);
-          }
-        });
-      });
-    }
+  function connect(uri) {
+    $log.debug('connect');
+    socket = io.connect(uri, { 'forceNew': true });
   }
+
+  function disconnect() {
+    $log.debug('disconnect');
+    socket.disconnect();
+  }
+
+  function on(eventName, callback) {
+    $log.debug('on');
+    socket.on(eventName, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        callback.apply(socket, args);
+      });
+    });
+  }
+
+  function emit(eventName, data, callback) {
+    $log.debug('emit called');
+    socket.emit(eventName, data, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        if (callback) {
+          callback.apply(socket, args);
+        }
+      });
+    });
+  }
+}
 }());
 
 (function() {

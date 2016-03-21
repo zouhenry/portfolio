@@ -1,0 +1,9 @@
+{
+  "public"          : "www/",
+  "index"           : "www/index.html",
+  "port"            : 4000,
+  "devlogWhitelist" : ["*"],
+  "devlogBlacklist" : [],
+  "COMMENTS"        : "0 = error, 1 = warn, 2 = info, 4 = debug",
+  "devlogLevel"     : 8
+}
