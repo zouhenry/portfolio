@@ -5,7 +5,7 @@ md-card.exchange-item
     div {{exchangeItemCtrl.product.name}}
     a.button(ng-href="{{exchangeItemCtrl.product.href}}" target="_blank") {{exchangeItemCtrl.product.site}}
   md-card-content
-    div(layout-sm="row" layout-xs="column")
+    div(layout="row" layout-xs="column")
       img.product-img(ng-src="{{exchangeItemCtrl.product.image}}" )
       ul(flex)
         li( ng-repeat="desc in exchangeItemCtrl.product.description track by $index")
