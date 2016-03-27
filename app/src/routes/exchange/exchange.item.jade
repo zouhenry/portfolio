@@ -1,0 +1,12 @@
+//
+   Created by hzou on 3/27/16.
+md-card.exchange-item
+  md-card-header(layout-align="space-between")
+    div {{exchangeItemCtrl.product.name}}
+    a.button(ng-href="{{exchangeItemCtrl.product.href}}" target="_blank") {{exchangeItemCtrl.product.site}}
+  md-card-content
+    .layout-row
+      img.product-img(ng-src="{{exchangeItemCtrl.product.image}}" )
+      ul(flex)
+        li( ng-repeat="desc in exchangeItemCtrl.product.description track by $index")
+          | {{desc}}

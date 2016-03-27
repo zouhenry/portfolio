@@ -19386,7 +19386,8 @@ md-card.center {
 
 md-card md-card-header {
   font-weight: 500;
-  font-size: 1.25rem; }
+  font-size: 1.25rem;
+  background: #F5F6FA; }
   md-card md-card-header.center {
     align-self: center; }
 
@@ -19540,5 +19541,12 @@ input[type="text"] {
 ul.feed-data {
   list-style: none;
   line-height: 1.25rem; }
+
+md-card.exchange-item md-card-content img {
+  max-height: 20rem;
+  max-width: 20rem; }
+
+md-card.exchange-item md-card-content ul li {
+  line-height: 2rem; }
 
 /*# sourceMappingURL=app.css.map */

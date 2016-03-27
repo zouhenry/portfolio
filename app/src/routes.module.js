@@ -11,6 +11,8 @@
       'portfolio.projects',
       'portfolio.todo',
       'portfolio.about',
-      'portfolio.chart']);
+      'portfolio.chart',
+      'portfolio.exchange'
+    ]);
 
 })();
