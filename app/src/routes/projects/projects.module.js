@@ -23,8 +23,8 @@ function getStates() {
     url        : "projects",
     tabName    : "Projects",
     tabIndex   : null,//3,
-    state      : "routes/portfolio.projects",
-    templateUrl: "projects/projects.html",
+    state      : "portfolio.projects",
+    templateUrl: "routes/projects/projects.html",
     controller : "projectsController as projectsCtrl"
   }];
 }

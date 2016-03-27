@@ -1,0 +1,15 @@
+md-card.exchange-item {
+  md-card-header {
+  }
+  md-card-content {
+    img {
+      max-height: 20rem;
+      max-width: 20rem;
+    }
+    ul {
+      li {
+        line-height: 2rem;
+      }
+    }
+  }
+}
