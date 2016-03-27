@@ -22,7 +22,7 @@ function getStates() {
     tabName    : "To Do",
     tabIndex   : 2,
     state      : "portfolio.todo",
-    templateUrl: "todo/todo.html",
+    templateUrl: "routes/todo/todo.html",
     controller : "todoController as todoCtrl"
   }];
 }

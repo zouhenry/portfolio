@@ -6,7 +6,7 @@
  ========================================*/
 
 angular
-  .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
+  .module('portfolio.about', [])
   .config(config);
 
 function config($stateProvider, navProvider) {
@@ -18,11 +18,11 @@ function config($stateProvider, navProvider) {
 
 function getStates() {
   return [{
-    url: "chart",
-    tabName: "Chart",
-    tabIndex: 3,
-    state: "portfolio.chart",
-    templateUrl: "chart/chart.html",
-    controller: "chartController as chartCtrl"
+    url        : "about",
+    tabName    : "About",
+    tabIndex   : 1,
+    state      : "portfolio.about",
+    templateUrl: "routes/about/about.html",
+    controller : "aboutController as aboutCtrl"
   }];
 }

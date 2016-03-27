@@ -18,12 +18,8 @@ angular
     'portfolio.services',
     //directives
     'portfolio.directives',
-    //pages
-    'portfolio.layout',
-    'portfolio.projects',
-    'portfolio.todo',
-    'portfolio.about',
-    'portfolio.chart'
+    //ui-router states/routes
+    'portfolio.routes'
   ])
   .config(config);
 

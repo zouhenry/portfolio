@@ -5,12 +5,14 @@
  =              APP START                =
  ========================================*/
 
-
 angular
-  .module('portfolio.projects', [])
+  .module('portfolio.layout', [])
   .config(config);
 
-function config($stateProvider, $urlRouterProvider, navProvider) {
+
+function config($stateProvider, navProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('', '/about');
+  $urlRouterProvider.when('/', '/about');
 
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
@@ -20,11 +22,10 @@ function config($stateProvider, $urlRouterProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : 3,
-    state      : "portfolio.projects",
-    templateUrl: "projects/projects.html",
-    controller : "projectsController as projectsCtrl"
+    url        : "/",
+    state      : "portfolio",
+    templateUrl: "routes/layout/layout.html",
+    controller : "layoutController as layoutCtrl"
   }];
 }
+
