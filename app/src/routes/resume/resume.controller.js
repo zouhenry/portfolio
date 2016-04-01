@@ -171,7 +171,7 @@ function ResumeController() {
           "Created and updated Stored Procedures in SQL Server 2005"
         ],
         technologies: ["ASP.NET", "Flex 3.0"]
-      },
+      }
       ]
     }];
 

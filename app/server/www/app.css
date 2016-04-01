@@ -19607,4 +19607,7 @@ md-card.exchange-item md-card-content ul li {
       padding-left: 0.5rem;
       color: #e0e0e0; }
 
+html {
+  height: inherit; }
+
 /*# sourceMappingURL=app.css.map */
