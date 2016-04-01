@@ -7,23 +7,24 @@ angular.module('portfolio.resume')
 
 function company() {
   return {
-    restrict: "E",
+    restrict        : "E",
     bindToController: {
       company: "="
     },
-    scope: true,
-    link: link,
-    controller: controller,
-    controllerAs: "companyCtrl",
-    templateUrl: "routes/resume/company/company.html"
+    scope           : true,
+    link            : link,
+    controller      : controller,
+    controllerAs    : "companyCtrl",
+    templateUrl     : "routes/resume/company/company.html"
   };
 
   function link(scope, elem, attrs, controller) {
-
   }
 
   function controller() {
     var vm = self;
-
+    angular.extend(vm, {
+      dateformat: "MM-yy"
+    });
   }
 }

@@ -7,14 +7,15 @@ angular.module('portfolio.resume')
 
 function recommendation() {
   return {
-    restrict: "E",
+    restrict        : "E",
     bindToController: {
-      experience: "="
+      rec: "=recommendation"
     },
-    scope: true,
-    link: link,
-    controller: controller,
-    controllerAs: "recommendCtrl"
+    scope           : true,
+    link            : link,
+    controller      : controller,
+    controllerAs    : "recCtrl",
+    templateUrl     : "routes/resume/recommendation/recommendation.html"
   };
 
   function link(scope, elem, attrs, controller) {

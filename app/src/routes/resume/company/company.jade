@@ -1,24 +1,24 @@
 //
    Created by hzou on 3/31/16.
 
-.layout-column
-  .layout-row
-    .title-company {{companyCtrl.company.title}} -
+md-card.company
+  md-card-header.layout-xs-column.layout-row.header
+    .title-company.flex {{companyCtrl.company.title}} at&nbsp;
       a(href="{{companyCtrl.company.companyUrl}}" target="_blank") {{companyCtrl.company.companyName}}
-    .time-frame {{companyCtrl.company.startDate | date:'short'}} - {{companyCtrl.company.endDate | date:'short'}}
-  .layout-row
+    .time-frame {{companyCtrl.company.startDate | date:'MMM yyyy'}} -&nbsp;
+      span(ng-if="companyCtrl.company.endDate") {{companyCtrl.company.endDate | date:'MMM yyyy'}}
+      span(ng-if="!companyCtrl.company.endDate") Present
+  md-card-title
     p.company-description {{companyCtrl.company.description}}
-  .layout-column
+  md-card-content
     .position.flex(ng-repeat="position in companyCtrl.company.positions track by $index")
-      .position-role {{position.role}}
+      .position-role Role: {{position.role}}
       ul.duties
         li.duty(ng-repeat="duty in position.duties track by $index")
           | {{duty}}
-      ul.tech
-        li.tech-item(ng-repeat="tech in position.technologies track by $index" style="display:inline-block")
-          div(style="padding:0 1rem") {{tech}}
+      ul.techs
+        li.tech(ng-repeat="tech in position.technologies track by $index")
+          | {{tech}}
       .summary(ng-if="position.summary")
         blockquote {{position.summary.quote}}
           cite {{position.summary.cite}}
-
-
