@@ -73,22 +73,22 @@ angular
 "use strict";
 
 /**
- * Created by hzou on 3/6/16.
+ * Created by hzou on 2/27/16.
  */
 
 angular
-  .module('portfolio.directives', []);
+  .module('portfolio.services', []);
 }());
 
 ;(function() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 3/6/16.
  */
 
 angular
-  .module('portfolio.services', []);
+  .module('portfolio.directives', []);
 }());
 
 ;(function() {
@@ -207,6 +207,40 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.resume', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "resume",
+    tabName    : "Resume",
+    tabIndex   : 1,
+    state      : "portfolio.resume",
+    templateUrl: "routes/resume/resume.html",
+    controller : "resumeController as resumeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -271,40 +305,6 @@ function getStates() {
     state      : "portfolio.projects",
     templateUrl: "routes/projects/projects.html",
     controller : "projectsController as projectsCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
-  .module('portfolio.resume', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "resume",
-    tabName    : "resume",
-    tabIndex   : 1,
-    state      : "portfolio.resume",
-    templateUrl: "routes/resume/resume.html",
-    controller : "resumeController as resumeCtrl"
   }];
 }
 }());
@@ -519,33 +519,6 @@ function localApi($window, $q) {
 "use strict";
 
 /**
- * Created by hzou on 3/6/16.
- */
-
-autofocus.$inject = ["$timeout"];
-angular
-  .module('portfolio.directives')
-  .directive('autofocus', autofocus);
-
-function autofocus($timeout) {
-  return {
-    restrict: 'A',
-    link    : focusOnLoad
-  };
-
-  function focusOnLoad($scope, $element) {
-    $timeout(function () {  //ensuring dom is rendered by waiting 250ms
-      $element[0].focus();
-    }, 250);
-  }
-
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/27/16.
  */
 
@@ -573,6 +546,33 @@ angular
       };
     }
   });
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/6/16.
+ */
+
+autofocus.$inject = ["$timeout"];
+angular
+  .module('portfolio.directives')
+  .directive('autofocus', autofocus);
+
+function autofocus($timeout) {
+  return {
+    restrict: 'A',
+    link    : focusOnLoad
+  };
+
+  function focusOnLoad($scope, $element) {
+    $timeout(function () {  //ensuring dom is rendered by waiting 250ms
+      $element[0].focus();
+    }, 250);
+  }
+
+}
 }());
 
 ;(function() {
@@ -882,79 +882,6 @@ function ExchangeController() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-
-(function () {
-  'use strict';
-
-  layoutController.$inject = ["nav", "$state"];
-  angular
-    .module('portfolio')
-    .controller('layoutController', layoutController);
-
-  function layoutController(nav, $state) {
-    var self      = this;
-    self.navItems = nav.getTabs();
-    self.openMenu = function ($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
-
-    self.isCurrentState = function isCurrentState(stateName) {
-      return stateName === $state.current.name;
-    };
-  }
-
-})();
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-'use strict';
-
-angular
-  .module('portfolio.projects')
-  .controller('projectsController', ProjectsController);
-
-function ProjectsController() {
-  var self      = this;
-  self.projects = getProjects();
-
-  /*========================================
-   =                 helpers                =
-   ========================================*/
-  function getProjects() {
-    return [
-      {
-        title      : "Timesheet",
-        img        : "",
-        description: "Angular timesheet"
-      },
-      {
-        title      : "Task Manager",
-        img        : "",
-        description: "Angular Task Manager"
-      },
-      {
-        title      : "To Do",
-        img        : "",
-        description: "Angular ToDo"
-      }
-    ];
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/28/16.
  */
 
@@ -1131,6 +1058,79 @@ function ResumeController() {
       ]
     }];
 
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+
+(function () {
+  'use strict';
+
+  layoutController.$inject = ["nav", "$state"];
+  angular
+    .module('portfolio')
+    .controller('layoutController', layoutController);
+
+  function layoutController(nav, $state) {
+    var self      = this;
+    self.navItems = nav.getTabs();
+    self.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    self.isCurrentState = function isCurrentState(stateName) {
+      return stateName === $state.current.name;
+    };
+  }
+
+})();
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+'use strict';
+
+angular
+  .module('portfolio.projects')
+  .controller('projectsController', ProjectsController);
+
+function ProjectsController() {
+  var self      = this;
+  self.projects = getProjects();
+
+  /*========================================
+   =                 helpers                =
+   ========================================*/
+  function getProjects() {
+    return [
+      {
+        title      : "Timesheet",
+        img        : "",
+        description: "Angular timesheet"
+      },
+      {
+        title      : "Task Manager",
+        img        : "",
+        description: "Angular Task Manager"
+      },
+      {
+        title      : "To Do",
+        img        : "",
+        description: "Angular ToDo"
+      }
+    ];
   }
 }
 }());

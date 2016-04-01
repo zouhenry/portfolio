@@ -19,7 +19,7 @@ function config($stateProvider, navProvider) {
 function getStates() {
   return [{
     url        : "resume",
-    tabName    : "resume",
+    tabName    : "Resume",
     tabIndex   : 1,
     state      : "portfolio.resume",
     templateUrl: "routes/resume/resume.html",
