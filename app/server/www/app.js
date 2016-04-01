@@ -174,6 +174,39 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 3/27/16.
+ */
+
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+angular
+  .module('portfolio.exchange', [])
+  .config(config);
+
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "exchange",
+    tabName    : "Exchange",
+    tabIndex   : 3,
+    state      : "portfolio.exchange",
+    templateUrl: "routes/exchange/exchange.html",
+    controller : "exchangeController as exchangeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -202,40 +235,7 @@ function getStates() {
     state      : "portfolio",
     templateUrl: "routes/layout/layout.html",
     controller : "layoutController as layoutCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 3/27/16.
- */
-
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
-angular
-  .module('portfolio.exchange', [])
-  .config(config);
-
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "exchange",
-    tabName    : "Exchange",
-    tabIndex   : 3,
-    state      : "portfolio.exchange",
-    templateUrl: "routes/exchange/exchange.html",
-    controller : "exchangeController as exchangeCtrl"
-  }];
+  }]; 
 }
 }());
 
@@ -287,40 +287,6 @@ function getStates() {
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.todo', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "todo",
-    tabName    : "To Do",
-    tabIndex   : 2,
-    state      : "portfolio.todo",
-    templateUrl: "routes/todo/todo.html",
-    controller : "todoController as todoCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
   .module('portfolio.resume', [])
   .config(config);
 
@@ -339,6 +305,40 @@ function getStates() {
     state      : "portfolio.resume",
     templateUrl: "routes/resume/resume.html",
     controller : "resumeController as resumeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.todo', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "todo",
+    tabName    : "To Do",
+    tabIndex   : 2,
+    state      : "portfolio.todo",
+    templateUrl: "routes/todo/todo.html",
+    controller : "todoController as todoCtrl"
   }];
 }
 }());
@@ -812,37 +812,6 @@ function ChartController($scope, socket) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-
-(function () {
-  'use strict';
-
-  layoutController.$inject = ["nav", "$state"];
-  angular
-    .module('portfolio')
-    .controller('layoutController', layoutController);
-
-  function layoutController(nav, $state) {
-    var self      = this;
-    self.navItems = nav.getTabs();
-    self.openMenu = function ($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
-
-    self.isCurrentState = function isCurrentState(stateName) {
-      return stateName === $state.current.name;
-    };
-  }
-
-})();
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 3/27/16.
  */
 
@@ -916,6 +885,37 @@ function ExchangeController() {
  * Created by hzou on 2/27/16.
  */
 
+
+(function () {
+  'use strict';
+
+  layoutController.$inject = ["nav", "$state"];
+  angular
+    .module('portfolio')
+    .controller('layoutController', layoutController);
+
+  function layoutController(nav, $state) {
+    var self      = this;
+    self.navItems = nav.getTabs();
+    self.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    self.isCurrentState = function isCurrentState(stateName) {
+      return stateName === $state.current.name;
+    };
+  }
+
+})();
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
 'use strict';
 
 angular
@@ -947,90 +947,6 @@ function ProjectsController() {
         description: "Angular ToDo"
       }
     ];
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-TodoController.$inject = ["dataApi"];
-angular
-  .module('portfolio.todo')
-  .controller('todoController', TodoController);
-
-function TodoController(dataApi) {
-  var self = this;
-  var url  = 'api/todo/';
-
-  _.extend(self, {
-    activeTodos   : [],
-    completedTodos: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  get();
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var todo    = { description: self.newTodo };
-    todo.status = 'active';
-    dataApi
-      .post(url, todo)
-      .then(function (data) {
-        self.activeTodos.push(data);
-        self.newTodo = "";
-      });
-  }
-
-  function remove(todo) {
-    dataApi
-      .delete(url + todo.id)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-      });
-  }
-
-  function get() {
-    dataApi
-      .get(url)
-      .then(function (data) {
-        self.activeTodos    = _.filter(data, { status: 'active' });
-        self.completedTodos = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(todo) {
-    var completed    = _.cloneDeep(todo);
-    completed.status = "completed";
-    dataApi
-      .put(url + todo.id, completed)
-      .then(function () {
-        _.remove(self.activeTodos, todo);
-        self.completedTodos.push(completed);
-      });
-  }
-
-  function reactivate(todo) {
-    var activated    = _.cloneDeep(todo);
-    activated.status = "active";
-    dataApi
-      .put(url + todo.id, activated)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-        self.activeTodos.push(activated);
-      });
   }
 }
 }());
@@ -1215,6 +1131,90 @@ function ResumeController() {
       ]
     }];
 
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+TodoController.$inject = ["dataApi"];
+angular
+  .module('portfolio.todo')
+  .controller('todoController', TodoController);
+
+function TodoController(dataApi) {
+  var self = this;
+  var url  = 'api/todo/';
+
+  _.extend(self, {
+    activeTodos   : [],
+    completedTodos: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  get();
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var todo    = { description: self.newTodo };
+    todo.status = 'active';
+    dataApi
+      .post(url, todo)
+      .then(function (data) {
+        self.activeTodos.push(data);
+        self.newTodo = "";
+      });
+  }
+
+  function remove(todo) {
+    dataApi
+      .delete(url + todo.id)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+      });
+  }
+
+  function get() {
+    dataApi
+      .get(url)
+      .then(function (data) {
+        self.activeTodos    = _.filter(data, { status: 'active' });
+        self.completedTodos = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(todo) {
+    var completed    = _.cloneDeep(todo);
+    completed.status = "completed";
+    dataApi
+      .put(url + todo.id, completed)
+      .then(function () {
+        _.remove(self.activeTodos, todo);
+        self.completedTodos.push(completed);
+      });
+  }
+
+  function reactivate(todo) {
+    var activated    = _.cloneDeep(todo);
+    activated.status = "active";
+    dataApi
+      .put(url + todo.id, activated)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+        self.activeTodos.push(activated);
+      });
   }
 }
 }());

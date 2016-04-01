@@ -26,6 +26,6 @@ function getStates() {
     state      : "portfolio",
     templateUrl: "routes/layout/layout.html",
     controller : "layoutController as layoutCtrl"
-  }];
+  }]; 
 }
 
