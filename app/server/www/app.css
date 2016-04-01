@@ -19549,4 +19549,65 @@ md-card.exchange-item md-card-content img {
 md-card.exchange-item md-card-content ul li {
   line-height: 2rem; }
 
+#resume .companies .company .company-description {
+  font-size: 1.1rem;
+  margin-top: 0.1rem; }
+
+#resume .companies .company .header .time-frame {
+  font-size: 1.1rem; }
+
+#resume .companies .company .position .position-role {
+  font-weight: 700;
+  font-size: 1.1rem; }
+
+#resume .companies .company .position .duties .duty {
+  padding: .3rem; }
+
+#resume .companies .company .position .techs {
+  padding-left: 2rem;
+  text-align: center; }
+  #resume .companies .company .position .techs .tech {
+    background-color: #eeeeee;
+    border-radius: 0.5rem;
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.4rem 0.75rem; }
+
+#resume .recommendations .recommendation {
+  margin-bottom: 3rem; }
+  #resume .recommendations .recommendation .user-img {
+    width: 5rem;
+    height: 5rem;
+    outline: 1px solid #999;
+    padding: 1px; }
+  #resume .recommendations .recommendation .user-info {
+    margin-top: 0;
+    list-style: none;
+    padding-left: 1rem; }
+    #resume .recommendations .recommendation .user-info .user-link {
+      font-weight: 700;
+      padding-bottom: 0.5rem; }
+      #resume .recommendations .recommendation .user-info .user-link a {
+        color: #666; }
+  #resume .recommendations .recommendation .rec-text {
+    font-size: 1.1rem; }
+    #resume .recommendations .recommendation .rec-text::before {
+      font: normal normal normal 14px/1 FontAwesome;
+      content: "\f10d";
+      font-size: 2rem;
+      font-weight: 700;
+      padding-right: 0.5rem;
+      color: #e0e0e0; }
+    #resume .recommendations .recommendation .rec-text::after {
+      font: normal normal normal 14px/1 FontAwesome;
+      content: "\f10e";
+      font-size: 2rem;
+      font-weight: 700;
+      padding-left: 0.5rem;
+      color: #e0e0e0; }
+
+html {
+  height: inherit; }
+
 /*# sourceMappingURL=app.css.map */

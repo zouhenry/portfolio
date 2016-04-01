@@ -1,0 +1,25 @@
+#resume
+  md-card
+    md-card-header
+      | Summary
+    md-card-content
+      | I am a professional web application developer with focus on optimizing efficiency. I have succeeded in increasing the Projector's efficiency via the team and the architecture. I have instituted a technical training program to train and advance the team's knowledge. To further enhance training, I introduced the team to an online video training site, Pluralsight.com. I have defined and implemented an architecture/framework to simplify the team's implementation and testing efforts. With the team's ever increasing technical knowledge and the S.O.L.I.D. architecture; resulted in modular, extensible, scaleable, maintainable, and robust apps.
+  md-card
+    md-card-header
+      | Core skills
+    md-card-content
+      ul
+        li Angular, Backbone, WebSocket, Gulp, Yeoman, Sass, Jade
+        li Foundation for Apps, Angular Material, Twitter Bootstrap
+        li Front-end development: Object-Oriented JavaScript, HTML, CSS
+        li Architecture, Design Patterns, Re-usable code
+        li Positive, enthusiastic role model and mentor
+  .companies(ng-repeat="company in resumeCtrl.experiences track by $index")
+    company(company="company")
+  .recommendations
+    md-card.rec
+      md-card-header
+        | Recommendations
+      md-card-content
+        .recommendation(ng-repeat="recommendation in resumeCtrl.recommendations track by $index")
+          recommendation(recommendation="recommendation")

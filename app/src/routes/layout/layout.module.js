@@ -11,8 +11,8 @@ angular
 
 
 function config($stateProvider, navProvider, $urlRouterProvider) {
-  $urlRouterProvider.when('', '/about');
-  $urlRouterProvider.when('/', '/about');
+  $urlRouterProvider.when('', '/resume');
+  $urlRouterProvider.when('/', '/resume');
 
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);

@@ -1,0 +1,83 @@
+#resume {
+  .companies {
+    .company {
+      .company-description {
+        font-size: 1.1rem;
+        margin-top: 0.1rem;
+      }
+      .header {
+        .time-frame {
+          font-size: 1.1rem;
+        }
+      }
+      .position {
+        .position-role {
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+        .duties {
+          .duty {
+            padding: .3rem;
+          }
+        }
+        .techs {
+          padding-left: 2rem;
+          text-align: center;
+          .tech {
+            background-color: rgb(238, 238, 238);
+            border-radius: 0.5rem;
+            display: inline-block;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.4rem 0.75rem;
+          }
+        }
+      }
+    }
+  }
+  .recommendations {
+    .recommendation {
+      margin-bottom: 3rem;
+
+      .user-img {
+        width: 5rem;
+        height: 5rem;
+        outline: 1px solid #999;
+        padding: 1px;
+      }
+      .user-info {
+        margin-top: 0;
+        list-style: none;
+        padding-left: 1rem;
+
+        .user-link {
+          font-weight: 700;
+          padding-bottom: 0.5rem;
+          a {
+            color: #666;
+          }
+        }
+
+      }
+      .rec-text {
+        font-size: 1.1rem;
+        &::before {
+          font: normal normal normal 14px/1 FontAwesome;
+          content: "\f10d";
+          font-size: 2rem;
+          font-weight: 700;
+          padding-right: 0.5rem;
+          color: rgb(224, 224, 224);
+        }
+        &::after {
+          font: normal normal normal 14px/1 FontAwesome;
+          content: "\f10e";
+          font-size: 2rem;
+          font-weight: 700;
+          padding-left: 0.5rem;
+          color: rgb(224, 224, 224);
+        }
+      }
+    }
+  }
+}

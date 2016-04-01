@@ -10,7 +10,8 @@
       'portfolio.layout',
       'portfolio.projects',
       'portfolio.todo',
-      'portfolio.about',
+      // 'portfolio.about',
+      'portfolio.resume',
       'portfolio.chart',
       'portfolio.exchange'
     ]);
