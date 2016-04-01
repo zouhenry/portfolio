@@ -1,0 +1,24 @@
+//
+   Created by hzou on 3/31/16.
+
+.layout-column
+  .layout-row
+    .title-company {{companyCtrl.company.title}} -
+      a(href="{{companyCtrl.company.companyUrl}}" target="_blank") {{companyCtrl.company.companyName}}
+    .time-frame {{companyCtrl.company.startDate | date:'short'}} - {{companyCtrl.company.endDate | date:'short'}}
+  .layout-row
+    p.company-description {{companyCtrl.company.description}}
+  .layout-column
+    .position.flex(ng-repeat="position in companyCtrl.company.positions track by $index")
+      .position-role {{position.role}}
+      ul.duties
+        li.duty(ng-repeat="duty in position.duties track by $index")
+          | {{duty}}
+      ul.tech
+        li.tech-item(ng-repeat="tech in position.technologies track by $index" style="display:inline-block")
+          div(style="padding:0 1rem") {{tech}}
+      .summary(ng-if="position.summary")
+        blockquote {{position.summary.quote}}
+          cite {{position.summary.cite}}
+
+

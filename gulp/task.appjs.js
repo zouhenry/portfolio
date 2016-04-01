@@ -18,7 +18,7 @@ function init(gulp, plugins, config, _, errorFn) {
       .pipe(plugins.sourcemaps.init({ loadMaps: true }))
       .pipe(plugins.iife())
       .pipe(plugins.ngAnnotate())
-      .pipe(plugins.uglify())
+      //.pipe(plugins.uglify())
       .pipe(plugins.concat("app.js"))
       .pipe(plugins.sourcemaps.write("."))
       .pipe(plugins.filelog())
