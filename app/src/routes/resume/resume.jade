@@ -14,12 +14,12 @@
         li Front-end development: Object-Oriented JavaScript, HTML, CSS
         li Architecture, Design Patterns, Re-usable code
         li Positive, enthusiastic role model and mentor
-  .companies(ng-repeat="company in resumeCtrl.experiences track by $index")
+  .companies(ng-repeat="company in resumeCtrl.resume.experiences track by $index")
     company(company="company")
   .recommendations
     md-card.rec
       md-card-header
         | Recommendations
       md-card-content
-        .recommendation(ng-repeat="recommendation in resumeCtrl.recommendations track by $index")
+        .recommendation(ng-repeat="recommendation in resumeCtrl.resume.recommendations track by $index")
           recommendation(recommendation="recommendation")

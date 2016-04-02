@@ -13,7 +13,7 @@ angular
     //templates
     'portfolio.tpls',
     //api
-    'portfolio.apis',
+    'portfolio.rest.api',
     //services
     'portfolio.services',
     //directives
@@ -23,8 +23,8 @@ angular
   ])
   .config(config);
 
-function config(dataApiProvider, $mdThemingProvider) {
-  dataApiProvider.set('localApi');
+function config(restApiProvider, $mdThemingProvider) {
+  restApiProvider.set('httpApi');
   $mdThemingProvider.theme('default')
     .primaryPalette('light-blue');
 }

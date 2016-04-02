@@ -3,7 +3,7 @@
  */
 
 angular
-  .module('portfolio.apis')
+  .module('portfolio.rest.api')
   .factory('localApi', localApi);
 
 function localApi($window, $q) {

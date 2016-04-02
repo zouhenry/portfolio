@@ -6,7 +6,7 @@ angular
   .module('portfolio.about')
   .controller('aboutController', AboutController);
 
-function AboutController(dataApi) {
+function AboutController(restApi) {
   var self = this;
   var url  = 'api/about/';
 
@@ -29,7 +29,7 @@ function AboutController(dataApi) {
   function create() {
     var about    = { description: self.newAbout };
     about.status = 'active';
-    dataApi
+    restApi
       .post(url, about)
       .then(function (data) {
         self.activeAbouts.push(data);
@@ -38,7 +38,7 @@ function AboutController(dataApi) {
   }
 
   function remove(about) {
-    dataApi
+    restApi
       .delete(url + about.id)
       .then(function () {
         _.remove(self.completedAbouts, about);
@@ -46,7 +46,7 @@ function AboutController(dataApi) {
   }
 
   function get() {
-    dataApi
+    restApi
       .get(url)
       .then(function (data) {
         self.activeAbouts    = _.filter(data, { status: 'active' });
@@ -57,7 +57,7 @@ function AboutController(dataApi) {
   function archive(about) {
     var completed    = _.cloneDeep(about);
     completed.status = "completed";
-    dataApi
+    restApi
       .put(url + about.id, completed)
       .then(function () {
         _.remove(self.activeAbouts, about);
@@ -68,7 +68,7 @@ function AboutController(dataApi) {
   function reactivate(about) {
     var activated    = _.cloneDeep(about);
     activated.status = "active";
-    dataApi
+    restApi
       .put(url + about.id, activated)
       .then(function () {
         _.remove(self.completedAbouts, about);

@@ -3,21 +3,21 @@
  */
 
 angular
-  .module('portfolio.apis')
-  .provider('dataApi', dataApiProvider);
+  .module('portfolio.rest.api')
+  .provider('restApi', restApiProvider);
 
-function dataApiProvider() {
+function restApiProvider() {
   var apiName = 'httpApi';
   return {
     set : set,
-    $get: dataApi
+    $get: restApi
   };
 
   function set(altApi) {
     apiName = altApi;
   }
 
-  function dataApi($injector) {
+  function restApi($injector) {
     var api = $injector.get(apiName);
     return api;
   }
