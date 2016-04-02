@@ -6,7 +6,7 @@ angular
   .module('portfolio.todo')
   .controller('todoController', TodoController);
 
-function TodoController(dataApi) {
+function TodoController(localApi) {
   var self = this;
   var url  = 'api/todo/';
 
@@ -20,7 +20,9 @@ function TodoController(dataApi) {
     remove        : remove
   });
 
-  get();
+  (function init() {
+    get();
+  }());
 
   /*========================================
    =             implementations           =
@@ -29,7 +31,7 @@ function TodoController(dataApi) {
   function create() {
     var todo    = { description: self.newTodo };
     todo.status = 'active';
-    dataApi
+    localApi
       .post(url, todo)
       .then(function (data) {
         self.activeTodos.push(data);
@@ -38,7 +40,7 @@ function TodoController(dataApi) {
   }
 
   function remove(todo) {
-    dataApi
+    localApi
       .delete(url + todo.id)
       .then(function () {
         _.remove(self.completedTodos, todo);
@@ -46,7 +48,7 @@ function TodoController(dataApi) {
   }
 
   function get() {
-    dataApi
+    localApi
       .get(url)
       .then(function (data) {
         self.activeTodos    = _.filter(data, { status: 'active' });
@@ -57,7 +59,7 @@ function TodoController(dataApi) {
   function archive(todo) {
     var completed    = _.cloneDeep(todo);
     completed.status = "completed";
-    dataApi
+    localApi
       .put(url + todo.id, completed)
       .then(function () {
         _.remove(self.activeTodos, todo);
@@ -68,7 +70,7 @@ function TodoController(dataApi) {
   function reactivate(todo) {
     var activated    = _.cloneDeep(todo);
     activated.status = "active";
-    dataApi
+    localApi
       .put(url + todo.id, activated)
       .then(function () {
         _.remove(self.completedTodos, todo);
