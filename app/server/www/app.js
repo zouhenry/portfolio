@@ -114,40 +114,6 @@ angular.module('portfolio.socket', []);
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.about', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "about",
-    tabName    : "About",
-    tabIndex   : 1,
-    state      : "portfolio.about",
-    templateUrl: "routes/about/about.html",
-    controller : "aboutController as aboutCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
   .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
   .config(config);
 
@@ -166,6 +132,40 @@ function getStates() {
     state      : "portfolio.chart",
     templateUrl: "routes/chart/chart.html",
     controller : "chartController as chartCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.about', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "about",
+    tabName    : "About",
+    tabIndex   : 1,
+    state      : "portfolio.about",
+    templateUrl: "routes/about/about.html",
+    controller : "aboutController as aboutCtrl"
   }];
 }
 }());
@@ -647,90 +647,6 @@ function socket($log, $rootScope) {
  * Created by hzou on 2/28/16.
  */
 
-AboutController.$inject = ["restApi"];
-angular
-  .module('portfolio.about')
-  .controller('aboutController', AboutController);
-
-function AboutController(restApi) {
-  var self = this;
-  var url  = 'api/about/';
-
-  _.extend(self, {
-    activeAbouts   : [],
-    completedAbouts: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  get();
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var about    = { description: self.newAbout };
-    about.status = 'active';
-    restApi
-      .post(url, about)
-      .then(function (data) {
-        self.activeAbouts.push(data);
-        self.newAbout = "";
-      });
-  }
-
-  function remove(about) {
-    restApi
-      .delete(url + about.id)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-      });
-  }
-
-  function get() {
-    restApi
-      .get(url)
-      .then(function (data) {
-        self.activeAbouts    = _.filter(data, { status: 'active' });
-        self.completedAbouts = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(about) {
-    var completed    = _.cloneDeep(about);
-    completed.status = "completed";
-    restApi
-      .put(url + about.id, completed)
-      .then(function () {
-        _.remove(self.activeAbouts, about);
-        self.completedAbouts.push(completed);
-      });
-  }
-
-  function reactivate(about) {
-    var activated    = _.cloneDeep(about);
-    activated.status = "active";
-    restApi
-      .put(url + about.id, activated)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-        self.activeAbouts.push(activated);
-      });
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
 ChartController.$inject = ["$scope", "socket"];
 angular
   .module('portfolio.chart')
@@ -812,6 +728,90 @@ function ChartController($scope, socket) {
         }
       }
     };
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+AboutController.$inject = ["restApi"];
+angular
+  .module('portfolio.about')
+  .controller('aboutController', AboutController);
+
+function AboutController(restApi) {
+  var self = this;
+  var url  = 'api/about/';
+
+  _.extend(self, {
+    activeAbouts   : [],
+    completedAbouts: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  get();
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var about    = { description: self.newAbout };
+    about.status = 'active';
+    restApi
+      .post(url, about)
+      .then(function (data) {
+        self.activeAbouts.push(data);
+        self.newAbout = "";
+      });
+  }
+
+  function remove(about) {
+    restApi
+      .delete(url + about.id)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+      });
+  }
+
+  function get() {
+    restApi
+      .get(url)
+      .then(function (data) {
+        self.activeAbouts    = _.filter(data, { status: 'active' });
+        self.completedAbouts = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(about) {
+    var completed    = _.cloneDeep(about);
+    completed.status = "completed";
+    restApi
+      .put(url + about.id, completed)
+      .then(function () {
+        _.remove(self.activeAbouts, about);
+        self.completedAbouts.push(completed);
+      });
+  }
+
+  function reactivate(about) {
+    var activated    = _.cloneDeep(about);
+    activated.status = "active";
+    restApi
+      .put(url + about.id, activated)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+        self.activeAbouts.push(activated);
+      });
   }
 }
 }());

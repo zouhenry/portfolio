@@ -1,4 +1,23 @@
 #resume {
+  .education {
+    .school {
+      .school-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      .school-degree {
+        margin-bottom: 0.5rem;
+      }
+      .school-year {
+
+      }
+      .school-logo {
+        width: 4.875rem;
+        height: 4.875rem;
+      }
+    }
+  }
   .companies {
     .company {
       .company-description {

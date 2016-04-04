@@ -1,4 +1,12 @@
 {
+  "education": [
+    {
+      "school": "University of Massachusetts, Amherst",
+      "degree": "Bachelor, Computer Science",
+      "year": "2003 - 2007",
+      "logo": "images/umass.png"
+    }
+  ],
   "recommendations" : [
     {
       "user"         : "David Katz",

@@ -29,7 +29,6 @@
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
-    "lodash": "^4.5.1",
     "require-dir": "^0.3.0",
     "run-sequence": "^0.3.2",
     "underscore.string": "^3.3.4"
@@ -40,6 +39,7 @@
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0",
     "koa.io": "0.0.3",
+    "lodash": "^4.5.1",
     "n3-charts": "^2.0.18"
   },
   "repository": {
