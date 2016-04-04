@@ -243,6 +243,40 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.resume', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "resume",
+    tabName    : "Resume",
+    tabIndex   : 1,
+    state      : "portfolio.resume",
+    templateUrl: "routes/resume/resume.html",
+    controller : "resumeController as resumeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -271,40 +305,6 @@ function getStates() {
     state      : "portfolio.projects",
     templateUrl: "routes/projects/projects.html",
     controller : "projectsController as projectsCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
-  .module('portfolio.resume', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "resume",
-    tabName    : "Resume",
-    tabIndex   : 1,
-    state      : "portfolio.resume",
-    templateUrl: "routes/resume/resume.html",
-    controller : "resumeController as resumeCtrl"
   }];
 }
 }());
@@ -921,6 +921,37 @@ function ExchangeController() {
 "use strict";
 
 /**
+ * Created by hzou on 2/28/16.
+ */
+
+ResumeController.$inject = ["restApi"];
+angular
+  .module('portfolio.resume')
+  .controller('resumeController', ResumeController);
+
+function ResumeController(restApi) {
+  var self = this;
+  var url  = 'api/resume/';
+
+  (function init() {
+    getResume();
+  }());
+
+  function getResume() {
+    restApi
+      .get(url)
+      .then(function (resume) {
+        self.resume = resume;
+      });
+  }
+
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/27/16.
  */
 
@@ -956,37 +987,6 @@ function ProjectsController() {
       }
     ];
   }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-ResumeController.$inject = ["restApi"];
-angular
-  .module('portfolio.resume')
-  .controller('resumeController', ResumeController);
-
-function ResumeController(restApi) {
-  var self = this;
-  var url  = 'api/resume/';
-
-  (function init() {
-    getResume();
-  }());
-
-  function getResume() {
-    restApi
-      .get(url)
-      .then(function (resume) {
-        self.resume = resume;
-      });
-  }
-
 }
 }());
 
