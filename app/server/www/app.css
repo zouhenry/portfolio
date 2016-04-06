@@ -19635,6 +19635,9 @@ md-card.exchange-item md-card-content ul li {
   .timesheet .time-line .name {
     flex: 3;
     padding-left: 0.5rem; }
+    .timesheet .time-line .name .small {
+      font-weight: 200;
+      color: gray; }
   .timesheet .time-line .day {
     padding: 0.5rem;
     margin: 0.5rem;
