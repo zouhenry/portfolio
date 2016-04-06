@@ -1,4 +1,4 @@
-#HENRY ZOU Portfolio
+#[HENRY ZOU Portfolio](http://henryzou.com) 
 ## This is my portfolio writen in AngularJS utilizing Angular Material.
 ### Additional Technologies used here: Gulp, WebSocket, NodeJs, Bower, NPM, Jade, SASS
 #### Feel free to use this as basis for your own personal portfolio
