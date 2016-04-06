@@ -10,7 +10,7 @@
       'portfolio.layout',
       'portfolio.projects',
       'portfolio.todo',
-      // 'portfolio.about',
+      'portfolio.timesheet',
       'portfolio.resume',
       'portfolio.chart',
       'portfolio.exchange'

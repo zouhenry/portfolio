@@ -19417,27 +19417,6 @@ body {
 input[type="text"] {
   padding: 0.5rem; }
 
-.name {
-  font-size: 1.75rem;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  line-height: 7rem;
-  height: 7rem;
-  background-color: white; }
-  .name .title {
-    padding-left: 0.5rem; }
-  @media screen and (max-width: 600px) {
-    .name {
-      line-height: 4rem;
-      height: 4rem;
-      font-size: 1.75rem; } }
-  @media screen and (min-width: 600px) and (max-width: 960px) {
-    .name {
-      font-size: 1.6rem; } }
-  .name .nametext {
-    display: inline-block;
-    vertical-align: text-top; }
-
 .avatar {
   position: absolute;
   top: 0rem;
@@ -19456,6 +19435,26 @@ input[type="text"] {
   position: relative;
   text-transform: uppercase;
   font-weight: 200; }
+  #header .name {
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 7rem;
+    height: 7rem;
+    background-color: white; }
+    #header .name .title {
+      padding-left: 0.5rem; }
+    @media screen and (max-width: 600px) {
+      #header .name {
+        line-height: 4rem;
+        height: 4rem;
+        font-size: 1.75rem; } }
+    @media screen and (min-width: 600px) and (max-width: 960px) {
+      #header .name {
+        font-size: 1.6rem; } }
+    #header .name .nametext {
+      display: inline-block;
+      vertical-align: text-top; }
   #header md-menu {
     padding-top: 1.5rem;
     float: right; }
@@ -19474,7 +19473,8 @@ input[type="text"] {
   #header md-menu-item > .md-button {
     font-size: 1.25rem; }
   #header .menu .menu-item {
-    margin: 0 0.625rem; }
+    margin: 0 0.625rem;
+    white-space: nowrap; }
     #header .menu .menu-item:first-child {
       margin-left: 0; }
     #header .menu .menu-item a {
@@ -19618,6 +19618,36 @@ md-card.exchange-item md-card-content ul li {
       font-weight: 700;
       padding-left: 0.5rem;
       color: #e0e0e0; }
+
+.timesheet .time-line {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  padding: 0 0.5rem; }
+  .timesheet .time-line.type {
+    background-color: gray;
+    color: black; }
+  .timesheet .time-line.company {
+    background-color: lightgray;
+    color: #333333; }
+  .timesheet .time-line .name {
+    flex: 3;
+    padding-left: 0.5rem; }
+  .timesheet .time-line .day {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    max-width: 5rem;
+    flex: 1;
+    text-align: right; }
+    .timesheet .time-line .day .dow, .timesheet .time-line .day .total {
+      font-weight: 700;
+      font-size: 1.25rem; }
+    .timesheet .time-line .day input {
+      padding: 0.5rem;
+      text-align: right;
+      width: 100%; }
 
 html {
   height: inherit; }
