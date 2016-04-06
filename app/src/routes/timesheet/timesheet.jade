@@ -31,6 +31,7 @@
           .task(ng-repeat="task in project.tasks track by $index")
             .time-line
               .name {{task.name}}
+                .small {{task.description}}
               .day(ng-repeat="day in task.days track by $index" style="display:inline")
                 input(type="numeric" ng-model="day.hours"
                 ng-change="timesheetCtrl.updateTotals($index, day, project, company, type)")

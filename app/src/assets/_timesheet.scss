@@ -20,6 +20,10 @@
     .name {
       flex: 3;
       padding-left: 0.5rem;
+      .small {
+        font-weight: 200;
+        color: gray;
+      }
     }
     .day {
       padding: 0.5rem;
