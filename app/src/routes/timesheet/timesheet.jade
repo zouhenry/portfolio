@@ -1,0 +1,36 @@
+.timesheet
+  .time-line
+    .name
+    .day(ng-repeat="day in timesheetCtrl.dailyTotals track by $index")
+      div
+        .dow {{day.name}}
+        hr
+        .total
+          span(ng-if="day.hours") {{day.hours | number:2 }}
+          span(ng-if="!day.hours") &mdash;
+
+  .layout-column
+    .layout-column(ng-repeat="type in timesheetCtrl.timesheet track by $index")
+      .time-line.type
+        .name {{type.name}}
+        .day(ng-repeat="day in type.days track by $index" style="display:inline")
+          span(ng-if="day.hours") {{day.hours | number:2 }}
+          span(ng-if="!day.hours") &mdash;
+      .layout-column(ng-repeat="company in type.companies track by $index")
+        .time-line.company
+          .name {{company.name}}
+          .day(ng-repeat="day in company.days track by $index" style="display:inline")
+            span(ng-if="day.hours") {{day.hours | number:2 }}
+            span(ng-if="!day.hours") &mdash;
+        .layout-column(ng-repeat="project in company.projects track by $index")
+          .time-line.project
+            .name {{project.name}}
+            .day(ng-repeat="day in project.days track by $index" style="display:inline")
+              span(ng-if="day.hours") {{day.hours | number:2 }}
+              span(ng-if="!day.hours") &mdash;
+          .task(ng-repeat="task in project.tasks track by $index")
+            .time-line
+              .name {{task.name}}
+              .day(ng-repeat="day in task.days track by $index" style="display:inline")
+                input(type="numeric" ng-model="day.hours"
+                ng-change="timesheetCtrl.updateTotals($index, day, project, company, type)")

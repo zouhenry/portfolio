@@ -49,7 +49,7 @@ function config(restApiProvider, $mdThemingProvider) {
       'portfolio.layout',
       'portfolio.projects',
       'portfolio.todo',
-      // 'portfolio.about',
+      'portfolio.timesheet',
       'portfolio.resume',
       'portfolio.chart',
       'portfolio.exchange'
@@ -114,40 +114,6 @@ angular.module('portfolio.socket', []);
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.about', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "about",
-    tabName    : "About",
-    tabIndex   : 1,
-    state      : "portfolio.about",
-    templateUrl: "routes/about/about.html",
-    controller : "aboutController as aboutCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
   .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
   .config(config);
 
@@ -166,6 +132,40 @@ function getStates() {
     state      : "portfolio.chart",
     templateUrl: "routes/chart/chart.html",
     controller : "chartController as chartCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.about', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "about",
+    tabName    : "About",
+    tabIndex   : 1,
+    state      : "portfolio.about",
+    templateUrl: "routes/about/about.html",
+    controller : "aboutController as aboutCtrl"
   }];
 }
 }());
@@ -243,6 +243,42 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/21/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+angular
+  .module('portfolio.projects', [])
+  .config(config);
+
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "projects",
+    tabName    : "Projects",
+    tabIndex   : null,//3,
+    state      : "portfolio.projects",
+    templateUrl: "routes/projects/projects.html",
+    controller : "projectsController as projectsCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/27/16.
  */
 /*========================================
@@ -277,20 +313,18 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 2/21/16.
+ * Created by hzou on 2/27/16.
  */
 /*========================================
  =              APP START                =
  ========================================*/
 
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.projects', [])
+  .module('portfolio.timesheet', [])
   .config(config);
 
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
+function config($stateProvider, navProvider) {
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
     navProvider.register(state);
@@ -299,12 +333,12 @@ function config($stateProvider, $urlRouterProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : null,//3,
-    state      : "portfolio.projects",
-    templateUrl: "routes/projects/projects.html",
-    controller : "projectsController as projectsCtrl"
+    url        : "timesheet",
+    tabName    : "TimeSheet",
+    tabIndex   : 2,
+    state      : "portfolio.timesheet",
+    templateUrl: "routes/timesheet/timesheet.html",
+    controller : "timesheetController as timesheetCtrl"
   }];
 }
 }());
@@ -647,90 +681,6 @@ function socket($log, $rootScope) {
  * Created by hzou on 2/28/16.
  */
 
-AboutController.$inject = ["restApi"];
-angular
-  .module('portfolio.about')
-  .controller('aboutController', AboutController);
-
-function AboutController(restApi) {
-  var self = this;
-  var url  = 'api/about/';
-
-  _.extend(self, {
-    activeAbouts   : [],
-    completedAbouts: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  get();
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var about    = { description: self.newAbout };
-    about.status = 'active';
-    restApi
-      .post(url, about)
-      .then(function (data) {
-        self.activeAbouts.push(data);
-        self.newAbout = "";
-      });
-  }
-
-  function remove(about) {
-    restApi
-      .delete(url + about.id)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-      });
-  }
-
-  function get() {
-    restApi
-      .get(url)
-      .then(function (data) {
-        self.activeAbouts    = _.filter(data, { status: 'active' });
-        self.completedAbouts = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(about) {
-    var completed    = _.cloneDeep(about);
-    completed.status = "completed";
-    restApi
-      .put(url + about.id, completed)
-      .then(function () {
-        _.remove(self.activeAbouts, about);
-        self.completedAbouts.push(completed);
-      });
-  }
-
-  function reactivate(about) {
-    var activated    = _.cloneDeep(about);
-    activated.status = "active";
-    restApi
-      .put(url + about.id, activated)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-        self.activeAbouts.push(activated);
-      });
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
 ChartController.$inject = ["$scope", "socket"];
 angular
   .module('portfolio.chart')
@@ -812,6 +762,90 @@ function ChartController($scope, socket) {
         }
       }
     };
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+AboutController.$inject = ["restApi"];
+angular
+  .module('portfolio.about')
+  .controller('aboutController', AboutController);
+
+function AboutController(restApi) {
+  var self = this;
+  var url  = 'api/about/';
+
+  _.extend(self, {
+    activeAbouts   : [],
+    completedAbouts: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  get();
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var about    = { description: self.newAbout };
+    about.status = 'active';
+    restApi
+      .post(url, about)
+      .then(function (data) {
+        self.activeAbouts.push(data);
+        self.newAbout = "";
+      });
+  }
+
+  function remove(about) {
+    restApi
+      .delete(url + about.id)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+      });
+  }
+
+  function get() {
+    restApi
+      .get(url)
+      .then(function (data) {
+        self.activeAbouts    = _.filter(data, { status: 'active' });
+        self.completedAbouts = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(about) {
+    var completed    = _.cloneDeep(about);
+    completed.status = "completed";
+    restApi
+      .put(url + about.id, completed)
+      .then(function () {
+        _.remove(self.activeAbouts, about);
+        self.completedAbouts.push(completed);
+      });
+  }
+
+  function reactivate(about) {
+    var activated    = _.cloneDeep(about);
+    activated.status = "active";
+    restApi
+      .put(url + about.id, activated)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+        self.activeAbouts.push(activated);
+      });
   }
 }
 }());
@@ -921,37 +955,6 @@ function ExchangeController() {
 "use strict";
 
 /**
- * Created by hzou on 2/28/16.
- */
-
-ResumeController.$inject = ["restApi"];
-angular
-  .module('portfolio.resume')
-  .controller('resumeController', ResumeController);
-
-function ResumeController(restApi) {
-  var self = this;
-  var url  = 'api/resume/';
-
-  (function init() {
-    getResume();
-  }());
-
-  function getResume() {
-    restApi
-      .get(url)
-      .then(function (resume) {
-        self.resume = resume;
-      });
-  }
-
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/27/16.
  */
 
@@ -986,6 +989,225 @@ function ProjectsController() {
         description: "Angular ToDo"
       }
     ];
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+ResumeController.$inject = ["restApi"];
+angular
+  .module('portfolio.resume')
+  .controller('resumeController', ResumeController);
+
+function ResumeController(restApi) {
+  var self = this;
+  var url  = 'api/resume/';
+
+  (function init() {
+    getResume();
+  }());
+
+  function getResume() {
+    restApi
+      .get(url)
+      .then(function (resume) {
+        self.resume = resume;
+      });
+  }
+
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+timesheetController.$inject = ["localApi"];
+angular
+  .module('portfolio.timesheet')
+  .controller('timesheetController', timesheetController);
+
+function timesheetController(localApi) {
+  var self = this;
+
+  _.extend(self, {
+    timesheet   : getTimesheet(),
+    dailyTotals : [{ name: "SUN" }, { name: "MON" }, { name: "TUE" }, { name: "WED" }, { name: "THU" }, { name: "FRI" }, { name: "SAT" }],
+    updateTotals: updateTotals
+  });
+
+  (function () {
+    refreshTotals();
+  }());
+
+  function refreshTotals() {
+    _.forEach(self.timesheet, function (type) {
+      _.forEach(type.companies, function (company) {
+        _.forEach(company.projects, function (project) {
+          for ( var taskCounter = 0; taskCounter < 7; ++taskCounter ) {
+            updateTotals(taskCounter, project.tasks[0].days[taskCounter], project, company, type);
+          }
+        });
+      });
+    });
+  }
+
+  function updateTotals(index, task, project, company, type) {
+    console.log("task", task);
+    task.hours                    = task.hours || 0;
+    project.days[index].hours     = _.reduce(project.tasks, function (sum, task) {
+      return sum + parseFloat(task.days[index].hours);
+    }, 0);
+    company.days[index].hours     = _.reduce(company.projects, function (sum, project) {
+      return sum + parseFloat(project.days[index].hours);
+    }, 0);
+    type.days[index].hours        = _.reduce(type.companies, function (sum, company) {
+      return sum + parseFloat(company.days[index].hours);
+    }, 0);
+    self.dailyTotals[index].hours = _.reduce(self.timesheet, function (sum, type) {
+      return sum + parseFloat(type.days[index].hours);
+    }, 0);
+  }
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+  function getTimesheet() {
+    return [{
+      name     : "Billable",
+      days     : [{}, {}, {}, {}, {}, {}, {}],
+      companies: [{
+        name    : "Henry Zou",
+        days    : [{}, {}, {}, {}, {}, {}, {}],
+        projects: [{
+          name : "Henry Zou - Portfolio",
+          days : [{}, {}, {}, {}, {}, {}, {}],
+          tasks: [{
+            name       : 'Technical Design',
+            description: 'Review design document',
+            status     : "late",
+            days       : [
+              {
+                hours: 0
+              },
+              {
+                hours: 4.5
+              },
+              {
+                hours: 6
+              },
+              {
+                hours: 8
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              }
+            ]
+          }, {
+            name       : 'Implementation',
+            description: 'implement business logic',
+            days       : [
+
+              {
+                hours: 0
+              },
+              {
+                hours: 3
+              },
+              {
+                hours: 2
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              }
+            ]
+          }, {
+            name       : 'Implementation',
+            description: 'Write test cases',
+            days       : [
+
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 1
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              }
+            ]
+          }]
+        }]
+      }, {
+        name    : "Wellwood Medical",
+        days    : [{}, {}, {}, {}, {}, {}, {}],
+        projects: [{
+          name : "Testing and revisions",
+          days : [{}, {}, {}, {}, {}, {}, {}],
+          tasks: [{
+            name: "Design",
+            days: [
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 3
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              },
+              {
+                hours: 0
+              }]
+          }]
+        }]
+      }]
+    }];
   }
 }
 }());

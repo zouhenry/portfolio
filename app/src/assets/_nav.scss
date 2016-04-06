@@ -1,33 +1,5 @@
 $header-name-height: 7rem;
 
-.name {
-  font-size: 1.75rem;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  line-height: $header-name-height;
-  height: $header-name-height;
-  background-color: white;
-
-  .title {
-    padding-left: 0.5rem;
-  }
-
-  @media screen and (max-width: $layout-breakpoint-xs) {
-    line-height: 4rem;
-    height: 4rem;
-    font-size: 1.75rem;
-  }
-
-  @media screen and (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
-    font-size: 1.6rem;
-  }
-
-  .nametext {
-    display: inline-block;
-    vertical-align: text-top;
-  }
-}
-
 .avatar {
   position: absolute;
   top: 0rem;
@@ -49,6 +21,33 @@ $header-name-height: 7rem;
   position: relative;
   text-transform: uppercase;
   font-weight: 200;
+  .name {
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: $header-name-height;
+    height: $header-name-height;
+    background-color: white;
+
+    .title {
+      padding-left: 0.5rem;
+    }
+
+    @media screen and (max-width: $layout-breakpoint-xs) {
+      line-height: 4rem;
+      height: 4rem;
+      font-size: 1.75rem;
+    }
+
+    @media screen and (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+      font-size: 1.6rem;
+    }
+
+    .nametext {
+      display: inline-block;
+      vertical-align: text-top;
+    }
+  }
 
   md-menu {
     padding-top: 1.5rem;
@@ -80,6 +79,7 @@ $header-name-height: 7rem;
     //flex-direction: row;
     .menu-item {
       margin: 0 0.625rem;
+      white-space: nowrap;
 
       &:first-child {
         margin-left: 0;
