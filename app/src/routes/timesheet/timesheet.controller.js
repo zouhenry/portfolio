@@ -32,7 +32,6 @@ function timesheetController(localApi) {
   }
 
   function updateTotals(index, task, project, company, type) {
-    console.log("task", task);
     task.hours                    = task.hours || 0;
     project.days[index].hours     = _.reduce(project.tasks, function (sum, task) {
       return sum + parseFloat(task.days[index].hours);

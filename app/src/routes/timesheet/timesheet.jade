@@ -9,7 +9,7 @@
           span(ng-if="day.hours") {{day.hours | number:2 }}
           span(ng-if="!day.hours") &mdash;
 
-  .layout-column
+  form.layout-column(name="timesheet")
     .layout-column(ng-repeat="type in timesheetCtrl.timesheet track by $index")
       .time-line.type
         .name {{type.name}}
