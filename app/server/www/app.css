@@ -19630,6 +19630,8 @@ md-card.exchange-item md-card-content ul li {
     background-color: gray;
     color: black; }
   .timesheet .time-line.company {
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
     background-color: lightgray;
     color: #333333; }
   .timesheet .time-line .name {
@@ -19647,11 +19649,16 @@ md-card.exchange-item md-card-content ul li {
     .timesheet .time-line .day .dow, .timesheet .time-line .day .total {
       font-weight: 700;
       font-size: 1.25rem; }
+    .timesheet .time-line .day.non-working {
+      color: #999; }
+      .timesheet .time-line .day.non-working input {
+        color: #999; }
     .timesheet .time-line .day input {
+      border: 1px solid #bbb;
+      border-bottom: 2px solid #bbb;
       padding: 0.5rem;
       text-align: right;
-      width: 100%;
-      border: 0; }
+      width: 100%; }
       .timesheet .time-line .day input.ng-touched:not(.ng-pristine) {
         border-bottom: 2px solid green; }
 

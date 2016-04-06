@@ -13,6 +13,8 @@
     }
 
     &.company {
+      border-bottom: 1px solid #999;
+      border-top: 1px solid #999;
       background-color: lightgray;
       color: #333333;
     }
@@ -37,26 +39,25 @@
         font-size: 1.25rem;
       }
 
+      &.non-working {
+        color: #999;
+        input {
+          color: #999;
+        }
+      }
+
       input {
+        border: 1px solid #bbb;
+        border-bottom: 2px solid #bbb;
         padding: 0.5rem;
         text-align: right;
         width: 100%;
-        border: 0;
 
         &.ng-touched:not(.ng-pristine) {
           border-bottom: 2px solid green;
         }
       }
 
-    }
-  }
-  .type {
-    .company {
-      .project {
-        .task {
-
-        }
-      }
     }
   }
 }
