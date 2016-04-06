@@ -62,33 +62,22 @@ function config(restApiProvider, $mdThemingProvider) {
 "use strict";
 
 /**
- * Created by hzou on 3/6/16.
- */
-
-angular
-  .module('portfolio.directives', []);
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-angular
-  .module('portfolio.rest.api', []);
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/27/16.
  */
 
 angular
   .module('portfolio.services', []);
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/6/16.
+ */
+
+angular
+  .module('portfolio.directives', []);
 }());
 
 ;(function() {
@@ -106,34 +95,11 @@ angular.module('portfolio.socket', []);
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 2/28/16.
  */
-/*========================================
- =              APP START                =
- ========================================*/
 
-config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "chart",
-    tabName    : "Chart",
-    tabIndex   : 3,
-    state      : "portfolio.chart",
-    templateUrl: "routes/chart/chart.html",
-    controller : "chartController as chartCtrl"
-  }];
-}
+  .module('portfolio.rest.api', []);
 }());
 
 ;(function() {
@@ -166,6 +132,40 @@ function getStates() {
     state      : "portfolio.about",
     templateUrl: "routes/about/about.html",
     controller : "aboutController as aboutCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "chart",
+    tabName    : "Chart",
+    tabIndex   : 3,
+    state      : "portfolio.chart",
+    templateUrl: "routes/chart/chart.html",
+    controller : "chartController as chartCtrl"
   }];
 }
 }());
@@ -381,6 +381,39 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 3/6/16.
  */
 
@@ -401,6 +434,63 @@ function autofocus($timeout) {
     }, 250);
   }
 
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/19/16.
+ */
+
+
+socket.$inject = ["$log", "$rootScope"];
+angular
+  .module('portfolio.socket')
+  .factory('socket', socket);
+
+function socket($log, $rootScope) {
+  $log.debug('socket LOADED');
+  var socket;
+  return {
+    connect   : connect,
+    disconnect: disconnect,
+    on        : on,
+    emit      : emit
+  };
+
+  function connect(uri) {
+    $log.debug('connect');
+    socket = io.connect(uri, { 'forceNew': true });
+  }
+
+  function disconnect() {
+    $log.debug('disconnect');
+    socket.disconnect();
+  }
+
+  function on(eventName, callback) {
+    $log.debug('on');
+    socket.on(eventName, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        callback.apply(socket, args);
+      });
+    });
+  }
+
+  function emit(eventName, data, callback) {
+    $log.debug('emit called');
+    socket.emit(eventName, data, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        if (callback) {
+          callback.apply(socket, args);
+        }
+      });
+    });
+  }
 }
 }());
 
@@ -588,88 +678,82 @@ function localApi($window, $q) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 2/28/16.
  */
 
+AboutController.$inject = ["restApi"];
 angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
+  .module('portfolio.about')
+  .controller('aboutController', AboutController);
 
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
+function AboutController(restApi) {
+  var self = this;
+  var url  = 'api/about/';
 
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
+  _.extend(self, {
+    activeAbouts   : [],
+    completedAbouts: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
   });
-}());
 
-;(function() {
-"use strict";
+  get();
 
-/**
- * Created by hzou on 3/19/16.
- */
+  /*========================================
+   =             implementations           =
+   ========================================*/
 
-
-socket.$inject = ["$log", "$rootScope"];
-angular
-  .module('portfolio.socket')
-  .factory('socket', socket);
-
-function socket($log, $rootScope) {
-  $log.debug('socket LOADED');
-  var socket;
-  return {
-    connect   : connect,
-    disconnect: disconnect,
-    on        : on,
-    emit      : emit
-  };
-
-  function connect(uri) {
-    $log.debug('connect');
-    socket = io.connect(uri, { 'forceNew': true });
-  }
-
-  function disconnect() {
-    $log.debug('disconnect');
-    socket.disconnect();
-  }
-
-  function on(eventName, callback) {
-    $log.debug('on');
-    socket.on(eventName, function () {
-      var args = arguments;
-      $rootScope.$evalAsync(function () {
-        callback.apply(socket, args);
+  function create() {
+    var about    = { description: self.newAbout };
+    about.status = 'active';
+    restApi
+      .post(url, about)
+      .then(function (data) {
+        self.activeAbouts.push(data);
+        self.newAbout = "";
       });
-    });
   }
 
-  function emit(eventName, data, callback) {
-    $log.debug('emit called');
-    socket.emit(eventName, data, function () {
-      var args = arguments;
-      $rootScope.$evalAsync(function () {
-        if (callback) {
-          callback.apply(socket, args);
-        }
+  function remove(about) {
+    restApi
+      .delete(url + about.id)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
       });
-    });
+  }
+
+  function get() {
+    restApi
+      .get(url)
+      .then(function (data) {
+        self.activeAbouts    = _.filter(data, { status: 'active' });
+        self.completedAbouts = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(about) {
+    var completed    = _.cloneDeep(about);
+    completed.status = "completed";
+    restApi
+      .put(url + about.id, completed)
+      .then(function () {
+        _.remove(self.activeAbouts, about);
+        self.completedAbouts.push(completed);
+      });
+  }
+
+  function reactivate(about) {
+    var activated    = _.cloneDeep(about);
+    activated.status = "active";
+    restApi
+      .put(url + about.id, activated)
+      .then(function () {
+        _.remove(self.completedAbouts, about);
+        self.activeAbouts.push(activated);
+      });
   }
 }
 }());
@@ -762,90 +846,6 @@ function ChartController($scope, socket) {
         }
       }
     };
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-AboutController.$inject = ["restApi"];
-angular
-  .module('portfolio.about')
-  .controller('aboutController', AboutController);
-
-function AboutController(restApi) {
-  var self = this;
-  var url  = 'api/about/';
-
-  _.extend(self, {
-    activeAbouts   : [],
-    completedAbouts: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  get();
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var about    = { description: self.newAbout };
-    about.status = 'active';
-    restApi
-      .post(url, about)
-      .then(function (data) {
-        self.activeAbouts.push(data);
-        self.newAbout = "";
-      });
-  }
-
-  function remove(about) {
-    restApi
-      .delete(url + about.id)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-      });
-  }
-
-  function get() {
-    restApi
-      .get(url)
-      .then(function (data) {
-        self.activeAbouts    = _.filter(data, { status: 'active' });
-        self.completedAbouts = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(about) {
-    var completed    = _.cloneDeep(about);
-    completed.status = "completed";
-    restApi
-      .put(url + about.id, completed)
-      .then(function () {
-        _.remove(self.activeAbouts, about);
-        self.completedAbouts.push(completed);
-      });
-  }
-
-  function reactivate(about) {
-    var activated    = _.cloneDeep(about);
-    activated.status = "active";
-    restApi
-      .put(url + about.id, activated)
-      .then(function () {
-        _.remove(self.completedAbouts, about);
-        self.activeAbouts.push(activated);
-      });
   }
 }
 }());
@@ -1062,7 +1062,6 @@ function timesheetController(localApi) {
   }
 
   function updateTotals(index, task, project, company, type) {
-    console.log("task", task);
     task.hours                    = task.hours || 0;
     project.days[index].hours     = _.reduce(project.tasks, function (sum, task) {
       return sum + parseFloat(task.days[index].hours);

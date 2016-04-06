@@ -19650,7 +19650,10 @@ md-card.exchange-item md-card-content ul li {
     .timesheet .time-line .day input {
       padding: 0.5rem;
       text-align: right;
-      width: 100%; }
+      width: 100%;
+      border: 0; }
+      .timesheet .time-line .day input.ng-touched:not(.ng-pristine) {
+        border-bottom: 2px solid green; }
 
 html {
   height: inherit; }
