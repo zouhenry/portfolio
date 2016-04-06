@@ -1,7 +1,7 @@
 .timesheet
   .time-line
     .name
-    .day(ng-repeat="day in timesheetCtrl.dailyTotals track by $index")
+    .day(ng-repeat="day in timesheetCtrl.dailyTotals track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
       div
         .dow {{day.name}}
         hr
@@ -12,26 +12,29 @@
   form.layout-column(name="timesheet")
     .layout-column(ng-repeat="type in timesheetCtrl.timesheet track by $index")
       .time-line.type
+        i.fa(ng-class="{'fa-chevron-right':isCollapsed, 'fa-chevron-down':!isCollapsed}" ng-click="isCollapsed = !isCollapsed")
         .name {{type.name}}
-        .day(ng-repeat="day in type.days track by $index" style="display:inline")
+        .day(ng-repeat="day in type.days track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
           span(ng-if="day.hours") {{day.hours | number:2 }}
           span(ng-if="!day.hours") &mdash;
-      .layout-column(ng-repeat="company in type.companies track by $index")
+      .layout-column(ng-repeat="company in type.companies track by $index" ng-if="!isCollapsed")
         .time-line.company
+          i.fa(ng-class="{'fa-chevron-right':isCollapsed, 'fa-chevron-down':!isCollapsed}" ng-click="isCollapsed = !isCollapsed")
           .name {{company.name}}
-          .day(ng-repeat="day in company.days track by $index" style="display:inline")
+          .day(ng-repeat="day in company.days track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
             span(ng-if="day.hours") {{day.hours | number:2 }}
             span(ng-if="!day.hours") &mdash;
-        .layout-column(ng-repeat="project in company.projects track by $index")
+        .layout-column(ng-repeat="project in company.projects track by $index" ng-if="!isCollapsed")
           .time-line.project
+            i.fa(ng-class="{'fa-chevron-right':isCollapsed, 'fa-chevron-down':!isCollapsed}" ng-click="isCollapsed = !isCollapsed")
             .name {{project.name}}
-            .day(ng-repeat="day in project.days track by $index" style="display:inline")
+            .day(ng-repeat="day in project.days track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
               span(ng-if="day.hours") {{day.hours | number:2 }}
               span(ng-if="!day.hours") &mdash;
-          .task(ng-repeat="task in project.tasks track by $index")
+          .task(ng-repeat="task in project.tasks track by $index" ng-if="!isCollapsed")
             .time-line
               .name {{task.name}}
                 .small {{task.description}}
-              .day(ng-repeat="day in task.days track by $index" style="display:inline")
+              .day(ng-repeat="day in task.days track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
                 input(type="numeric" ng-model="day.hours"
                 ng-change="timesheetCtrl.updateTotals($index, day, project, company, type)")
