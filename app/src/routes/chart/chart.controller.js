@@ -21,7 +21,7 @@ function ChartController($scope, socket) {
   init();
 
   function init() {
-    socket.connect();
+    socket.connect('ws://localhost:4000');
     socket.on('connect', function () {
       socket.emit('startFeed', { duration: duration, frequency: frequency });
     });

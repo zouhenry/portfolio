@@ -11,6 +11,7 @@ var devlog = require('./devlog').init(config);
 
 //middleware
 var route       = require('koa-route');
+var cors        = require('koa-cors');
 var conditional = require('koa-conditional-get');
 var etag        = require('koa-etag');
 var duration    = require('./middleware/duration');
@@ -24,6 +25,7 @@ var logger = devlog.channel('portfolio');
 
 // middleware for koa
 // etag works together with conditional-get
+app.use(cors());  //CORS
 app.use(conditional()); //needed by etag
 app.use(etag());        //etag for cache management
 app.use(duration());    //puts "Duration" in the header
