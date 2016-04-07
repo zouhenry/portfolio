@@ -44,6 +44,7 @@
     "build": ["clean", ["vendorjs", "appjs",
       "index", "jade", "sass", "fonts", "images"]],
     "deploy": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
-    "default":["build", "watch"]
+    "default":["build", "watch"],
+    "serve": ["default", "server"]
   }
 }
