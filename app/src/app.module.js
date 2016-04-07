@@ -21,10 +21,15 @@ angular
     //ui-router states/routes
     'portfolio.routes'
   ])
-  .config(config);
+  .config(config)
+  .run(run);
 
 function config(restApiProvider, $mdThemingProvider) {
   restApiProvider.set('httpApi');
   $mdThemingProvider.theme('default')
     .primaryPalette('light-blue');
+}
+
+function run(httpApi) {
+  httpApi.setApiBaseUrl("http://localhost:4000/");
 }
