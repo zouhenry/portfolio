@@ -20,7 +20,7 @@ function socket($log, $rootScope) {
   function connect(uri) {
     $log.debug('connect');
     socket = io.connect(uri, { 'forceNew': true });
-  }
+  } 
 
   function disconnect() {
     $log.debug('disconnect');

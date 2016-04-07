@@ -62,17 +62,6 @@ function config(restApiProvider, $mdThemingProvider) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services', []);
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 3/6/16.
  */
 
@@ -84,22 +73,33 @@ angular
 "use strict";
 
 /**
- * Created by hzou on 3/19/16.
+ * Created by hzou on 2/28/16.
  */
 
-
-angular.module('portfolio.socket', []);
+angular
+  .module('portfolio.rest.api', []);
 }());
 
 ;(function() {
 "use strict";
 
 /**
- * Created by hzou on 2/28/16.
+ * Created by hzou on 2/27/16.
  */
 
 angular
-  .module('portfolio.rest.api', []);
+  .module('portfolio.services', []);
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/19/16.
+ */
+
+
+angular.module('portfolio.socket', []);
 }());
 
 ;(function() {
@@ -321,40 +321,6 @@ function getStates() {
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.timesheet', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "timesheet",
-    tabName    : "TimeSheet",
-    tabIndex   : 2,
-    state      : "portfolio.timesheet",
-    templateUrl: "routes/timesheet/timesheet.html",
-    controller : "timesheetController as timesheetCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
   .module('portfolio.todo', [])
   .config(config);
 
@@ -383,31 +349,32 @@ function getStates() {
 /**
  * Created by hzou on 2/27/16.
  */
+/*========================================
+ =              APP START                =
+ ========================================*/
 
+config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
+  .module('portfolio.timesheet', [])
+  .config(config);
 
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
   });
+}
+
+function getStates() {
+  return [{
+    url        : "timesheet",
+    tabName    : "TimeSheet",
+    tabIndex   : 2,
+    state      : "portfolio.timesheet",
+    templateUrl: "routes/timesheet/timesheet.html",
+    controller : "timesheetController as timesheetCtrl"
+  }];
+}
 }());
 
 ;(function() {
@@ -434,63 +401,6 @@ function autofocus($timeout) {
     }, 250);
   }
 
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 3/19/16.
- */
-
-
-socket.$inject = ["$log", "$rootScope"];
-angular
-  .module('portfolio.socket')
-  .factory('socket', socket);
-
-function socket($log, $rootScope) {
-  $log.debug('socket LOADED');
-  var socket;
-  return {
-    connect   : connect,
-    disconnect: disconnect,
-    on        : on,
-    emit      : emit
-  };
-
-  function connect(uri) {
-    $log.debug('connect');
-    socket = io.connect(uri, { 'forceNew': true });
-  }
-
-  function disconnect() {
-    $log.debug('disconnect');
-    socket.disconnect();
-  }
-
-  function on(eventName, callback) {
-    $log.debug('on');
-    socket.on(eventName, function () {
-      var args = arguments;
-      $rootScope.$evalAsync(function () {
-        callback.apply(socket, args);
-      });
-    });
-  }
-
-  function emit(eventName, data, callback) {
-    $log.debug('emit called');
-    socket.emit(eventName, data, function () {
-      var args = arguments;
-      $rootScope.$evalAsync(function () {
-        if (callback) {
-          callback.apply(socket, args);
-        }
-      });
-    });
-  }
 }
 }());
 
@@ -670,6 +580,96 @@ function localApi($window, $q) {
     var deferred = $q.defer();
     deferred.resolve(data);
     return deferred.promise;
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/19/16.
+ */
+
+
+socket.$inject = ["$log", "$rootScope"];
+angular
+  .module('portfolio.socket')
+  .factory('socket', socket);
+
+function socket($log, $rootScope) {
+  $log.debug('socket LOADED');
+  var socket;
+  return {
+    connect   : connect,
+    disconnect: disconnect,
+    on        : on,
+    emit      : emit
+  };
+
+  function connect(uri) {
+    $log.debug('connect');
+    socket = io.connect(uri, { 'forceNew': true });
+  } 
+
+  function disconnect() {
+    $log.debug('disconnect');
+    socket.disconnect();
+  }
+
+  function on(eventName, callback) {
+    $log.debug('on');
+    socket.on(eventName, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        callback.apply(socket, args);
+      });
+    });
+  }
+
+  function emit(eventName, data, callback) {
+    $log.debug('emit called');
+    socket.emit(eventName, data, function () {
+      var args = arguments;
+      $rootScope.$evalAsync(function () {
+        if (callback) {
+          callback.apply(socket, args);
+        }
+      });
+    });
   }
 }
 }());
@@ -1031,6 +1031,92 @@ function ResumeController(restApi) {
  * Created by hzou on 2/28/16.
  */
 
+TodoController.$inject = ["localApi"];
+angular
+  .module('portfolio.todo')
+  .controller('todoController', TodoController);
+
+function TodoController(localApi) {
+  var self = this;
+  var url  = 'api/todo/';
+
+  _.extend(self, {
+    activeTodos   : [],
+    completedTodos: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  (function init() {
+    get();
+  }());
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var todo    = { description: self.newTodo };
+    todo.status = 'active';
+    localApi
+      .post(url, todo)
+      .then(function (data) {
+        self.activeTodos.push(data);
+        self.newTodo = "";
+      });
+  }
+
+  function remove(todo) {
+    localApi
+      .delete(url + todo.id)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+      });
+  }
+
+  function get() {
+    localApi
+      .get(url)
+      .then(function (data) {
+        self.activeTodos    = _.filter(data, { status: 'active' });
+        self.completedTodos = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(todo) {
+    var completed    = _.cloneDeep(todo);
+    completed.status = "completed";
+    localApi
+      .put(url + todo.id, completed)
+      .then(function () {
+        _.remove(self.activeTodos, todo);
+        self.completedTodos.push(completed);
+      });
+  }
+
+  function reactivate(todo) {
+    var activated    = _.cloneDeep(todo);
+    activated.status = "active";
+    localApi
+      .put(url + todo.id, activated)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+        self.activeTodos.push(activated);
+      });
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
 timesheetController.$inject = ["localApi"];
 angular
   .module('portfolio.timesheet')
@@ -1207,92 +1293,6 @@ function timesheetController(localApi) {
         }]
       }]
     }];
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-TodoController.$inject = ["localApi"];
-angular
-  .module('portfolio.todo')
-  .controller('todoController', TodoController);
-
-function TodoController(localApi) {
-  var self = this;
-  var url  = 'api/todo/';
-
-  _.extend(self, {
-    activeTodos   : [],
-    completedTodos: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  (function init() {
-    get();
-  }());
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var todo    = { description: self.newTodo };
-    todo.status = 'active';
-    localApi
-      .post(url, todo)
-      .then(function (data) {
-        self.activeTodos.push(data);
-        self.newTodo = "";
-      });
-  }
-
-  function remove(todo) {
-    localApi
-      .delete(url + todo.id)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-      });
-  }
-
-  function get() {
-    localApi
-      .get(url)
-      .then(function (data) {
-        self.activeTodos    = _.filter(data, { status: 'active' });
-        self.completedTodos = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(todo) {
-    var completed    = _.cloneDeep(todo);
-    completed.status = "completed";
-    localApi
-      .put(url + todo.id, completed)
-      .then(function () {
-        _.remove(self.activeTodos, todo);
-        self.completedTodos.push(completed);
-      });
-  }
-
-  function reactivate(todo) {
-    var activated    = _.cloneDeep(todo);
-    activated.status = "active";
-    localApi
-      .put(url + todo.id, activated)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-        self.activeTodos.push(activated);
-      });
   }
 }
 }());
