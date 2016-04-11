@@ -32,5 +32,5 @@ function config(restApiProvider, $mdThemingProvider) {
 }
 
 function run(httpApi) {
-  httpApi.setApiBaseUrl("http://localhost:4000/");
+  // httpApi.setApiBaseUrl("http://localhost:4000/");
 }

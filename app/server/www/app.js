@@ -37,7 +37,7 @@ function config(restApiProvider, $mdThemingProvider) {
 }
 
 function run(httpApi) {
-  httpApi.setApiBaseUrl("http://localhost:4000/");
+  // httpApi.setApiBaseUrl("http://localhost:4000/");
 }
 }());
 
@@ -182,6 +182,39 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 3/27/16.
+ */
+
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+angular
+  .module('portfolio.exchange', [])
+  .config(config);
+
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "exchange",
+    tabName    : "Exchange",
+    tabIndex   : 3,
+    state      : "portfolio.exchange",
+    templateUrl: "routes/exchange/exchange.html",
+    controller : "exchangeController as exchangeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 2/21/16.
  */
 /*========================================
@@ -218,13 +251,16 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 3/27/16.
+ * Created by hzou on 2/21/16.
  */
+/*========================================
+ =              APP START                =
+ ========================================*/
 
 
 config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
 angular
-  .module('portfolio.exchange', [])
+  .module('portfolio.projects', [])
   .config(config);
 
 function config($stateProvider, $urlRouterProvider, navProvider) {
@@ -237,12 +273,12 @@ function config($stateProvider, $urlRouterProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "exchange",
-    tabName    : "Exchange",
-    tabIndex   : 3,
-    state      : "portfolio.exchange",
-    templateUrl: "routes/exchange/exchange.html",
-    controller : "exchangeController as exchangeCtrl"
+    url        : "projects",
+    tabName    : "Projects",
+    tabIndex   : null,//3,
+    state      : "portfolio.projects",
+    templateUrl: "routes/projects/projects.html",
+    controller : "projectsController as projectsCtrl"
   }];
 }
 }());
@@ -311,42 +347,6 @@ function getStates() {
     state      : "portfolio.timesheet",
     templateUrl: "routes/timesheet/timesheet.html",
     controller : "timesheetController as timesheetCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/21/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
-angular
-  .module('portfolio.projects', [])
-  .config(config);
-
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : null,//3,
-    state      : "portfolio.projects",
-    templateUrl: "routes/projects/projects.html",
-    controller : "projectsController as projectsCtrl"
   }];
 }
 }());
@@ -803,7 +803,8 @@ function ChartController($scope, socket) {
   init();
 
   function init() {
-    socket.connect('ws://localhost:4000');
+    // socket.connect('ws://localhost:4000');
+    socket.connect();
     socket.on('connect', function () {
       socket.emit('startFeed', { duration: duration, frequency: frequency });
     });
@@ -872,37 +873,6 @@ function ChartController($scope, socket) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-
-(function () {
-  'use strict';
-
-  layoutController.$inject = ["nav", "$state"];
-  angular
-    .module('portfolio')
-    .controller('layoutController', layoutController);
-
-  function layoutController(nav, $state) {
-    var self      = this;
-    self.navItems = nav.getTabs();
-    self.openMenu = function ($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
-
-    self.isCurrentState = function isCurrentState(stateName) {
-      return stateName === $state.current.name;
-    };
-  }
-
-})();
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 3/27/16.
  */
 
@@ -965,6 +935,79 @@ function ExchangeController() {
       description: ["The perfect tablet for work and play.",
         "At just under 1.5lbs, and pre-loaded with Office 2013 RT,1 Surface 2 lets you carry less while you do more."]
     }];
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+
+(function () {
+  'use strict';
+
+  layoutController.$inject = ["nav", "$state"];
+  angular
+    .module('portfolio')
+    .controller('layoutController', layoutController);
+
+  function layoutController(nav, $state) {
+    var self      = this;
+    self.navItems = nav.getTabs();
+    self.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    self.isCurrentState = function isCurrentState(stateName) {
+      return stateName === $state.current.name;
+    };
+  }
+
+})();
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+'use strict';
+
+angular
+  .module('portfolio.projects')
+  .controller('projectsController', ProjectsController);
+
+function ProjectsController() {
+  var self      = this;
+  self.projects = getProjects();
+
+  /*========================================
+   =                 helpers                =
+   ========================================*/
+  function getProjects() {
+    return [
+      {
+        title      : "Timesheet",
+        img        : "",
+        description: "Angular timesheet"
+      },
+      {
+        title      : "Task Manager",
+        img        : "",
+        description: "Angular Task Manager"
+      },
+      {
+        title      : "To Do",
+        img        : "",
+        description: "Angular ToDo"
+      }
+    ];
   }
 }
 }());
@@ -1191,48 +1234,6 @@ function timesheetController(localApi) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-'use strict';
-
-angular
-  .module('portfolio.projects')
-  .controller('projectsController', ProjectsController);
-
-function ProjectsController() {
-  var self      = this;
-  self.projects = getProjects();
-
-  /*========================================
-   =                 helpers                =
-   ========================================*/
-  function getProjects() {
-    return [
-      {
-        title      : "Timesheet",
-        img        : "",
-        description: "Angular timesheet"
-      },
-      {
-        title      : "Task Manager",
-        img        : "",
-        description: "Angular Task Manager"
-      },
-      {
-        title      : "To Do",
-        img        : "",
-        description: "Angular ToDo"
-      }
-    ];
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/28/16.
  */
 
@@ -1323,40 +1324,6 @@ function TodoController(localApi) {
  */
 
 angular.module('portfolio.resume')
-  .directive('recommendation', recommendation);
-
-function recommendation() {
-  return {
-    restrict        : "E",
-    bindToController: {
-      rec: "=recommendation"
-    },
-    scope           : true,
-    link            : link,
-    controller      : controller,
-    controllerAs    : "recCtrl",
-    templateUrl     : "routes/resume/recommendation/recommendation.html"
-  };
-
-  function link(scope, elem, attrs, controller) {
-
-  }
-
-  function controller() {
-    var vm = self;
-
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 3/31/16.
- */
-
-angular.module('portfolio.resume')
   .directive('company', company);
 
 function company() {
@@ -1380,6 +1347,40 @@ function company() {
     angular.extend(vm, {
       dateformat: "MM-yy"
     });
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/31/16.
+ */
+
+angular.module('portfolio.resume')
+  .directive('recommendation', recommendation);
+
+function recommendation() {
+  return {
+    restrict        : "E",
+    bindToController: {
+      rec: "=recommendation"
+    },
+    scope           : true,
+    link            : link,
+    controller      : controller,
+    controllerAs    : "recCtrl",
+    templateUrl     : "routes/resume/recommendation/recommendation.html"
+  };
+
+  function link(scope, elem, attrs, controller) {
+
+  }
+
+  function controller() {
+    var vm = self;
+
   }
 }
 }());
