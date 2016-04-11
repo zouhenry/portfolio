@@ -1,27 +1,28 @@
 {
-  "gulpFiles"    : [
+  "gulpFiles"     : [
     "gulp/**.js"
   ],
-  "jsSrc"        : [
+  "jsSrc"         : [
     "app/src/**/*.module.js",
     "app/src/**/*.js"
   ],
-  "indexSrc"     : [
+  "indexSrc"      : [
     "app/src/index.html"
   ],
-  "indexSrc"     : [
+  "indexSrc"      : [
     "app/src/index.jade"
   ],
-  "jadeSrc"      : [
+  "jadeSrc"       : [
     "app/src/**/*.jade"
   ],
-  "sassSrc"      : [
+  "sassSrc"       : [
     "app/src/assets/**/*.scss"
   ],
-  "jsVendorSrc"  : [
+  "jsVendorSrc"   : [
     "app/bower_components/lodash/dist/lodash.js",
     "app/bower_components/angular/angular.js",
     "app/bower_components/angular-animate/angular-animate.js",
+    "app/bower_components/angular-sanitize/angular-sanitize.js",
     "app/bower_components/angular-aria/angular-aria.js",
     "app/bower_components/angular-messages/angular-messages.js",
     "app/bower_components/angular-material/angular-material.js",
@@ -31,20 +32,45 @@
     "app/bower_components/d3/d3.js",
     "node_modules/n3-charts/build/LineChart.js"
   ],
-  "fontsSrc"     : [
+  "fontsSrc"      : [
     "app/bower_components/font-awesome/fonts/*"
   ],
-  "imagesSrc": [
+  "imagesSrc"     : [
     "app/src/assets/images/*"
   ],
-  "destDir"      : "app/server/www/",
-  "destFontsDir" : "app/server/www/fonts/",
+  "destDir"       : "app/server/www/",
+  "destFontsDir"  : "app/server/www/fonts/",
   "destImagesDir" : "app/server/www/images/",
-  "gulpTasks"    : {
-    "build": ["clean", ["vendorjs", "appjs",
-      "index", "jade", "sass", "fonts", "images"]],
-    "deploy": ["clean", ["deployJs", "index", "jade", "sass", "fonts"]],
-    "default":["build", "watch"],
-    "serve": ["default", "server"]
+  "gulpTasks"     : {
+    "build"   : [
+      "clean",
+      [
+        "vendorjs",
+        "appjs",
+        "index",
+        "jade",
+        "sass",
+        "fonts",
+        "images"
+      ]
+    ],
+    "deploy"  : [
+      "clean",
+      [
+        "deployJs",
+        "index",
+        "jade",
+        "sass",
+        "fonts"
+      ]
+    ],
+    "default" : [
+      "build",
+      "watch"
+    ],
+    "serve"   : [
+      "default",
+      "server"
+    ]
   }
 }

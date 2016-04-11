@@ -1,20 +1,30 @@
 {
-  "education": [
+  "education"       : [
     {
-      "school": "University of Massachusetts, Amherst",
-      "degree": "Bachelor, Computer Science",
-      "year": "2003 - 2007",
-      "logo": "images/umass.png"
+      "school" : "University of Massachusetts, Amherst",
+      "degree" : "Bachelor, Computer Science",
+      "year"   : "2003 - 2007",
+      "logo"   : "images/umass.png"
     }
   ],
   "recommendations" : [
+    {
+      "user"         : "Julien Dutto",
+      "company"      : "Amadeus IT Group",
+      "title"        : "Team Lead Software engineer",
+      "linkedin"     : "https://www.linkedin.com/profile/view?id=AAEAAAElw_MB5KRr3V4GVLln8PS6PoH6CBe6Zx4&authType=name&authToken=zOuL",
+      "imgSrc"       : "https://media.licdn.com/mpr/mpr/shrinknp_100_100/p/1/005/073/157/37b5a12.jpg",
+      "message"      : "I have had the opportunity to work with Henry during a full year while he was reporting to me as a Senior Software engineer at Amadeus.<br/><br/>At this time, we were building an entire new ecosystem based on cutting-edge open-source technologies, and we needed people with strong technical skills as well as soft skills.<br/><br/>Henry met all the requirements and was key to our success by providing great recommendations while he was taking a great part in the design of our new architecture and system.<br/><br/>Apart from his very strong technical skills, Henry has proven to be a great mentor, by helping team members and newcomers while we were ramping-up our team.<br/><br/>Always aiming for perfection, Henry is constantly looking for enhancement, best practices and improvement while keeping a down-to-earth vision, that helps not loosing the focus on his objectives.<br/><br/>It's been a great pleasure working with Henry, and I'm happy to recommend him today",
+      "date"         : "April 11, 2016",
+      "relationship" : "Julien managed Henry at Amadeus IT Group"
+    },
     {
       "user"         : "David Katz",
       "company"      : "Projector PSA",
       "title"        : "User experience design leader",
       "linkedin"     : "https://www.linkedin.com/in/dkatz",
       "imgSrc"       : "https://media.licdn.com/mpr/mpr/shrinknp_100_100/p/4/005/045/29f/252a712.jpg",
-      "message"      : "Henry is a fantastic software engineer and was a pleasure to have on my team. Actually, software engineer doesn't reflect the depth of Henry's expertise. He's more of a software architect. I worked with Henry on a multi-year iterative effort to redesign and build a large, complex web application. Henry continually looked for ways to make the front-end architecture more scaleable, reduce the effort to implement features, improve reuse, and eliminate some fundamental technical problems. For example, on his own initiative, Henry researched and experimented with Marionette and StickIt, open source components that extend the capabilities of Backbone, the core Javascript MVC framework used in our application (and which have proved essential).",
+      "message"      : "Henry is a fantastic software engineer and was a pleasure to have on my team. Actually, software engineer doesn't reflect the depth of Henry's expertise. He's more of a software architect. I worked with Henry on a multi-year iterative effort to redesign and build a large, complex web application. Henry continually looked for ways to make the front-end architecture more scaleable, reduce the effort to implement features, improve reuse, and eliminate some fundamental technical problems. For example, on his own initiative, Henry researched and experimented with Marionette and StickIt, open source components that extend the capabilities of Backbone, the core Javascript MVC framework used in our application (and which have proved essential).<br/></br/>Henry also has a strong appetite for refactoring code. He always looks for ways to build components to support common user interface patterns, which reduces implementation effort and bugs. Finally, Henry is a terrific teammate -- he's always looking to share knowledge (in addition to informal knowledge sharing, Henry instituted a weekly lunch-and-learn program) and help new team members get up to speed.",
       "date"         : "February 23, 2014",
       "relationship" : "David managed Henry at Projector PSA"
     },
@@ -24,7 +34,7 @@
       "title"        : "Director of Engineering",
       "linkedin"     : "https://www.linkedin.com/in/dmitri-fradkin-9100442",
       "imgSrc"       : "https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/076/2c2/35d549c.jpg",
-      "message"      : "Henry is independent problem solver with a great understanding of cutting edge technologies and web development principals. Henry is passionate about work he does every day and motivated by success of the product he developed. Over the past two years Henry worked on multiple web applications, researching and developing complex user interfaces and services for TriZetto core architecture components. While working on the projects he constantly looked at opportunities to improve existing development methods and frameworks. When Henry was asked to work on bringing offshore resources to the team, Henry went above and beyond to make sure the knowledge transition was smooth and the new team was enabled in shortest period possible.",
+      "message"      : "Henry is passionate about work he does every day and motivated by success of the product he developed. Over the past two years Henry worked on multiple web applications, researching and developing complex user interfaces and services for TriZetto core architecture components. While working on the projects he constantly looked at opportunities to improve existing development methods and frameworks.<br/>When Henry was asked to work on bringing offshore resources to the team, Henry went above and beyond to make sure the knowledge transition was smooth and the new team was enabled in shortest period possible.",
       "date"         : "May 9, 2011",
       "relationship" : "Dmitri managed Henry at The TriZetto Group"
     },
@@ -34,7 +44,7 @@
       "title"        : "Director of Engineering",
       "linkedin"     : "https://www.linkedin.com/in/marcos-elugardo-37ba348",
       "imgSrc"       : "https://media.licdn.com/mpr/mpr/shrinknp_100_100/p/8/005/017/010/2fe75f9.jpg",
-      "message"      : "I have worked with Henry for a year and have constantly been impressed with his approach to his job. His love for the field, his adaptability and his commitment to meeting deadlines have all stood out to me above other colleagues I have worked with in the past. He loves his work and is always bring forth new ideas or bits of information he has found while reading about development. He is quick to offer help when needed and often has a fresh perspective that advances the task at hand. Always open to input, Henry is not afraid to look back at his code and see where it can be improved, again showing his interest in coding as something he can take pride in. In addition to this excitement for engineering, I have been surprised to see how quickly Henry was able to become a valuable contributor to our team. After a very short time, he was given entire projects to build with little guidance and was able to deliver quality work by the deadline. He was available to QA when needed and delivered tools to our customers that have enabled them to be successful. As hinted to above, Henry is committed to the deadline, but not at the cot of quality. When needed, he willingly works late or on the weekends, not because he is asked to, but because he cares about what he produces. He could easily meet his deadlines with half baked solutions, but instead he goes the extra mile to ensure what he delivers is quality. If you are considering him, I can’t emphasize enough how valuable he will quickly become to your team or company. I would gladly work with Henry again knowing with confidence that I can rely on him to accomplish and even exceed the goals set before him.",
+      "message"      : "I have worked with Henry for a year and have constantly been impressed with his approach to his job. His love for the field, his adaptability and his commitment to meeting deadlines have all stood out to me above other colleagues I have worked with in the past. He loves his work and is always bring forth new ideas or bits of information he has found while reading about development. He is quick to offer help when needed and often has a fresh perspective that advances the task at hand. Always open to input, Henry is not afraid to look back at his code and see where it can be improved, again showing his interest in coding as something he can take pride in.<br/><br/>In addition to this excitement for engineering, I have been surprised to see how quickly Henry was able to become a valuable contributor to our team. After a very short time, he was given entire projects to build with little guidance and was able to deliver quality work by the deadline. He was available to QA when needed and delivered tools to our customers that have enabled them to be successful.<br/><br/>As hinted to above, Henry is committed to the deadline, but not at the cot of quality. When needed, he willingly works late or on the weekends, not because he is asked to, but because he cares about what he produces. He could easily meet his deadlines with half baked solutions, but instead he goes the extra mile to ensure what he delivers is quality.<br/><br/>If you are considering him, I can’t emphasize enough how valuable he will quickly become to your team or company. I would gladly work with Henry again knowing with confidence that I can rely on him to accomplish and even exceed the goals set before him.",
       "date"         : "May 12, 2010",
       "relationship" : "Marcos managed Henry indirectly at The TriZetto Group"
     }
@@ -53,9 +63,7 @@
           "duties"       : [
             "Leading InterSystem's Angular Framework team",
             "Main contributor to InterSystem's Angular Framework",
-            "Mentored teammates with regular training sessions",
-            "Mentoring and guiding Junior and Veteran Engineers",
-            "making shit more efficient by creating "
+            "Mentoring and guiding Junior and Veteran Engineers"
           ],
           "technologies" : [
             "AngularJs",

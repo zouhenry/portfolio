@@ -12,8 +12,9 @@
       'portfolio.todo',
       'portfolio.timesheet',
       'portfolio.resume',
-      'portfolio.chart',
-      'portfolio.exchange'
+      'portfolio.chart'
+      // ,
+      // 'portfolio.exchange'
     ]);
 
 })();
