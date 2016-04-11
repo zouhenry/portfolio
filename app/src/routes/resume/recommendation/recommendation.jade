@@ -11,4 +11,4 @@
       li {{recCtrl.rec.date}}
       li {{recCtrl.rec.relationship}}
   .layout-row
-    blockquote.rec-text {{recCtrl.rec.message}}
+    blockquote.rec-text(ng-bind-html="recCtrl.rec.message")

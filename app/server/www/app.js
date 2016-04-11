@@ -9,8 +9,10 @@
  ========================================*/
 
 config.$inject = ["restApiProvider", "$mdThemingProvider"];
+run.$inject = ["httpApi"];
 angular
   .module('portfolio', [
+    'ngSanitize',
     'ui.router',
     'ngMaterial',
     'ipsum',
@@ -25,12 +27,17 @@ angular
     //ui-router states/routes
     'portfolio.routes'
   ])
-  .config(config);
+  .config(config)
+  .run(run);
 
 function config(restApiProvider, $mdThemingProvider) {
   restApiProvider.set('httpApi');
   $mdThemingProvider.theme('default')
     .primaryPalette('light-blue');
+}
+
+function run(httpApi) {
+  httpApi.setApiBaseUrl("http://localhost:4000/");
 }
 }());
 
@@ -51,8 +58,9 @@ function config(restApiProvider, $mdThemingProvider) {
       'portfolio.todo',
       'portfolio.timesheet',
       'portfolio.resume',
-      'portfolio.chart',
-      'portfolio.exchange'
+      'portfolio.chart'
+      // ,
+      // 'portfolio.exchange'
     ]);
 
 })();
@@ -174,6 +182,42 @@ function getStates() {
 "use strict";
 
 /**
+ * Created by hzou on 2/21/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider", "$urlRouterProvider"];
+angular
+  .module('portfolio.layout', [])
+  .config(config);
+
+
+function config($stateProvider, navProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('', '/resume');
+  $urlRouterProvider.when('/', '/resume');
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "/",
+    state      : "portfolio",
+    templateUrl: "routes/layout/layout.html",
+    controller : "layoutController as layoutCtrl"
+  }]; 
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 3/27/16.
  */
 
@@ -207,22 +251,18 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 2/21/16.
+ * Created by hzou on 2/27/16.
  */
 /*========================================
  =              APP START                =
  ========================================*/
 
-config.$inject = ["$stateProvider", "navProvider", "$urlRouterProvider"];
+config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.layout', [])
+  .module('portfolio.resume', [])
   .config(config);
 
-
-function config($stateProvider, navProvider, $urlRouterProvider) {
-  $urlRouterProvider.when('', '/resume');
-  $urlRouterProvider.when('/', '/resume');
-
+function config($stateProvider, navProvider) {
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
     navProvider.register(state);
@@ -231,11 +271,47 @@ function config($stateProvider, navProvider, $urlRouterProvider) {
 
 function getStates() {
   return [{
-    url        : "/",
-    state      : "portfolio",
-    templateUrl: "routes/layout/layout.html",
-    controller : "layoutController as layoutCtrl"
-  }]; 
+    url        : "resume",
+    tabName    : "Resume",
+    tabIndex   : 1,
+    state      : "portfolio.resume",
+    templateUrl: "routes/resume/resume.html",
+    controller : "resumeController as resumeCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.timesheet', [])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "timesheet",
+    tabName    : "TimeSheet",
+    tabIndex   : 2,
+    state      : "portfolio.timesheet",
+    templateUrl: "routes/timesheet/timesheet.html",
+    controller : "timesheetController as timesheetCtrl"
+  }];
 }
 }());
 
@@ -287,40 +363,6 @@ function getStates() {
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.resume', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "resume",
-    tabName    : "Resume",
-    tabIndex   : 1,
-    state      : "portfolio.resume",
-    templateUrl: "routes/resume/resume.html",
-    controller : "resumeController as resumeCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
   .module('portfolio.todo', [])
   .config(config);
 
@@ -339,40 +381,6 @@ function getStates() {
     state      : "portfolio.todo",
     templateUrl: "routes/todo/todo.html",
     controller : "todoController as todoCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
-  .module('portfolio.timesheet', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "timesheet",
-    tabName    : "TimeSheet",
-    tabIndex   : 2,
-    state      : "portfolio.timesheet",
-    templateUrl: "routes/timesheet/timesheet.html",
-    controller : "timesheetController as timesheetCtrl"
   }];
 }
 }());
@@ -417,27 +425,37 @@ angular
   .factory('httpApi', httpApi);
 
 function httpApi($http) {
+  var apiBaseUrl = "";
   return {
-    get     : get,
-    post    : post,
-    put     : put,
-    "delete": remove
+    setApiBaseUrl: setApiBaseUrl,
+    get          : get,
+    post         : post,
+    put          : put,
+    "delete"     : remove
   };
 
+  function setApiBaseUrl(url) {
+    apiBaseUrl = url;
+  }
+
+  function makeUrl(url) {
+    return apiBaseUrl + url;
+  }
+
   function get(url, opts) {
-    return $http.get(url, opts).then(getData);
+    return $http.get(makeUrl(url), opts).then(getData);
   }
 
   function post(url, data, opts) {
-    return $http.post(url, data, opts).then(getData);
+    return $http.post(makeUrl(url), data, opts).then(getData);
   }
 
   function put(url, data, opts) {
-    return $http.post(url, data, opts).then(getData);
+    return $http.post(makeUrl(url), data, opts).then(getData);
   }
 
   function remove(url, opts) {
-    return $http.delete(url, opts).then(getData);
+    return $http.delete(makeUrl(url), opts).then(getData);
   }
 
 
@@ -785,7 +803,7 @@ function ChartController($scope, socket) {
   init();
 
   function init() {
-    socket.connect();
+    socket.connect('ws://localhost:4000');
     socket.on('connect', function () {
       socket.emit('startFeed', { duration: duration, frequency: frequency });
     });
@@ -848,6 +866,37 @@ function ChartController($scope, socket) {
     };
   }
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+
+(function () {
+  'use strict';
+
+  layoutController.$inject = ["nav", "$state"];
+  angular
+    .module('portfolio')
+    .controller('layoutController', layoutController);
+
+  function layoutController(nav, $state) {
+    var self      = this;
+    self.navItems = nav.getTabs();
+    self.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    self.isCurrentState = function isCurrentState(stateName) {
+      return stateName === $state.current.name;
+    };
+  }
+
+})();
 }());
 
 ;(function() {
@@ -924,79 +973,6 @@ function ExchangeController() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-
-(function () {
-  'use strict';
-
-  layoutController.$inject = ["nav", "$state"];
-  angular
-    .module('portfolio')
-    .controller('layoutController', layoutController);
-
-  function layoutController(nav, $state) {
-    var self      = this;
-    self.navItems = nav.getTabs();
-    self.openMenu = function ($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
-
-    self.isCurrentState = function isCurrentState(stateName) {
-      return stateName === $state.current.name;
-    };
-  }
-
-})();
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-'use strict';
-
-angular
-  .module('portfolio.projects')
-  .controller('projectsController', ProjectsController);
-
-function ProjectsController() {
-  var self      = this;
-  self.projects = getProjects();
-
-  /*========================================
-   =                 helpers                =
-   ========================================*/
-  function getProjects() {
-    return [
-      {
-        title      : "Timesheet",
-        img        : "",
-        description: "Angular timesheet"
-      },
-      {
-        title      : "Task Manager",
-        img        : "",
-        description: "Angular Task Manager"
-      },
-      {
-        title      : "To Do",
-        img        : "",
-        description: "Angular ToDo"
-      }
-    ];
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/28/16.
  */
 
@@ -1021,92 +997,6 @@ function ResumeController(restApi) {
       });
   }
 
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/28/16.
- */
-
-TodoController.$inject = ["localApi"];
-angular
-  .module('portfolio.todo')
-  .controller('todoController', TodoController);
-
-function TodoController(localApi) {
-  var self = this;
-  var url  = 'api/todo/';
-
-  _.extend(self, {
-    activeTodos   : [],
-    completedTodos: [],
-    reactivate    : reactivate,
-    archive       : archive,
-    create        : create,
-    get           : get,
-    remove        : remove
-  });
-
-  (function init() {
-    get();
-  }());
-
-  /*========================================
-   =             implementations           =
-   ========================================*/
-
-  function create() {
-    var todo    = { description: self.newTodo };
-    todo.status = 'active';
-    localApi
-      .post(url, todo)
-      .then(function (data) {
-        self.activeTodos.push(data);
-        self.newTodo = "";
-      });
-  }
-
-  function remove(todo) {
-    localApi
-      .delete(url + todo.id)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-      });
-  }
-
-  function get() {
-    localApi
-      .get(url)
-      .then(function (data) {
-        self.activeTodos    = _.filter(data, { status: 'active' });
-        self.completedTodos = _.filter(data, { status: 'completed' });
-      });
-  }
-
-  function archive(todo) {
-    var completed    = _.cloneDeep(todo);
-    completed.status = "completed";
-    localApi
-      .put(url + todo.id, completed)
-      .then(function () {
-        _.remove(self.activeTodos, todo);
-        self.completedTodos.push(completed);
-      });
-  }
-
-  function reactivate(todo) {
-    var activated    = _.cloneDeep(todo);
-    activated.status = "active";
-    localApi
-      .put(url + todo.id, activated)
-      .then(function () {
-        _.remove(self.completedTodos, todo);
-        self.activeTodos.push(activated);
-      });
-  }
 }
 }());
 
@@ -1301,33 +1191,126 @@ function timesheetController(localApi) {
 "use strict";
 
 /**
- * Created by hzou on 3/31/16.
+ * Created by hzou on 2/27/16.
  */
 
-angular.module('portfolio.resume')
-  .directive('company', company);
+'use strict';
 
-function company() {
-  return {
-    restrict        : "E",
-    bindToController: {
-      company: "="
-    },
-    scope           : true,
-    link            : link,
-    controller      : controller,
-    controllerAs    : "companyCtrl",
-    templateUrl     : "routes/resume/company/company.html"
-  };
+angular
+  .module('portfolio.projects')
+  .controller('projectsController', ProjectsController);
 
-  function link(scope, elem, attrs, controller) {
+function ProjectsController() {
+  var self      = this;
+  self.projects = getProjects();
+
+  /*========================================
+   =                 helpers                =
+   ========================================*/
+  function getProjects() {
+    return [
+      {
+        title      : "Timesheet",
+        img        : "",
+        description: "Angular timesheet"
+      },
+      {
+        title      : "Task Manager",
+        img        : "",
+        description: "Angular Task Manager"
+      },
+      {
+        title      : "To Do",
+        img        : "",
+        description: "Angular ToDo"
+      }
+    ];
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+TodoController.$inject = ["localApi"];
+angular
+  .module('portfolio.todo')
+  .controller('todoController', TodoController);
+
+function TodoController(localApi) {
+  var self = this;
+  var url  = 'api/todo/';
+
+  _.extend(self, {
+    activeTodos   : [],
+    completedTodos: [],
+    reactivate    : reactivate,
+    archive       : archive,
+    create        : create,
+    get           : get,
+    remove        : remove
+  });
+
+  (function init() {
+    get();
+  }());
+
+  /*========================================
+   =             implementations           =
+   ========================================*/
+
+  function create() {
+    var todo    = { description: self.newTodo };
+    todo.status = 'active';
+    localApi
+      .post(url, todo)
+      .then(function (data) {
+        self.activeTodos.push(data);
+        self.newTodo = "";
+      });
   }
 
-  function controller() {
-    var vm = self;
-    angular.extend(vm, {
-      dateformat: "MM-yy"
-    });
+  function remove(todo) {
+    localApi
+      .delete(url + todo.id)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+      });
+  }
+
+  function get() {
+    localApi
+      .get(url)
+      .then(function (data) {
+        self.activeTodos    = _.filter(data, { status: 'active' });
+        self.completedTodos = _.filter(data, { status: 'completed' });
+      });
+  }
+
+  function archive(todo) {
+    var completed    = _.cloneDeep(todo);
+    completed.status = "completed";
+    localApi
+      .put(url + todo.id, completed)
+      .then(function () {
+        _.remove(self.activeTodos, todo);
+        self.completedTodos.push(completed);
+      });
+  }
+
+  function reactivate(todo) {
+    var activated    = _.cloneDeep(todo);
+    activated.status = "active";
+    localApi
+      .put(url + todo.id, activated)
+      .then(function () {
+        _.remove(self.completedTodos, todo);
+        self.activeTodos.push(activated);
+      });
   }
 }
 }());
@@ -1362,6 +1345,41 @@ function recommendation() {
   function controller() {
     var vm = self;
 
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/31/16.
+ */
+
+angular.module('portfolio.resume')
+  .directive('company', company);
+
+function company() {
+  return {
+    restrict        : "E",
+    bindToController: {
+      company: "="
+    },
+    scope           : true,
+    link            : link,
+    controller      : controller,
+    controllerAs    : "companyCtrl",
+    templateUrl     : "routes/resume/company/company.html"
+  };
+
+  function link(scope, elem, attrs, controller) {
+  }
+
+  function controller() {
+    var vm = self;
+    angular.extend(vm, {
+      dateformat: "MM-yy"
+    });
   }
 }
 }());

@@ -7,6 +7,7 @@
 
 angular
   .module('portfolio', [
+    'ngSanitize',
     'ui.router',
     'ngMaterial',
     'ipsum',
