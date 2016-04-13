@@ -5,7 +5,7 @@
 module.exports = {
   isGulpTask: true,
   init      : init,
-  taskName: 'jade'
+  taskName  : 'jade'
 };
 
 function init(gulp, plugins, config, _, errorFn) {
@@ -18,6 +18,6 @@ function init(gulp, plugins, config, _, errorFn) {
         standalone: true
       }))
       .pipe(plugins.filelog())
-      .pipe(gulp.dest(config.destDir));
+      .pipe(gulp.dest(config.destDir + "/js/"));
   });
 }

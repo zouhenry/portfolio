@@ -13387,6 +13387,16 @@ md-card.exchange-item md-card-content ul li {
       width: 100%; }
       .timesheet .time-line .day input.ng-touched:not(.ng-pristine) {
         border-bottom: 2px solid green; }
+    .timesheet .time-line .day.week {
+      background-color: #888;
+      border-radius: 4rem;
+      color: white;
+      font-size: 2rem;
+      height: 3.7rem;
+      margin-right: -0.8rem;
+      padding: 1rem;
+      text-align: center;
+      width: 3.5rem; }
 
 html {
   height: inherit; }
