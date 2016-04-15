@@ -1,6 +1,6 @@
 #todo.layout-column.center-panel
   md-card
-    md-card-header.center
+    md-card-header.text-center
       | Pending
     md-card-content
       md-list
@@ -16,7 +16,7 @@
               label write a new task and press enter...
               input(autofocus type="text" ng-model="todoCtrl.newTodo" autocomplete="off")
   md-card(ng-if="todoCtrl.completedTodos.length > 0")
-    md-card-header.center
+    md-card-header.text-center
       | Completed
     md-card-content
       md-list

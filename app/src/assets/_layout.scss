@@ -6,10 +6,13 @@ html {
 }
 
 body {
-  background-color: #EFF0F1;
   color: $font-color;
 }
 
+.text-center {
+  text-align: center;
+  display: inline-block;
+}
 
 .center-panel {
   max-width: $page-width;
@@ -26,7 +29,15 @@ body {
   max-width: 60rem;
 }
 
-
 input[type="text"] {
   padding: 0.5rem;
+}
+
+.section {
+  border-radius: 4px;
+  margin-bottom: 16px;
+  -webkit-transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+  transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+  position: relative;
+  padding-bottom: 0;
 }

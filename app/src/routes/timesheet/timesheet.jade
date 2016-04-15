@@ -1,4 +1,4 @@
-.timesheet
+section.section.timesheet.md-whiteframe-z2
   .time-line
     .name
     .day(ng-repeat="day in timesheetCtrl.dailyTotals track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
@@ -36,5 +36,5 @@
               .name {{task.name}}
                 .small {{task.description}}
               .day(ng-repeat="day in task.days track by $index" ng-class="{'non-working': $index === 0 || $index === 6}")
-                input(type="numeric" ng-model="day.hours"
+                input(type="numeric" ng-model="day.hours" val="day.hours | currency"
                 ng-change="timesheetCtrl.updateTotals($index, day, project, company, type)")

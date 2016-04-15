@@ -5,6 +5,8 @@ $header-name-height: 7rem;
   top: 0rem;
   border-radius: $header-name-height;
   margin: 0.5rem;
+  margin-left: 0;
+
   img {
     border-radius: $header-name-height;
     width: 12rem;
@@ -22,12 +24,12 @@ $header-name-height: 7rem;
   text-transform: uppercase;
   font-weight: 200;
   .name {
+    border-bottom: 2px dotted gray;
     font-size: 1.75rem;
-    text-transform: uppercase;
+    height: $header-name-height;
     letter-spacing: -2px;
     line-height: $header-name-height;
-    height: $header-name-height;
-    background-color: white;
+    text-transform: uppercase;
 
     .title {
       padding-left: 0.5rem;
