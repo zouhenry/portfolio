@@ -13128,8 +13128,11 @@ html {
       font-size: 15px; } }
 
 body {
-  background-color: #EFF0F1;
   color: #666; }
+
+.text-center {
+  text-align: center;
+  display: inline-block; }
 
 .center-panel {
   max-width: 60rem;
@@ -13143,11 +13146,20 @@ body {
 input[type="text"] {
   padding: 0.5rem; }
 
+.section {
+  border-radius: 4px;
+  margin-bottom: 16px;
+  -webkit-transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+  transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+  position: relative;
+  padding-bottom: 0; }
+
 .avatar {
   position: absolute;
   top: 0rem;
   border-radius: 7rem;
-  margin: 0.5rem; }
+  margin: 0.5rem;
+  margin-left: 0; }
   .avatar img {
     border-radius: 7rem;
     width: 12rem;
@@ -13162,12 +13174,12 @@ input[type="text"] {
   text-transform: uppercase;
   font-weight: 200; }
   #header .name {
+    border-bottom: 2px dotted gray;
     font-size: 1.75rem;
-    text-transform: uppercase;
+    height: 7rem;
     letter-spacing: -2px;
     line-height: 7rem;
-    height: 7rem;
-    background-color: white; }
+    text-transform: uppercase; }
     #header .name .title {
       padding-left: 0.5rem; }
     @media screen and (max-width: 600px) {
@@ -13345,50 +13357,49 @@ md-card.exchange-item md-card-content ul li {
       padding-left: 0.5rem;
       color: #e0e0e0; }
 
-.timesheet .time-line {
-  display: flex;
-  flex-direction: row;
-  align-content: space-between;
-  align-items: center;
-  font-weight: 500;
-  padding: 0 0.5rem; }
-  .timesheet .time-line.type {
-    background-color: gray;
-    color: black; }
-  .timesheet .time-line.company {
-    border-bottom: 1px solid #999;
-    border-top: 1px solid #999;
-    background-color: lightgray;
-    color: #333333; }
-  .timesheet .time-line .name {
-    flex: 3;
-    padding-left: 0.5rem; }
-    .timesheet .time-line .name .small {
-      font-weight: 200;
-      color: gray; }
-  .timesheet .time-line .day {
-    padding: 0.5rem;
-    margin: 0.5rem;
-    max-width: 5rem;
-    flex: 1;
-    text-align: right; }
-    .timesheet .time-line .day .dow, .timesheet .time-line .day .total {
-      font-weight: 700;
-      font-size: 1.25rem; }
-    .timesheet .time-line .day.non-working {
-      color: #999; }
-      .timesheet .time-line .day.non-working input {
-        color: #999; }
-    .timesheet .time-line .day input {
-      border: 1px solid #bbb;
-      border-bottom: 2px solid #bbb;
+.timesheet {
+  padding: 1rem; }
+  .timesheet .time-line {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    padding: 0 0.5rem; }
+    .timesheet .time-line.type {
+      background-color: gray;
+      color: black; }
+    .timesheet .time-line.company {
+      border-bottom: 1px solid #999;
+      border-top: 1px solid #999;
+      background-color: lightgray;
+      color: #333333; }
+    .timesheet .time-line .name {
+      flex: 3;
+      padding-left: 0.5rem; }
+      .timesheet .time-line .name .small {
+        font-weight: 200;
+        color: gray; }
+    .timesheet .time-line .day {
       padding: 0.5rem;
-      text-align: right;
-      width: 100%; }
-      .timesheet .time-line .day input.ng-touched:not(.ng-pristine) {
-        border-bottom: 2px solid green; }
-
-html {
-  height: inherit; }
+      margin: 0.5rem;
+      max-width: 5rem;
+      flex: 1;
+      text-align: right; }
+      .timesheet .time-line .day .dow, .timesheet .time-line .day .total {
+        font-weight: 700;
+        font-size: 1.25rem; }
+      .timesheet .time-line .day.non-working {
+        color: #999; }
+        .timesheet .time-line .day.non-working input {
+          color: #999; }
+      .timesheet .time-line .day input {
+        border: 1px solid #bbb;
+        border-bottom: 2px solid #bbb;
+        padding: 0.5rem;
+        text-align: right;
+        width: 100%; }
+        .timesheet .time-line .day input.ng-touched:not(.ng-pristine) {
+          border-bottom: 2px solid green; }
 
 /*# sourceMappingURL=app.css.map */
