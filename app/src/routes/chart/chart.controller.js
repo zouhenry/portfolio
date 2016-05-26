@@ -66,7 +66,7 @@ function ChartController($scope, socket) {
           key    : "mph",
           label  : "Speed (MPH)",
           color  : "#3333ff",
-          type   : ['line', 'area'],
+          type   : ['line', 'area', 'column'],
           id     : 'speed'
         }
       ],

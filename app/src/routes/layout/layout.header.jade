@@ -7,9 +7,9 @@
       md-button.md-icon-button(ng-click='layoutCtrl.openMenu($mdOpenMenu, $event)')
         md-icon.fa.fa-2x(md-font-icon='fa-bars')
       md-menu-content(width='4')
-        md-menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':false" ui-sref="{{item.state}}")
+        md-menu-item(ng-repeat="item in :: layoutCtrl.navItems | orderBy:'tabIndex':false" ui-sref="{{::item.state}}")
           md-button
-            | {{item.tabName}}
+            | {{::item.tabName}}
         md-menu-divider
         md-menu-item
           a.md-button(target="_blank" href="https://www.linkedin.com/in/zouhenry" title="Henry Zou on Linkedin")
@@ -27,8 +27,8 @@
     img(style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png")
   .right
     .menu.layout-row(hide-xs)
-      .menu-item(ng-repeat="item in layoutCtrl.navItems | orderBy:'tabIndex':false")
-        a(ui-sref="{{item.state}}" ng-class="{active: layoutCtrl.isCurrentState(item.state)}") {{item.tabName}}
+      .menu-item(ng-repeat="item in :: layoutCtrl.navItems | orderBy:'tabIndex':false")
+        a(ui-sref="{{::item.state}}" ng-class="{active: layoutCtrl.isCurrentState(item.state)}") {{::item.tabName}}
     small.title(hide-gt-xs) Front End Engineer
 .avatar
-  img(src="images/portfolio.jpg")
+  //img(src="images/portfolio.jpg")

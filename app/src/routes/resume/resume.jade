@@ -17,15 +17,15 @@
     md-card
       md-card-header Recommendations
       md-card-content
-        .recommendation(ng-repeat="recommendation in resumeCtrl.resume.recommendations track by $index")
+        .recommendation(ng-repeat="recommendation in :: resumeCtrl.resume.recommendations track by $index")
           recommendation(recommendation="recommendation")
   .education
     md-card
       md-card-header Education
       md-card-content.layout-column
-        .school.layout-row(ng-repeat="degree in resumeCtrl.resume.education")
+        .school.layout-row(ng-repeat="degree in :: resumeCtrl.resume.education")
           .flex
-            .school-name {{ degree.school }}
-            .school-degree {{ degree.degree }}
-            .school-year {{ degree.year }}
-          img.school-logo(ng-src="{{degree.logo}}")
+            .school-name {{:: degree.school }}
+            .school-degree {{:: degree.degree }}
+            .school-year {{ ::degree.year }}
+          img.school-logo(ng-src="{{::degree.logo}}")

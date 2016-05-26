@@ -2,13 +2,13 @@
    Created by hzou on 3/31/16.
 .layout-column
   .layout-row.user
-    a(ng-href="{{recCtrl.rec.linkedin}}" target="_blank")
-      img.user-img(ng-src="{{recCtrl.rec.imgSrc}}")
+    a(ng-href="{{::recCtrl.rec.linkedin}}" target="_blank")
+      img.user-img(ng-src="{{::recCtrl.rec.imgSrc}}")
     ul.user-info
       li.user-link
-        a(ng-href="{{recCtrl.rec.linkedin}}" target="_blank") {{recCtrl.rec.user}}
-      li {{recCtrl.rec.title}}
-      li {{recCtrl.rec.date}}
-      li {{recCtrl.rec.relationship}}
+        a(ng-href="{{::recCtrl.rec.linkedin}}" target="_blank") {{::recCtrl.rec.user}}
+      li {{::recCtrl.rec.title}}
+      li {{::recCtrl.rec.date}}
+      li {{::recCtrl.rec.relationship}}
   .layout-row
     blockquote.rec-text(ng-bind-html="recCtrl.rec.message")

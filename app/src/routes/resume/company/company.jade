@@ -3,22 +3,22 @@
 
 md-card.company
   md-card-header.layout-xs-column.layout-row.header
-    .title-company.flex {{companyCtrl.company.title}} at&nbsp;
-      a(href="{{companyCtrl.company.companyUrl}}" target="_blank") {{companyCtrl.company.companyName}}
-    .time-frame {{companyCtrl.company.startDate | date:'MMM yyyy'}} -&nbsp;
-      span(ng-if="companyCtrl.company.endDate") {{companyCtrl.company.endDate | date:'MMM yyyy'}}
+    .title-company.flex {{::companyCtrl.company.title}} at&nbsp;
+      a(href="{{::companyCtrl.company.companyUrl}}" target="_blank") {{::companyCtrl.company.companyName}}
+    .time-frame {{::companyCtrl.company.startDate | date:'MMM yyyy'}} -&nbsp;
+      span(ng-if="companyCtrl.company.endDate") {{::companyCtrl.company.endDate | date:'MMM yyyy'}}
       span(ng-if="!companyCtrl.company.endDate") Present
   md-card-title
-    p.company-description {{companyCtrl.company.description}}
+    p.company-description {{::companyCtrl.company.description}}
   md-card-content
     .position.flex(ng-repeat="position in companyCtrl.company.positions track by $index")
-      .position-role Role: {{position.role}}
+      .position-role Role: {{::position.role}}
       ul.duties
         li.duty(ng-repeat="duty in position.duties track by $index")
-          | {{duty}}
+          | {{::duty}}
       ul.techs
         li.tech(ng-repeat="tech in position.technologies track by $index")
-          | {{tech}}
+          | {{::tech}}
       .summary(ng-if="position.summary")
-        blockquote {{position.summary.quote}}
-          cite {{position.summary.cite}}
+        blockquote {{::position.summary.quote}}
+          cite {{::position.summary.cite}}

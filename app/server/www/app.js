@@ -92,22 +92,22 @@ angular
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 3/19/16.
  */
 
-angular
-  .module('portfolio.services', []);
+
+angular.module('portfolio.socket', []);
 }());
 
 ;(function() {
 "use strict";
 
 /**
- * Created by hzou on 3/19/16.
+ * Created by hzou on 2/27/16.
  */
 
-
-angular.module('portfolio.socket', []);
+angular
+  .module('portfolio.services', []);
 }());
 
 ;(function() {
@@ -140,6 +140,39 @@ function getStates() {
     state      : "portfolio.about",
     templateUrl: "routes/about/about.html",
     controller : "aboutController as aboutCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/27/16.
+ */
+
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+angular
+  .module('portfolio.exchange', [])
+  .config(config);
+
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "exchange",
+    tabName    : "Exchange",
+    tabIndex   : 3,
+    state      : "portfolio.exchange",
+    templateUrl: "routes/exchange/exchange.html",
+    controller : "exchangeController as exchangeCtrl"
   }];
 }
 }());
@@ -182,53 +215,18 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 3/27/16.
- */
-
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
-angular
-  .module('portfolio.exchange', [])
-  .config(config);
-
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "exchange",
-    tabName    : "Exchange",
-    tabIndex   : 3,
-    state      : "portfolio.exchange",
-    templateUrl: "routes/exchange/exchange.html",
-    controller : "exchangeController as exchangeCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/21/16.
+ * Created by hzou on 2/27/16.
  */
 /*========================================
  =              APP START                =
  ========================================*/
 
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.projects', [])
+  .module('portfolio.resume', [])
   .config(config);
 
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
+function config($stateProvider, navProvider) {
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
     navProvider.register(state);
@@ -237,12 +235,12 @@ function config($stateProvider, $urlRouterProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : null,//3,
-    state      : "portfolio.projects",
-    templateUrl: "routes/projects/projects.html",
-    controller : "projectsController as projectsCtrl"
+    url        : "resume",
+    tabName    : "Resume",
+    tabIndex   : 1,
+    state      : "portfolio.resume",
+    templateUrl: "routes/resume/resume.html",
+    controller : "resumeController as resumeCtrl"
   }];
 }
 }());
@@ -287,18 +285,20 @@ function getStates() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 2/21/16.
  */
 /*========================================
  =              APP START                =
  ========================================*/
 
-config.$inject = ["$stateProvider", "navProvider"];
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
 angular
-  .module('portfolio.resume', [])
+  .module('portfolio.projects', [])
   .config(config);
 
-function config($stateProvider, navProvider) {
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
   _.forEach(getStates(), function (state) {
     $stateProvider.state(state.state, state);
     navProvider.register(state);
@@ -307,12 +307,12 @@ function config($stateProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "resume",
-    tabName    : "Resume",
-    tabIndex   : 1,
-    state      : "portfolio.resume",
-    templateUrl: "routes/resume/resume.html",
-    controller : "resumeController as resumeCtrl"
+    url        : "projects",
+    tabName    : "Projects",
+    tabIndex   : null,//3,
+    state      : "portfolio.projects",
+    templateUrl: "routes/projects/projects.html",
+    controller : "projectsController as projectsCtrl"
   }];
 }
 }());
@@ -606,39 +606,6 @@ function localApi($window, $q) {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
-
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
-  });
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 3/19/16.
  */
 
@@ -690,6 +657,39 @@ function socket($log, $rootScope) {
     });
   }
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
 }());
 
 ;(function() {
@@ -780,99 +780,6 @@ function AboutController(restApi) {
 "use strict";
 
 /**
- * Created by hzou on 2/28/16.
- */
-
-ChartController.$inject = ["$scope", "socket"];
-angular
-  .module('portfolio.chart')
-  .controller('chartController', ChartController);
-
-function ChartController($scope, socket) {
-  var self      = this;
-  var duration  = 30;
-  var frequency = 1;
-  var ticks     = duration / frequency;
-
-  _.extend(self, {
-    data    : { dataset0: [] },
-    feeds: [],
-    options : getOptions()
-  });
-
-  init();
-
-  function init() {
-    // socket.connect('ws://localhost:4000');
-    socket.connect();
-    socket.on('connect', function () {
-      socket.emit('startFeed', { duration: duration, frequency: frequency });
-    });
-
-    socket.on('initialFeed', function (data) {
-      self.data.dataset0 = data;
-    });
-
-    socket.on('feed', function (data) {
-      if (self.data.dataset0.length >= ticks) {
-        self.data.dataset0.shift();
-      }
-      self.data.dataset0.push(data);
-      self.feeds.push(data);
-    });
-
-    $scope.$on('$destroy', function () {
-      socket.emit('stopFeed');
-      socket.disconnect();
-    });
-  }
-
-  function getOptions() {
-    return {
-      margin: {
-        top: 15
-      },
-      series: [
-        {
-          axis   : "y",
-          dataset: "dataset0",
-          key    : "bpm",
-          label  : "Heart Rate (BPM)",
-          color  : "#1f99a5",
-          type   : ['column'],
-          id     : 'hr'
-        },
-        {
-          axis   : "y",
-          dataset: "dataset0",
-          key    : "mph",
-          label  : "Speed (MPH)",
-          color  : "#3333ff",
-          type   : ['line', 'area'],
-          id     : 'speed'
-        }
-      ],
-      axes  : {
-        x: {
-          key       : "x",
-          ticks     : ticks,
-          ticksShift: {
-            x: -10
-          },
-          tickFormat: function (value, index) {
-            return ((ticks - 1) - (index % ticks)) * frequency + 's';
-          }
-        }
-      }
-    };
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 3/27/16.
  */
 
@@ -943,41 +850,123 @@ function ExchangeController() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 2/28/16.
  */
 
-'use strict';
-
+ChartController.$inject = ["$scope", "socket"];
 angular
-  .module('portfolio.projects')
-  .controller('projectsController', ProjectsController);
+  .module('portfolio.chart')
+  .controller('chartController', ChartController);
 
-function ProjectsController() {
+function ChartController($scope, socket) {
   var self      = this;
-  self.projects = getProjects();
+  var duration  = 30;
+  var frequency = 1;
+  var ticks     = duration / frequency;
 
-  /*========================================
-   =                 helpers                =
-   ========================================*/
-  function getProjects() {
-    return [
-      {
-        title      : "Timesheet",
-        img        : "",
-        description: "Angular timesheet"
-      },
-      {
-        title      : "Task Manager",
-        img        : "",
-        description: "Angular Task Manager"
-      },
-      {
-        title      : "To Do",
-        img        : "",
-        description: "Angular ToDo"
+  _.extend(self, {
+    data    : { dataset0: [] },
+    feeds: [],
+    options : getOptions()
+  });
+
+  init();
+
+  function init() {
+    // socket.connect('ws://localhost:4000');
+    socket.connect();
+    socket.on('connect', function () {
+      socket.emit('startFeed', { duration: duration, frequency: frequency });
+    });
+
+    socket.on('initialFeed', function (data) {
+      self.data.dataset0 = data;
+    });
+
+    socket.on('feed', function (data) {
+      if (self.data.dataset0.length >= ticks) {
+        self.data.dataset0.shift();
       }
-    ];
+      self.data.dataset0.push(data);
+      self.feeds.push(data);
+    });
+
+    $scope.$on('$destroy', function () {
+      socket.emit('stopFeed');
+      socket.disconnect();
+    });
   }
+
+  function getOptions() {
+    return {
+      margin: {
+        top: 15
+      },
+      series: [
+        {
+          axis   : "y",
+          dataset: "dataset0",
+          key    : "bpm",
+          label  : "Heart Rate (BPM)",
+          color  : "#1f99a5",
+          type   : ['column'],
+          id     : 'hr'
+        },
+        {
+          axis   : "y",
+          dataset: "dataset0",
+          key    : "mph",
+          label  : "Speed (MPH)",
+          color  : "#3333ff",
+          type   : ['line', 'area', 'column'],
+          id     : 'speed'
+        }
+      ],
+      axes  : {
+        x: {
+          key       : "x",
+          ticks     : ticks,
+          ticksShift: {
+            x: -10
+          },
+          tickFormat: function (value, index) {
+            return ((ticks - 1) - (index % ticks)) * frequency + 's';
+          }
+        }
+      }
+    };
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+ResumeController.$inject = ["restApi"];
+angular
+  .module('portfolio.resume')
+  .controller('resumeController', ResumeController);
+
+function ResumeController(restApi) {
+  var self = this;
+  var url  = 'api/resume/';
+
+  (function init() {
+    getResume();
+  }());
+
+  function getResume() {
+    restApi
+      .get(url)
+      .then(function (resume) {
+        self.resume = resume;
+      });
+  }
+
 }
 }());
 
@@ -1016,30 +1005,41 @@ function ProjectsController() {
 "use strict";
 
 /**
- * Created by hzou on 2/28/16.
+ * Created by hzou on 2/27/16.
  */
 
-ResumeController.$inject = ["restApi"];
+'use strict';
+
 angular
-  .module('portfolio.resume')
-  .controller('resumeController', ResumeController);
+  .module('portfolio.projects')
+  .controller('projectsController', ProjectsController);
 
-function ResumeController(restApi) {
-  var self = this;
-  var url  = 'api/resume/';
+function ProjectsController() {
+  var self      = this;
+  self.projects = getProjects();
 
-  (function init() {
-    getResume();
-  }());
-
-  function getResume() {
-    restApi
-      .get(url)
-      .then(function (resume) {
-        self.resume = resume;
-      });
+  /*========================================
+   =                 helpers                =
+   ========================================*/
+  function getProjects() {
+    return [
+      {
+        title      : "Timesheet",
+        img        : "",
+        description: "Angular timesheet"
+      },
+      {
+        title      : "Task Manager",
+        img        : "",
+        description: "Angular Task Manager"
+      },
+      {
+        title      : "To Do",
+        img        : "",
+        description: "Angular ToDo"
+      }
+    ];
   }
-
 }
 }());
 
@@ -1138,48 +1138,50 @@ function TodoController(localApi) {
 
 timesheetController.$inject = ["localApi"];
 angular
-  .module('portfolio.timesheet')
-  .controller('timesheetController', timesheetController);
+  .module( 'portfolio.timesheet' )
+  .controller( 'timesheetController', timesheetController );
 
-function timesheetController(localApi) {
+function timesheetController( localApi ) {
   var self = this;
 
-  _.extend(self, {
+  _.extend( self, {
     timesheet   : getTimesheet(),
     dailyTotals : [{ name: "SUN" }, { name: "MON" }, { name: "TUE" }, { name: "WED" }, { name: "THU" }, { name: "FRI" }, { name: "SAT" }],
     updateTotals: updateTotals
-  });
+  } );
 
-  (function () {
+  (function() {
     refreshTotals();
   }());
 
   function refreshTotals() {
-    _.forEach(self.timesheet, function (type) {
-      _.forEach(type.companies, function (company) {
-        _.forEach(company.projects, function (project) {
+    _.forEach( self.timesheet, function( type ) {
+      _.forEach( type.companies, function( company ) {
+        _.forEach( company.projects, function( project ) {
           for ( var taskCounter = 0; taskCounter < 7; ++taskCounter ) {
-            updateTotals(taskCounter, project.tasks[0].days[taskCounter], project, company, type);
+            updateTotals( taskCounter, project.tasks[0].days[taskCounter], project, company, type );
           }
-        });
-      });
-    });
+        } );
+      } );
+    } );
   }
 
-  function updateTotals(index, task, project, company, type) {
+  function updateTotals( index, task, project, company, type ) {
+    console.profile( 'timesheetUpdate' );
     task.hours                    = task.hours || 0;
-    project.days[index].hours     = _.reduce(project.tasks, function (sum, task) {
-      return sum + parseFloat(task.days[index].hours);
-    }, 0);
-    company.days[index].hours     = _.reduce(company.projects, function (sum, project) {
-      return sum + parseFloat(project.days[index].hours);
-    }, 0);
-    type.days[index].hours        = _.reduce(type.companies, function (sum, company) {
-      return sum + parseFloat(company.days[index].hours);
-    }, 0);
-    self.dailyTotals[index].hours = _.reduce(self.timesheet, function (sum, type) {
-      return sum + parseFloat(type.days[index].hours);
-    }, 0);
+    project.days[index].hours     = _.reduce( project.tasks, function( sum, task ) {
+      return sum + parseFloat( task.days[index].hours );
+    }, 0 );
+    company.days[index].hours     = _.reduce( company.projects, function( sum, project ) {
+      return sum + parseFloat( project.days[index].hours );
+    }, 0 );
+    type.days[index].hours        = _.reduce( type.companies, function( sum, company ) {
+      return sum + parseFloat( company.days[index].hours );
+    }, 0 );
+    self.dailyTotals[index].hours = _.reduce( self.timesheet, function( sum, type ) {
+      return sum + parseFloat( type.days[index].hours );
+    }, 0 );
+    console.profileEnd( 'timesheetUpdate' );
   }
 
   /*========================================
