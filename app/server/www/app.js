@@ -92,22 +92,22 @@ angular
 "use strict";
 
 /**
- * Created by hzou on 3/19/16.
+ * Created by hzou on 2/27/16.
  */
 
-
-angular.module('portfolio.socket', []);
+angular
+  .module('portfolio.services', []);
 }());
 
 ;(function() {
 "use strict";
 
 /**
- * Created by hzou on 2/27/16.
+ * Created by hzou on 3/19/16.
  */
 
-angular
-  .module('portfolio.services', []);
+
+angular.module('portfolio.socket', []);
 }());
 
 ;(function() {
@@ -140,6 +140,76 @@ function getStates() {
     state      : "portfolio.about",
     templateUrl: "routes/about/about.html",
     controller : "aboutController as aboutCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+config.$inject = ["$stateProvider", "navProvider"];
+angular
+  .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
+  .config(config);
+
+function config($stateProvider, navProvider) {
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "chart",
+    tabName    : "Chart",
+    tabIndex   : 3,
+    state      : "portfolio.chart",
+    templateUrl: "routes/chart/chart.html",
+    controller : "chartController as chartCtrl"
+  }];
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/21/16.
+ */
+/*========================================
+ =              APP START                =
+ ========================================*/
+
+
+config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
+angular
+  .module('portfolio.projects', [])
+  .config(config);
+
+function config($stateProvider, $urlRouterProvider, navProvider) {
+
+  _.forEach(getStates(), function (state) {
+    $stateProvider.state(state.state, state);
+    navProvider.register(state);
+  });
+}
+
+function getStates() {
+  return [{
+    url        : "projects",
+    tabName    : "Projects",
+    tabIndex   : null,//3,
+    state      : "portfolio.projects",
+    templateUrl: "routes/projects/projects.html",
+    controller : "projectsController as projectsCtrl"
   }];
 }
 }());
@@ -189,7 +259,7 @@ function getStates() {
 
 config.$inject = ["$stateProvider", "navProvider"];
 angular
-  .module('portfolio.chart', ['portfolio.socket', 'n3-line-chart'])
+  .module('portfolio.todo', [])
   .config(config);
 
 function config($stateProvider, navProvider) {
@@ -201,12 +271,12 @@ function config($stateProvider, navProvider) {
 
 function getStates() {
   return [{
-    url        : "chart",
-    tabName    : "Chart",
-    tabIndex   : 3,
-    state      : "portfolio.chart",
-    templateUrl: "routes/chart/chart.html",
-    controller : "chartController as chartCtrl"
+    url        : "todo",
+    tabName    : "To Do",
+    tabIndex   : 2,
+    state      : "portfolio.todo",
+    templateUrl: "routes/todo/todo.html",
+    controller : "todoController as todoCtrl"
   }];
 }
 }());
@@ -278,76 +348,6 @@ function getStates() {
     templateUrl: "routes/layout/layout.html",
     controller : "layoutController as layoutCtrl"
   }]; 
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/21/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-
-config.$inject = ["$stateProvider", "$urlRouterProvider", "navProvider"];
-angular
-  .module('portfolio.projects', [])
-  .config(config);
-
-function config($stateProvider, $urlRouterProvider, navProvider) {
-
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "projects",
-    tabName    : "Projects",
-    tabIndex   : null,//3,
-    state      : "portfolio.projects",
-    templateUrl: "routes/projects/projects.html",
-    controller : "projectsController as projectsCtrl"
-  }];
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-/*========================================
- =              APP START                =
- ========================================*/
-
-config.$inject = ["$stateProvider", "navProvider"];
-angular
-  .module('portfolio.todo', [])
-  .config(config);
-
-function config($stateProvider, navProvider) {
-  _.forEach(getStates(), function (state) {
-    $stateProvider.state(state.state, state);
-    navProvider.register(state);
-  });
-}
-
-function getStates() {
-  return [{
-    url        : "todo",
-    tabName    : "To Do",
-    tabIndex   : 2,
-    state      : "portfolio.todo",
-    templateUrl: "routes/todo/todo.html",
-    controller : "todoController as todoCtrl"
-  }];
 }
 }());
 
@@ -606,6 +606,39 @@ function localApi($window, $q) {
 "use strict";
 
 /**
+ * Created by hzou on 2/27/16.
+ */
+
+angular
+  .module('portfolio.services')
+  .provider('nav', function navServiceProvider() {
+    var tabs = [];
+    return {
+      register: register,
+      $get    : navService
+    };
+
+    function register(tab) {
+      console.log(tab);
+      tabs.push(tab);
+    }
+
+    function navService() {
+      return {
+        getTabs: function () {
+          return _.filter(tabs, function(tab){
+            return +tab.tabIndex > 0;
+          });
+        }
+      };
+    }
+  });
+}());
+
+;(function() {
+"use strict";
+
+/**
  * Created by hzou on 3/19/16.
  */
 
@@ -657,39 +690,6 @@ function socket($log, $rootScope) {
     });
   }
 }
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-angular
-  .module('portfolio.services')
-  .provider('nav', function navServiceProvider() {
-    var tabs = [];
-    return {
-      register: register,
-      $get    : navService
-    };
-
-    function register(tab) {
-      console.log(tab);
-      tabs.push(tab);
-    }
-
-    function navService() {
-      return {
-        getTabs: function () {
-          return _.filter(tabs, function(tab){
-            return +tab.tabIndex > 0;
-          });
-        }
-      };
-    }
-  });
 }());
 
 ;(function() {
@@ -772,76 +772,6 @@ function AboutController(restApi) {
         _.remove(self.completedAbouts, about);
         self.activeAbouts.push(activated);
       });
-  }
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 3/27/16.
- */
-
-
-angular
-  .module('portfolio.exchange')
-  .directive('exchangeItem', exchangeItem);
-
-function exchangeItem() {
-  return {
-    //bind paramst o controller
-    bindToController: {
-      product: "="
-    },
-    scope           : true, //isolated
-    /* @ngInject */
-    controller      : function () {
-    },
-    controllerAs    : "exchangeItemCtrl",
-    templateUrl     : function (elem, attrs) {
-      return attrs.templateUrl || 'routes/exchange/exchange.item.html';
-    }
-  };
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 3/27/16.
- */
-
-angular
-  .module('portfolio.exchange')
-  .controller('exchangeController', ExchangeController);
-
-function ExchangeController() {
-  var self = this;
-
-  self.products = getProducts();
-
-
-  function getProducts() {
-    return [{
-      name       : "Saganizer corner shelf brown corner shelf unit 5 Tier corner shelves",
-      image      : "http://ecx.images-amazon.com/images/I/71d-WWSgdiL._SY679_.jpg",
-      href       : "http://www.amazon.com/Saganizer-corner-shelf-brown-shelves/dp/B013RXA7OU/ref=sr_1_3?ie=UTF8&qid=1459115030&sr=8-3&keywords=shelf",
-      site       : "Amazon",
-      description: ["price is a limited time offer, and this is 100% satisfaction guarantee.",
-        "corner wall shelf Simple stylish design yet functional and suitable for any room",
-        "Great storage unit for bathroom corner shelf, closet, home office, living room, kids room, kitchen, shower corner shelf etc",
-        "Sturdy on flat surface and no hassle 5-minutes assembly",
-        "Dimensions: 7.75x7.75x48.5 inche Black color to fit any decor attaches to both sides of the wall with only 2 nails or screws. With its contemporary black finish"]
-    }, {
-      name       : "Microsoft Surface 2",
-      image      : "https://compass-ssl.surface.com/assets/37/a4/37a4c0f1-b493-4063-9207-e280a9c1b880.jpg?n=Desktop_Surface-2_Hero.jpg",
-      href       : "https://www.microsoft.com/surface/en-us/devices/surface-2",
-      site       : "Microsoft",
-      description: ["The perfect tablet for work and play.",
-        "At just under 1.5lbs, and pre-loaded with Office 2013 RT,1 Surface 2 lets you carry less while you do more."]
-    }];
   }
 }
 }());
@@ -943,68 +873,6 @@ function ChartController($scope, socket) {
 "use strict";
 
 /**
- * Created by hzou on 2/28/16.
- */
-
-ResumeController.$inject = ["restApi"];
-angular
-  .module('portfolio.resume')
-  .controller('resumeController', ResumeController);
-
-function ResumeController(restApi) {
-  var self = this;
-  var url  = 'api/resume/';
-
-  (function init() {
-    getResume();
-  }());
-
-  function getResume() {
-    restApi
-      .get(url)
-      .then(function (resume) {
-        self.resume = resume;
-      });
-  }
-
-}
-}());
-
-;(function() {
-"use strict";
-
-/**
- * Created by hzou on 2/27/16.
- */
-
-
-(function () {
-  'use strict';
-
-  layoutController.$inject = ["nav", "$state"];
-  angular
-    .module('portfolio')
-    .controller('layoutController', layoutController);
-
-  function layoutController(nav, $state) {
-    var self      = this;
-    self.navItems = nav.getTabs();
-    self.openMenu = function ($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
-
-    self.isCurrentState = function isCurrentState(stateName) {
-      return stateName === $state.current.name;
-    };
-  }
-
-})();
-}());
-
-;(function() {
-"use strict";
-
-/**
  * Created by hzou on 2/27/16.
  */
 
@@ -1039,6 +907,76 @@ function ProjectsController() {
         description: "Angular ToDo"
       }
     ];
+  }
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/27/16.
+ */
+
+
+angular
+  .module('portfolio.exchange')
+  .directive('exchangeItem', exchangeItem);
+
+function exchangeItem() {
+  return {
+    //bind paramst o controller
+    bindToController: {
+      product: "="
+    },
+    scope           : true, //isolated
+    /* @ngInject */
+    controller      : function () {
+    },
+    controllerAs    : "exchangeItemCtrl",
+    templateUrl     : function (elem, attrs) {
+      return attrs.templateUrl || 'routes/exchange/exchange.item.html';
+    }
+  };
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 3/27/16.
+ */
+
+angular
+  .module('portfolio.exchange')
+  .controller('exchangeController', ExchangeController);
+
+function ExchangeController() {
+  var self = this;
+
+  self.products = getProducts();
+
+
+  function getProducts() {
+    return [{
+      name       : "Saganizer corner shelf brown corner shelf unit 5 Tier corner shelves",
+      image      : "http://ecx.images-amazon.com/images/I/71d-WWSgdiL._SY679_.jpg",
+      href       : "http://www.amazon.com/Saganizer-corner-shelf-brown-shelves/dp/B013RXA7OU/ref=sr_1_3?ie=UTF8&qid=1459115030&sr=8-3&keywords=shelf",
+      site       : "Amazon",
+      description: ["price is a limited time offer, and this is 100% satisfaction guarantee.",
+        "corner wall shelf Simple stylish design yet functional and suitable for any room",
+        "Great storage unit for bathroom corner shelf, closet, home office, living room, kids room, kitchen, shower corner shelf etc",
+        "Sturdy on flat surface and no hassle 5-minutes assembly",
+        "Dimensions: 7.75x7.75x48.5 inche Black color to fit any decor attaches to both sides of the wall with only 2 nails or screws. With its contemporary black finish"]
+    }, {
+      name       : "Microsoft Surface 2",
+      image      : "https://compass-ssl.surface.com/assets/37/a4/37a4c0f1-b493-4063-9207-e280a9c1b880.jpg?n=Desktop_Surface-2_Hero.jpg",
+      href       : "https://www.microsoft.com/surface/en-us/devices/surface-2",
+      site       : "Microsoft",
+      description: ["The perfect tablet for work and play.",
+        "At just under 1.5lbs, and pre-loaded with Office 2013 RT,1 Surface 2 lets you carry less while you do more."]
+    }];
   }
 }
 }());
@@ -1127,6 +1065,68 @@ function TodoController(localApi) {
       });
   }
 }
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/28/16.
+ */
+
+ResumeController.$inject = ["restApi"];
+angular
+  .module('portfolio.resume')
+  .controller('resumeController', ResumeController);
+
+function ResumeController(restApi) {
+  var self = this;
+  var url  = 'api/resume/';
+
+  (function init() {
+    getResume();
+  }());
+
+  function getResume() {
+    restApi
+      .get(url)
+      .then(function (resume) {
+        self.resume = resume;
+      });
+  }
+
+}
+}());
+
+;(function() {
+"use strict";
+
+/**
+ * Created by hzou on 2/27/16.
+ */
+
+
+(function () {
+  'use strict';
+
+  layoutController.$inject = ["nav", "$state"];
+  angular
+    .module('portfolio')
+    .controller('layoutController', layoutController);
+
+  function layoutController(nav, $state) {
+    var self      = this;
+    self.navItems = nav.getTabs();
+    self.openMenu = function ($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    self.isCurrentState = function isCurrentState(stateName) {
+      return stateName === $state.current.name;
+    };
+  }
+
+})();
 }());
 
 ;(function() {
